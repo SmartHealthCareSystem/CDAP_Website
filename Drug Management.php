@@ -8,7 +8,7 @@
     <ul class="breadcrumb">
       <li><a href="#">Dashboard</a></li>
       <li><a href="#">Information Management</a></li>
-      <li class="active">Customers</li> 
+      <li class="active">Drug</li> 
     </ul>
 <div class="well well-style">
     
@@ -18,7 +18,7 @@
   <button type="button" class="btn btn-danger">Delete</button>
 </div>
 <div class="input-group col-lg-3 col-md-3">
-    <input type="text" class="form-control" id="myInput" onkeyup="myFunction()" placeholder="Search By  First name...">
+    <input type="text" class="form-control" id="myInput" onkeyup="myFunction()" placeholder="Search By  Drug name...">
     <div class="input-group-btn">
       <button class="btn btn-default" type="submit">
         <i class="glyphicon glyphicon-search"></i>
@@ -29,15 +29,15 @@
   <table class="table table-hover" id="myTable">
     <thead class="thead-default">
       <tr>
-        <th>Firstname</th>
-        <th>Lastname</th>
-        <th>Email</th>
-        <th>Password</th>
-        <th>Sex</th>
-        <th>Age</th>
-        <th>Address</th>
-        <th>Contact No.</th>
-        <th>Rfid Code</th>
+        <th>Drug ID</th>
+        <th>Drug Name</th>
+        <th>Dosage</th>
+        <th>Price</th>
+        <th>Formulation</th>
+        <th>Manufacturer</th>
+        <th>Manufacture Date</th>
+        <th>Expiry Date</th>
+        
       </tr>
     </thead>
     <tbody>
@@ -50,7 +50,7 @@
         <td>21</td>
         <td>35,hi,str</td>
         <td>0771234567</td>
-          <td>USA123</td>
+         
       </tr>
       <tr>
         <td>Patt</td>
@@ -61,7 +61,7 @@
         <td>21</td>
         <td>35,hi,str</td>
         <td>0771234567</td>
-        <td>USA123</td>
+       
       </tr>
       <tr>
         <td>Putt</td>
@@ -72,7 +72,7 @@
         <td>21</td>
         <td>35,hi,str</td>
         <td>0771234567</td>
-         <td>USA123</td>
+        
       </tr>
     </tbody>
   </table>
@@ -87,65 +87,60 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Insert Customer</h4>
+        <h4 class="modal-title">Insert Drug</h4>
       </div>
       <div class="modal-body">
         <form class="form-horizontal">
           <div class="form-group">
-            <label class="control-label col-sm-3" for="Ifname">First Name:</label>
+            <label class="control-label col-sm-3" for="Ifdid">Drug ID:</label>
             <div class="col-sm-9">
-              <input type="text" class="form-control" id="Ifname" placeholder="Enter First Name">
+              <input type="number" class="form-control" id="Ifdid" placeholder="Enter Drug ID">
             </div>
           </div>
             <div class="form-group">
-            <label class="control-label col-sm-3" for="Ilname">Last Name:</label>
+            <label class="control-label col-sm-3" for="Ifdname">Drug Name:</label>
             <div class="col-sm-9">
-              <input type="text" class="form-control" id="Ilname" placeholder="Enter Last Name">
+              <input type="text" class="form-control" id="Ifdname" placeholder="Enter Drug Name">
             </div>
           </div>
             <div class="form-group">
-            <label class="control-label col-sm-3" for="Iemail">Email:</label>
+            <label class="control-label col-sm-3" for="Ifdosage">Dosage:</label>
             <div class="col-sm-9">
-              <input type="email" class="form-control" id="Iemail" placeholder="Enter email">
+              <input type="number" class="form-control" id="Ifdosage" placeholder="Enter Dosage">
             </div>
           </div>
           <div class="form-group">
-            <label class="control-label col-sm-3" for="Ipwd">Password:</label>
+            <label class="control-label col-sm-3" for="Ifprc">Price:</label>
             <div class="col-sm-9"> 
-              <input type="password" class="form-control" id="Ipwd" placeholder="Enter password">
+              <input type="number" class="form-control" id="Ifprc" placeholder="Enter Price">
             </div>
           </div>
             <div class="form-group">
-            <label class="control-label col-sm-3" for="IgenradioM">Gender:</label>
+            <label class="control-label col-sm-3" for="Ifml">Formulation:</label>
             <div class="col-sm-9"> 
-                <label class="radio-inline"><input type="radio" id="IgenradioM" name="Igenradio">Male</label>
-                <label class="radio-inline"><input type="radio" name="Igenradio" id="IgenradioF">Female</label>
+               <input type="text" class="form-control" id="Ifml" placeholder="Enter Formulation">
+            </div>
             </div>
           </div>
             <div class="form-group">
-            <label class="control-label col-sm-3" for="Iage">Age:</label>
+            <label class="control-label col-sm-3" for="Ifmanf">manufacturer:</label>
             <div class="col-sm-9"> 
-              <input type="number" class="form-control" id="Iage" placeholder="Enter Age" min="5">
+              <input type="text" class="form-control" id="Ifmanf" placeholder="Enter manufacturer" min="5">
             </div>
           </div>
              <div class="form-group">
-            <label class="control-label col-sm-3" for="ItelCustomer">Contact No:</label>
+            <label class="control-label col-sm-3" for="Ifmnfdate">manufacture date:</label>
             <div class="col-sm-9"> 
-              <input type="tel" class="form-control" id="ItelCustomer" placeholder="Enter Contact No." min="5">
+              <input type="date" class="form-control" id="Ifmnfdate" placeholder="Enter manufacturer date" min="5">
             </div>
           </div>
             <div class="form-group">
-            <label class="control-label col-sm-3" for="ItelCustomer">Address:</label>
+            <label class="control-label col-sm-3" for="Ifexpdate">Expiry Date:</label>
             <div class="col-sm-9"> 
-                <textarea class="form-control" id="ItelCustomer" placeholder="Enter Address" min="5" cols="12" rows="4"></textarea>
+                <input type="date" class="form-control" id="Ifexpdate" placeholder="Enter Expiry Date" min="5" cols="12" rows="4">
             </div>
           </div>
-             <div class="form-group">
-            <label class="control-label col-sm-3" for="Irfid">RFID code:</label>
-            <div class="col-sm-9"> 
-              <input type="number" class="form-control" id="Irfid" placeholder="Enter RFID code">
-            </div>
-          </div>
+             
           
           <div class="form-group text-center"> 
               
