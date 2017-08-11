@@ -7,51 +7,38 @@
 
                 $sql="SELECT * 
                         FROM  `patient` 
-                        WHERE  `Email` =  '".$email."'
-                        AND  `Password` =  '".$password."'";
+                        WHERE  `Email` =  :email
+                        AND  `Password` = :password";
 
-                $result=$this->db->query($sql);
+                //$result=$this->db->query($sql);
 
-                if($result){
-
-                    return $result->result();
-                }else{
-                    return false;
-                }
+                $prepQuery = $this->db->conn_id->prepare($sql);
+                $prepQuery->bindParam(':email', $email, PDO::PARAM_STR);
+                $prepQuery->bindParam(':password', $password, PDO::PARAM_STR);
+                $prepQuery->execute();
+                $patient = $prepQuery->fetch(PDO::FETCH_ASSOC);
+                
+                              
+                return $patient;
             }
             public function register_customer($Ifname,$Ilname,$Iemail,$Ipwd,$Igenradio,$Iage,$ItelCustomer,$IaddCustomer,$Irfid)
             {
 
-                $sql="INSERT INTO `patient`(`FirstName`, `LastName`, `Email`, `Password`, `Sex`, `Age`, `Address`, `ContactNo`, `RfidCode`, `Status`) VALUES ('".$Ifname."','".$Ilname."','".$Iemail."','".$Ipwd."','".$Igenradio."','".$Iage."','".$IaddCustomer."','".$ItelCustomer."','".$Irfid."',1)";
+                $sql="INSERT INTO `patient`(`FirstName`, `LastName`, `Email`, `Password`, `Sex`, `Age`, `Address`, `ContactNo`, `RfidCode`, `Status`) VALUES (:Ifname,:Ilname,:Iemail,:Ipwd,:Igenradio,:Iage,:IaddCustomer,:ItelCustomer,:Irfid,1)";
 
-                $results=$this->db->query($sql);
-
-    //            $data = array(
-    //
-    //            'FirstName'=>$Ifname, 
-    //            'LastName'=>$Ilname,
-    //            'Email'=>$Iemail,
-    //            'Password'=>$Ipwd,
-    //            'Sex'=>$Igenradio,
-    //            'Age'=>$Iage,
-    //            'Address'=>$IaddCustomer, 
-    //            'ContactNo'=>$ItelCustomer,
-    //            'RfidCode'=> $Irfid         
-    //        );
-    //
-    //            $results=$this->db->insert('patient', $data);
-
-
-                if($this->db->affected_rows()>0){
-
-                    echo "Successfully inserted";
-                    return TRUE;
-
-                }else{
-
-                    return FALSE;
-
-                }
+                $prepQuery = $this->db->conn_id->prepare($sql);
+                $prepQuery->bindParam(':Ifname',$Ifname, PDO::PARAM_STR);
+                $prepQuery->bindParam(':Ilname',$Ilname, PDO::PARAM_STR);
+                $prepQuery->bindParam(':Iemail',$Iemail, PDO::PARAM_STR);
+                $prepQuery->bindParam(':Ipwd',$Ipwd, PDO::PARAM_STR);
+                $prepQuery->bindParam(':Igenradio',$Igenradio, PDO::PARAM_STR);
+                $prepQuery->bindParam(':Iage',$Iage, PDO::PARAM_INT);
+                $prepQuery->bindParam(':IaddCustomer',$IaddCustomer, PDO::PARAM_STR);
+                $prepQuery->bindParam(':ItelCustomer',$ItelCustomer, PDO::PARAM_INT);
+                $prepQuery->bindParam(':Irfid',$Irfid, PDO::PARAM_STR);
+                var_dump($prepQuery);
+                
+                $prepQuery->execute();
 
             }
 
