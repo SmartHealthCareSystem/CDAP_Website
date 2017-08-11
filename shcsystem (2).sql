@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Aug 09, 2017 at 07:16 AM
+-- Generation Time: Aug 11, 2017 at 09:40 AM
 -- Server version: 5.5.24-log
 -- PHP Version: 5.4.3
 
@@ -26,6 +26,7 @@ SET time_zone = "+00:00";
 -- Table structure for table `drug`
 --
 
+DROP TABLE IF EXISTS `drug`;
 CREATE TABLE IF NOT EXISTS `drug` (
   `DrugId` int(11) NOT NULL AUTO_INCREMENT,
   `DrugName` varchar(100) NOT NULL,
@@ -45,6 +46,7 @@ CREATE TABLE IF NOT EXISTS `drug` (
 -- Table structure for table `drugpack`
 --
 
+DROP TABLE IF EXISTS `drugpack`;
 CREATE TABLE IF NOT EXISTS `drugpack` (
   `DrugPackId` varchar(300) NOT NULL,
   `DrugId` int(11) NOT NULL,
@@ -57,6 +59,7 @@ CREATE TABLE IF NOT EXISTS `drugpack` (
 -- Table structure for table `employee`
 --
 
+DROP TABLE IF EXISTS `employee`;
 CREATE TABLE IF NOT EXISTS `employee` (
   `FirstName` varchar(50) NOT NULL,
   `LastName` varchar(50) NOT NULL,
@@ -83,6 +86,7 @@ INSERT INTO `employee` (`FirstName`, `LastName`, `Email`, `Password`, `Sex`, `Ag
 -- Table structure for table `injury`
 --
 
+DROP TABLE IF EXISTS `injury`;
 CREATE TABLE IF NOT EXISTS `injury` (
   `InjuryId` int(11) NOT NULL AUTO_INCREMENT,
   `InjuryName` varchar(300) NOT NULL,
@@ -99,6 +103,7 @@ CREATE TABLE IF NOT EXISTS `injury` (
 -- Table structure for table `invoice`
 --
 
+DROP TABLE IF EXISTS `invoice`;
 CREATE TABLE IF NOT EXISTS `invoice` (
   `InvoiceNo` int(11) NOT NULL,
   `OrderNo` int(11) NOT NULL,
@@ -119,6 +124,7 @@ INSERT INTO `invoice` (`InvoiceNo`, `OrderNo`, `TotalAmount`, `Date`) VALUES
 -- Table structure for table `kiosk`
 --
 
+DROP TABLE IF EXISTS `kiosk`;
 CREATE TABLE IF NOT EXISTS `kiosk` (
   `KioskId` varchar(100) NOT NULL,
   `Status` varchar(200) NOT NULL,
@@ -139,6 +145,7 @@ INSERT INTO `kiosk` (`KioskId`, `Status`, `Location`) VALUES
 -- Table structure for table `kioskstock`
 --
 
+DROP TABLE IF EXISTS `kioskstock`;
 CREATE TABLE IF NOT EXISTS `kioskstock` (
   `KioskId` int(11) NOT NULL,
   `DrugPackId` varchar(500) NOT NULL,
@@ -152,6 +159,7 @@ CREATE TABLE IF NOT EXISTS `kioskstock` (
 -- Table structure for table `order`
 --
 
+DROP TABLE IF EXISTS `order`;
 CREATE TABLE IF NOT EXISTS `order` (
   `OrderId` int(11) NOT NULL,
   `KioskId` varchar(200) NOT NULL,
@@ -174,6 +182,7 @@ INSERT INTO `order` (`OrderId`, `KioskId`, `CustomerId`, `TotalAmount`, `Deliver
 -- Table structure for table `orderitems`
 --
 
+DROP TABLE IF EXISTS `orderitems`;
 CREATE TABLE IF NOT EXISTS `orderitems` (
   `OrderId` int(11) NOT NULL,
   `DrugPackId` int(11) NOT NULL,
@@ -187,6 +196,7 @@ CREATE TABLE IF NOT EXISTS `orderitems` (
 -- Table structure for table `patient`
 --
 
+DROP TABLE IF EXISTS `patient`;
 CREATE TABLE IF NOT EXISTS `patient` (
   `Id` int(11) NOT NULL AUTO_INCREMENT,
   `FirstName` varchar(100) NOT NULL,
@@ -204,15 +214,17 @@ CREATE TABLE IF NOT EXISTS `patient` (
   KEY `Password` (`Password`),
   KEY `Id` (`Id`),
   KEY `Id_3` (`Id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=17 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=26 ;
 
 --
 -- Dumping data for table `patient`
 --
 
 INSERT INTO `patient` (`Id`, `FirstName`, `LastName`, `Email`, `Password`, `Sex`, `Age`, `Address`, `ContactNo`, `RfidCode`, `Status`) VALUES
+(18, 'gg', 'ddff', 'gg@dhgd.com', 'ff', 'Male', 33, 'gs', 123, '4', 0),
 (16, 'Vijayashangavi', 'Kanthan', 'Shangavi6@gmail.com', '123456', 'Female', 21, '108,st Banadicts Mw', 112343682, '123456', 1),
 (15, 'Shangavi', 'Kanthan', 'Shangavi@gmail.com', '123456', 'Female', 21, '108,st Benadicts mw, Colombo-13', 772396957, '2017', 0),
+(25, 'Vijayashangavi', 'VijayaKanthan', 'ShangaviKanthan@gmail.com', '123456', 'Female', 21, '108,st Banadicts Mw', 112343682, '123456', 1),
 (14, 'Sharaaf', 'Nazeer', 'Sharaaf@gmail.com', '12345', 'Male', 23, 'marathana', 779592868, '1234', 1);
 
 -- --------------------------------------------------------
@@ -221,6 +233,7 @@ INSERT INTO `patient` (`Id`, `FirstName`, `LastName`, `Email`, `Password`, `Sex`
 -- Table structure for table `stock`
 --
 
+DROP TABLE IF EXISTS `stock`;
 CREATE TABLE IF NOT EXISTS `stock` (
   `DrugPackId` varchar(500) NOT NULL,
   `AvailStock` int(11) NOT NULL,
