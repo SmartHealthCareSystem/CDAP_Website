@@ -36,9 +36,29 @@
                 $prepQuery->bindParam(':IaddCustomer',$IaddCustomer, PDO::PARAM_STR);
                 $prepQuery->bindParam(':ItelCustomer',$ItelCustomer, PDO::PARAM_INT);
                 $prepQuery->bindParam(':Irfid',$Irfid, PDO::PARAM_STR);
-                var_dump($prepQuery);
                 
                 $prepQuery->execute();
+
+            }
+            public function update_customer($Ufname,$Ulname,$Uemail,$Upwd,$Ugenradio,$Uage,$UtelCustomer,$UaddCustomer,$Urfid)
+            {
+
+                $sql="UPDATE `patient` SET `FirstName`=:Ufname,`LastName`=:Ulname,`Password`=:Upwd,`Sex`=:Ugenradio,`Age`=:Uage,`Address`=:UaddCustomer,`ContactNo`=:UtelCustomer,`RfidCode`=:Urfid WHERE `Email`=:Uemail";
+
+                $prepQuery = $this->db->conn_id->prepare($sql);
+                $prepQuery->bindParam(':Ufname',$Ufname, PDO::PARAM_STR);
+                $prepQuery->bindParam(':Ulname',$Ulname, PDO::PARAM_STR);
+                $prepQuery->bindParam(':Uemail',$Uemail, PDO::PARAM_STR);
+                $prepQuery->bindParam(':Upwd',$Upwd, PDO::PARAM_STR);
+                $prepQuery->bindParam(':Ugenradio',$Ugenradio, PDO::PARAM_STR);
+                $prepQuery->bindParam(':Uage',$Uage, PDO::PARAM_INT);
+                $prepQuery->bindParam(':UaddCustomer',$UaddCustomer, PDO::PARAM_STR);
+                $prepQuery->bindParam(':UtelCustomer',$UtelCustomer, PDO::PARAM_INT);
+                $prepQuery->bindParam(':Urfid',$Urfid, PDO::PARAM_STR);
+                
+                            
+                $r=$prepQuery->execute();
+                var_dump($r);
 
             }
 
@@ -47,21 +67,17 @@
 
                $sql="SELECT `ORDER`.`KioskId`,`INVOICE`.`OrderNo`,`INVOICE`.`TotalAmount`,`INVOICE`. `Date`  FROM `ORDER` 
                INNER JOIN `INVOICE`ON `ORDER`.`OrderId`=`INVOICE`.`ORDERNO`
-               WHERE `ORDER`.`CustomerId`=".$customerId.";";
-
-                $results=$this->db->query($sql);
+               WHERE `ORDER`.`CustomerId`=:customerId;";
 
 
-
-                if($this->db->affected_rows()>0){
-
-                    return $results->result();
-
-                }else{
-
-                    return FALSE;
-
-                }
+                $prepQuery = $this->db->conn_id->prepare($sql);
+                $prepQuery->bindParam(':customerId',$customerId, PDO::PARAM_INT);
+                
+                $prepQuery->execute();                
+                $result= $prepQuery->fetch(PDO::FETCH_ASSOC);               
+                
+                
+                return $result;
 
             }
             
@@ -70,19 +86,12 @@
 
                $sql="SELECT `KioskId`, `Location` FROM `kiosk`";
 
-                $results=$this->db->query($sql);
-
-
-
-                if($this->db->affected_rows()>0){
-
-                    return $results->result();
-
-                }else{
-
-                    return FALSE;
-
-                }
+                $prepQuery = $this->db->conn_id->prepare($sql);
+                
+                $prepQuery->execute();                
+                $result= $prepQuery->fetch(PDO::FETCH_ASSOC);               
+                                
+                return $result;
 
             }
 

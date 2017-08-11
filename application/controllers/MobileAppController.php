@@ -54,7 +54,35 @@ class MobileAppController extends CI_Controller {
         echo json_encode($result);
 //        echo var_dump($result);
     }
-    
+    public function update_profile(){
+        
+        $this->form_validation->set_rules('Ufname','First name','trim|required|alpha');
+        $this->form_validation->set_rules('Ulname','Last name','trim|required|alpha');
+        $this->form_validation->set_rules('Uemail','Email','trim|required|valid_email');
+        $this->form_validation->set_rules('Upwd','Password','trim|required');
+        $this->form_validation->set_rules('Ugenradio','Gender','trim|required');
+        $this->form_validation->set_rules('Uage','Age','trim|required|numeric');
+        $this->form_validation->set_rules('UtelCustomer','Tele-phone no.','trim|required|numeric');
+        $this->form_validation->set_rules('UaddCustomer','Address','trim|required');
+        $this->form_validation->set_rules('Urfid','RFID code','trim|required');
+
+        
+        $Ufname=$this->input->post('Ufname');
+		$Ulname=$this->input->post('Ulname');
+        $Uemail=$this->input->post('Uemail');
+		$Upwd=$this->input->post('Upwd');
+        $Ugenradio=$this->input->post('Ugenradio');
+		$Uage=$this->input->post('Uage');
+        $UtelCustomer=$this->input->post('UtelCustomer');
+		$UaddCustomer=$this->input->post('UaddCustomer');
+        $Urfid=$this->input->post('Urfid');
+        
+        
+        $this->load->model('MobileAppModel');
+        $result=$this->MobileAppModel->update_customer($Ufname,$Ulname,$Uemail,$Upwd,$Ugenradio,$Uage,$UtelCustomer,$UaddCustomer,$Urfid);
+        echo json_encode($result);
+//        echo var_dump($result);
+    }
     public function getHistory(){
         
         $this->form_validation->set_rules('customerId','Customer Id','trim|required');
