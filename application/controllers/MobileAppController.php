@@ -104,6 +104,36 @@ class MobileAppController extends CI_Controller {
         echo json_encode($result);
         
     }
+    public function getBalance(){
+      
+        $this->form_validation->set_rules('patientId','Patient Id','trim|required|numeric');
+        
+        $patientId=$this->input->post('patientId');
+        
+        $this->load->model('MobileAppModel');
+        $result=$this->MobileAppModel->get_balance($patientId);
+        
+        echo json_encode($result);
+        
+    }
+    public function makeOrder(){
+      
+        $this->form_validation->set_rules('CustomerId','Customer Id','trim|required|numeric');
+        $this->form_validation->set_rules('TotalAmount','Total Amount','trim|required|numeric');
+        $this->form_validation->set_rules('Quantity','Quantity','trim|required|numeric');
+        $this->form_validation->set_rules('PackId','PackId','trim|required|numeric');
+        
+        $CustomerId=$this->input->post('CustomerId');
+        $TotalAmount=$this->input->post('TotalAmount');
+        $Quantity=$this->input->post('Quantity');
+        $PackId=$this->input->post('PackId');
+        
+        $this->load->model('MobileAppModel');
+        $result=$this->MobileAppModel->make_order($CustomerId,$TotalAmount,$Quantity,$PackId);
+        
+        echo json_encode($result);
+        
+    }
     
     
     

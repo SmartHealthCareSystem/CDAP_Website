@@ -65,7 +65,7 @@
             public function purchase_history($customerId)
             {
 
-               $sql="SELECT `ORDER`.`KioskId`,`INVOICE`.`OrderNo`,`INVOICE`.`TotalAmount`,`INVOICE`. `Date`  FROM `ORDER` 
+               $sql="SELECT `INVOICE`.`kioskId`,`INVOICE`.`OrderNo`,`INVOICE`.`TotalAmount`,`INVOICE`. `Date`  FROM `ORDER` 
                INNER JOIN `INVOICE`ON `ORDER`.`OrderId`=`INVOICE`.`ORDERNO`
                WHERE `ORDER`.`CustomerId`=:customerId;";
 
@@ -94,5 +94,32 @@
                 return $result;
 
             }
+            public function get_balance($patientId)
+            {
+
+               $sql="SELECT `account_balance` FROM `patient` WHERE `Id`= :patientId";
+
+                $prepQuery = $this->db->conn_id->prepare($sql);
+                $prepQuery->bindParam(':patientId',$patientId, PDO::PARAM_INT);
+                $prepQuery->execute();                
+                $result= $prepQuery->fetch(PDO::FETCH_ASSOC);               
+                                
+                return $result;
+
+            }
+            public function make_order($CustomerId,$TotalAmount,$Quantity,$PackId)
+            {
+
+               $sql="INSERT INTO `order`(`CustomerId`, `TotalAmount`, `Quantity`, `PackId`) VALUES (:CustomerId,:TotalAmount,:Quantity,:PackId)";
+
+                $prepQuery = $this->db->conn_id->prepare($sql);
+                $prepQuery->bindParam(':CustomerId',$CustomerId, PDO::PARAM_INT);
+                $prepQuery->bindParam(':TotalAmount',$TotalAmount, PDO::PARAM_INT);
+                $prepQuery->bindParam(':Quantity',$Quantity, PDO::PARAM_INT);
+                $prepQuery->bindParam(':PackId',$PackId, PDO::PARAM_INT);
+                $prepQuery->execute();                
+                
+            }
+            
 
         }
