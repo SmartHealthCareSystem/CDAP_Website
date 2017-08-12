@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Aug 12, 2017 at 07:28 AM
+-- Generation Time: Aug 12, 2017 at 08:48 AM
 -- Server version: 5.5.24-log
 -- PHP Version: 5.4.3
 
@@ -49,6 +49,7 @@ CREATE TABLE IF NOT EXISTS `drugpack` (
   `UnitPrice` int(11) NOT NULL,
   `delete` int(11) NOT NULL,
   `Instruction` varchar(1000) NOT NULL,
+  `image` varchar(100) NOT NULL,
   PRIMARY KEY (`DrugPackId`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
@@ -56,8 +57,8 @@ CREATE TABLE IF NOT EXISTS `drugpack` (
 -- Dumping data for table `drugpack`
 --
 
-INSERT INTO `drugpack` (`DrugPackId`, `DrugPackName`, `UnitPrice`, `delete`, `Instruction`) VALUES
-(3, 'Small Burn First-Aid Pack', 100, 0, 'Place the burned area under running cool water for at least 5 minutes to reduce swelling. Apply an antiseptic spray, antibiotic ointment, or aloe vera cream to soothe the area. Loosely wrap a gauze bandage around the burn. To relieve pain, take acetaminophen');
+INSERT INTO `drugpack` (`DrugPackId`, `DrugPackName`, `UnitPrice`, `delete`, `Instruction`, `image`) VALUES
+(3, 'Small Burn First-Aid Pack', 100, 0, 'Place the burned area under running cool water for at least 5 minutes to reduce swelling. Apply an antiseptic spray, antibiotic ointment, or aloe vera cream to soothe the area. Loosely wrap a gauze bandage around the burn. To relieve pain, take acetaminophen', 'Drug_pack_img.jpg');
 
 -- --------------------------------------------------------
 
@@ -144,6 +145,7 @@ CREATE TABLE IF NOT EXISTS `kiosk` (
   `KioskId` varchar(100) NOT NULL,
   `Status` varchar(200) NOT NULL,
   `Location` varchar(200) NOT NULL,
+  `Address` int(11) NOT NULL,
   PRIMARY KEY (`KioskId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -151,8 +153,8 @@ CREATE TABLE IF NOT EXISTS `kiosk` (
 -- Dumping data for table `kiosk`
 --
 
-INSERT INTO `kiosk` (`KioskId`, `Status`, `Location`) VALUES
-('1', '1', '6.9488, 79.8605');
+INSERT INTO `kiosk` (`KioskId`, `Status`, `Location`, `Address`) VALUES
+('1', '1', '6.9488, 79.8605', 0);
 
 -- --------------------------------------------------------
 
@@ -166,6 +168,13 @@ CREATE TABLE IF NOT EXISTS `kioskstock` (
   `AvailQuantity` int(11) NOT NULL,
   PRIMARY KEY (`KioskId`,`DrugPackId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `kioskstock`
+--
+
+INSERT INTO `kioskstock` (`KioskId`, `DrugPackId`, `AvailQuantity`) VALUES
+(1, '1', 2);
 
 -- --------------------------------------------------------
 

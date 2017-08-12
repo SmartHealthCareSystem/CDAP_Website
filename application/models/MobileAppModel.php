@@ -123,7 +123,7 @@
             public function getDrugPackDetails()
             {
 
-               $sql="SELECT `DrugPackId`, `DrugPackName`, `UnitPrice`, `Instruction` FROM `drugpack`";
+               $sql="SELECT `DrugPackId`,`image`, `DrugPackName`, `UnitPrice`, `Instruction` FROM `drugpack`";
 
                 $prepQuery = $this->db->conn_id->prepare($sql);
                 $prepQuery->execute();  
