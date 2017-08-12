@@ -5,6 +5,8 @@
 
             public function getLoginDetails($email,$password){
 
+                $patient_array = [];
+
                 $sql="SELECT * 
                         FROM  `patient` 
                         WHERE  `Email` =  :email
@@ -17,9 +19,13 @@
                 $prepQuery->bindParam(':password', $password, PDO::PARAM_STR);
                 $prepQuery->execute();
                 $patient = $prepQuery->fetch(PDO::FETCH_ASSOC);
-                
-                              
-                return $patient;
+
+                if($patient>0){
+                    $patient_array = $patient;
+                    return $patient_array;
+                }else
+                    return null;
+
             }
             public function register_customer($Ifname,$Ilname,$Iemail,$Ipwd,$Igenradio,$Iage,$ItelCustomer,$IaddCustomer,$Irfid)
             {
@@ -117,7 +123,19 @@
                 $prepQuery->bindParam(':TotalAmount',$TotalAmount, PDO::PARAM_INT);
                 $prepQuery->bindParam(':Quantity',$Quantity, PDO::PARAM_INT);
                 $prepQuery->bindParam(':PackId',$PackId, PDO::PARAM_INT);
-                $prepQuery->execute();                
+                $prepQuery->execute();
+
+                if ($prepQuery->execute()){
+                    echo json_encode([
+                        "result" => TRUE,
+                        "message" => 'Order placed successfully',
+                    ]);
+                }else{
+                    echo json_encode([
+                        "result" => FALSE,
+                        "message" => 'Something went wrong try again later',
+                    ]);
+                }
                 
             }
             public function getDrugPackDetails()
