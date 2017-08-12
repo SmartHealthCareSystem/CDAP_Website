@@ -126,8 +126,6 @@
                $sql="SELECT `DrugPackId`, `DrugPackName`, `UnitPrice`, `Instruction` FROM `drugpack`";
 
                 $prepQuery = $this->db->conn_id->prepare($sql);
-                
-                $prepQuery->bindParam(':PackId',$PackId, PDO::PARAM_INT);
                 $prepQuery->execute();  
                 
                 $result= $prepQuery->fetch(PDO::FETCH_ASSOC);               
