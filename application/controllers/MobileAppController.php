@@ -136,12 +136,9 @@ class MobileAppController extends CI_Controller {
     }
     public function getDrugPackDetails(){
       
-        $this->form_validation->set_rules('PackId','Pack Id','trim|required|numeric');
-        
-        $PackId=$this->input->post('PackId');
-        
+   
         $this->load->model('MobileAppModel');
-        $result=$this->MobileAppModel->getDrugPackDetails($PackId);
+        $result=$this->MobileAppModel->getDrugPackDetails();
         
         echo json_encode($result);
         

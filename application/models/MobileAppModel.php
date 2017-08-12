@@ -120,10 +120,10 @@
                 $prepQuery->execute();                
                 
             }
-            public function getDrugPackDetails($PackId)
+            public function getDrugPackDetails()
             {
 
-               $sql="SELECT `DrugPackId`, `DrugPackName`, `UnitPrice`, `Instruction` FROM `drugpack` WHERE `DrugPackId`=:PackId";
+               $sql="SELECT `DrugPackId`, `DrugPackName`, `UnitPrice`, `Instruction` FROM `drugpack`";
 
                 $prepQuery = $this->db->conn_id->prepare($sql);
                 
