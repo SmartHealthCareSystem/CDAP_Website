@@ -166,6 +166,25 @@
                 return $result;
 
             }
+            public function getReferenceNo($CustomerId)
+            {
+
+               $sql="SELECT * 
+                    FROM  `order` 
+                    WHERE  `CustomerId` =:CustomerId
+                    ";
+
+                $prepQuery = $this->db->conn_id->prepare($sql);
+                
+                $prepQuery->bindParam(':CustomerId',$CustomerId, PDO::PARAM_INT);
+                
+                $prepQuery->execute();  
+                
+                $result= $prepQuery->fetch(PDO::FETCH_ASSOC);               
+                                
+                return $result;
+                
+            }
             
             
 
