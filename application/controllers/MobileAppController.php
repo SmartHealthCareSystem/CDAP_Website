@@ -17,8 +17,7 @@ class MobileAppController extends CI_Controller {
         
         $email=$this->input->post('email');
         $password=$this->input->post('password');  
-        
-        echo $email;
+    
         
         $this->load->model('MobileAppModel');
         $result=$this->MobileAppModel->getLoginDetails($email,$password);
