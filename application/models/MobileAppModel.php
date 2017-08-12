@@ -74,7 +74,7 @@
                 $prepQuery->bindParam(':customerId',$customerId, PDO::PARAM_INT);
                 
                 $prepQuery->execute();                
-                $result= $prepQuery->fetch(PDO::FETCH_ASSOC);               
+                $result= $prepQuery->fetchAll(PDO::FETCH_ASSOC);
                 
                 
                 return $result;
@@ -89,7 +89,7 @@
                 $prepQuery = $this->db->conn_id->prepare($sql);
                 
                 $prepQuery->execute();                
-                $result= $prepQuery->fetch(PDO::FETCH_ASSOC);               
+                $result= $prepQuery->fetchAll(PDO::FETCH_ASSOC);
                                 
                 return $result;
 
@@ -123,12 +123,12 @@
             public function getDrugPackDetails()
             {
 
-               $sql="SELECT `DrugPackId`,`image`, `DrugPackName`, `UnitPrice`, `Instruction` FROM `drugpack`";
+               $sql="SELECT * FROM `drugpack`";
 
                 $prepQuery = $this->db->conn_id->prepare($sql);
                 $prepQuery->execute();  
                 
-                $result= $prepQuery->fetch(PDO::FETCH_ASSOC);               
+                $result= $prepQuery->fetchAll(PDO::FETCH_ASSOC);
                                 
                 return $result;
                 
@@ -137,7 +137,7 @@
             public function getDrugPackDetailsByID($DrugId)
             {
 
-               $sql="SELECT `DrugPackId`,`image`, `DrugPackName`, `UnitPrice`, `Instruction` FROM `drugpack` WHERE `DrugPackId`=:DrugId";
+               $sql="SELECT * FROM `drugpack` WHERE `DrugPackId`=:DrugId";
 
                 $prepQuery = $this->db->conn_id->prepare($sql);
                 
@@ -161,7 +161,7 @@
                 $prepQuery = $this->db->conn_id->prepare($sql);
                  $prepQuery->bindParam(':PackId',$PackId, PDO::PARAM_INT);
                 $prepQuery->execute();                
-                $result= $prepQuery->fetch(PDO::FETCH_ASSOC);               
+                $result= $prepQuery->fetchAll(PDO::FETCH_ASSOC);
                                 
                 return $result;
 
