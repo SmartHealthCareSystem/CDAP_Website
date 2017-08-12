@@ -135,6 +135,22 @@
                 return $result;
                 
             }
+            public function kioskSearchByDrugAvail($PackId)
+            {
+
+               $sql="SELECT `kioskstock`.`KioskId`, `kioskstock`.`AvailQuantity`,`kiosk`.`Location`,`kiosk`.`Address` FROM `kioskstock`
+                INNER JOIN `kiosk`ON `kioskstock`.`KioskId`=`kiosk`.`KioskId`
+               WHERE `kioskstock`.`DrugPackId`=:PackId;";
+
+                $prepQuery = $this->db->conn_id->prepare($sql);
+                 $prepQuery->bindParam(':PackId',$PackId, PDO::PARAM_INT);
+                $prepQuery->execute();                
+                $result= $prepQuery->fetch(PDO::FETCH_ASSOC);               
+                                
+                return $result;
+
+            }
+            
             
 
         }
