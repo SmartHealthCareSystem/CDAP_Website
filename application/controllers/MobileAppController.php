@@ -142,6 +142,18 @@ class MobileAppController extends CI_Controller {
         echo json_encode($result);
         
     }
+    public function getDrugPackDetailsByID(){
+      
+        $this->form_validation->set_rules('DrugId','Drug Id','trim|required|numeric');
+        
+        $DrugId=$this->input->post('DrugId');
+   
+        $this->load->model('MobileAppModel');
+        $result=$this->MobileAppModel->getDrugPackDetailsByID($DrugId);
+        
+        echo json_encode($result);
+        
+    }
      public function kioskSearchByDrugAvail(){
          
          $this->form_validation->set_rules('PackId','Pack Id','trim|required|numeric');

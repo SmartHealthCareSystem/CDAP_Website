@@ -133,6 +133,24 @@
                 return $result;
                 
             }
+            
+            public function getDrugPackDetailsByID($DrugId)
+            {
+
+               $sql="SELECT `DrugPackId`,`image`, `DrugPackName`, `UnitPrice`, `Instruction` FROM `drugpack` WHERE `DrugPackId`=:DrugId";
+
+                $prepQuery = $this->db->conn_id->prepare($sql);
+                
+                $prepQuery->bindParam(':DrugId',$DrugId, PDO::PARAM_INT);
+                
+                $prepQuery->execute();  
+                
+                $result= $prepQuery->fetch(PDO::FETCH_ASSOC);               
+                                
+                return $result;
+                
+            }
+            
             public function kioskSearchByDrugAvail($PackId)
             {
 
