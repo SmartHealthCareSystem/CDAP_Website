@@ -120,6 +120,21 @@
                 $prepQuery->execute();                
                 
             }
+            public function getDrugPackDetails($PackId)
+            {
+
+               $sql="SELECT `DrugPackId`, `DrugPackName`, `UnitPrice`, `Instruction` FROM `drugpack` WHERE `DrugPackId`=:PackId";
+
+                $prepQuery = $this->db->conn_id->prepare($sql);
+                
+                $prepQuery->bindParam(':PackId',$PackId, PDO::PARAM_INT);
+                $prepQuery->execute();  
+                
+                $result= $prepQuery->fetch(PDO::FETCH_ASSOC);               
+                                
+                return $result;
+                
+            }
             
 
         }
