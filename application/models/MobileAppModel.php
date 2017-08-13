@@ -187,7 +187,7 @@
                 FROM  `order` 
                 INNER JOIN  `DRUGPACK` ON  `order`.`PackId` =  `DRUGPACK`.`DrugPackId`
                 WHERE  `order`.`CustomerId` =?
-                ORDER BY  `order`.`OrderId` DESC";
+                ORDER BY `order`.OrderId DESC";
 
                 $prepQuery = $this->db->conn_id->prepare($sql);
                 $prepQuery->bindParam(1,$CustomerId);
