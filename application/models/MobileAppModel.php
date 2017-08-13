@@ -103,10 +103,10 @@
             public function get_balance($patientId)
             {
 
-               $sql="SELECT `account_balance` FROM `patient` WHERE `Id`= :patientId";
+               $sql="SELECT ab.* FROM `patient` as p INNER JOIN account_balance as ab on p.Id= ab.PatientId WHERE p.Id = ?";
 
                 $prepQuery = $this->db->conn_id->prepare($sql);
-                $prepQuery->bindParam(':patientId',$patientId, PDO::PARAM_INT);
+                $prepQuery->bindParam(1,$patientId);
                 $prepQuery->execute();                
                 $result= $prepQuery->fetch(PDO::FETCH_ASSOC);               
                                 
