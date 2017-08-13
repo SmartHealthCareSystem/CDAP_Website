@@ -214,5 +214,24 @@
 
                 return $OrderDetails;
             }
+            public function getKioskLocationByDrugName($PackName){
+                
+                $_PackName="%$PackName%";
+                
+                $sql="SELECT  `kioskstock`.`KioskId` ,  `kioskstock`.`AvailQuantity` ,  `kiosk`.`Location` ,  `kiosk`.`Address` ,  `drugpack`.`DrugPackName` 
+                FROM  `kioskstock` 
+                INNER JOIN  `kiosk` ON  `kioskstock`.`KioskId` =  `kiosk`.`KioskId` 
+                INNER JOIN  `drugpack` ON  `kioskstock`.`DrugPackId` =  `drugpack`.`DrugPackId` 
+                WHERE  `drugpack`.`DrugPackName` LIKE  :_PackName";
+
+                $prepQuery = $this->db->conn_id->prepare($sql);
+                $prepQuery->bindParam(':_PackName',$_PackName, PDO::PARAM_STR);
+                $prepQuery->execute();                
+                $result= $prepQuery->fetchAll(PDO::FETCH_ASSOC);
+                                
+                return $result;
+                
+            }
+            
 
         }
