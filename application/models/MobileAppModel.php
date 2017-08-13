@@ -71,13 +71,11 @@
             public function purchase_history($customerId)
             {
 
-               $sql="SELECT `INVOICE`.`kioskId`,`INVOICE`.`OrderNo`,`INVOICE`.`TotalAmount`,`INVOICE`. `Date`  FROM `ORDER` 
-               INNER JOIN `INVOICE`ON `ORDER`.`OrderId`=`INVOICE`.`ORDERNO`
-               WHERE `ORDER`.`CustomerId`=:customerId;";
-
-
+               $sql="SELECT d.DrugPackId, d.DrugPackName, o.TotalAmount, i.InvoiceNo, i.Date, i.kioskId 
+                    FROM `order` as o INNER JOIN invoice as i on o.OrderId= i.OrderNo 
+                    JOIN drugpack d on d.DrugPackId=o.PackId WHERE o.CustomerId = ?";
                 $prepQuery = $this->db->conn_id->prepare($sql);
-                $prepQuery->bindParam(':customerId',$customerId, PDO::PARAM_INT);
+                $prepQuery->bindParam(1,$customerId);
                 
                 $prepQuery->execute();                
                 $result= $prepQuery->fetchAll(PDO::FETCH_ASSOC);
