@@ -166,14 +166,14 @@ class MobileAppController extends CI_Controller {
         echo json_encode($result);
         
     }
-    public function getReferenceNo(){
+    public function getOrderDetails(){
       
         $this->form_validation->set_rules('CustomerId','Customer Id','trim|required|numeric');
         
         $CustomerId=$this->input->post('CustomerId');
    
         $this->load->model('MobileAppModel');
-        $result=$this->MobileAppModel->getReferenceNo($CustomerId);
+        $result=$this->MobileAppModel->getOrderDetails($CustomerId);
         
         echo json_encode($result);
         

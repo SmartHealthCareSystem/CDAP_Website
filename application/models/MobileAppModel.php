@@ -184,13 +184,14 @@
                 return $result;
 
             }
-            public function getReferenceNo($CustomerId)
+            public function getOrderDetails($CustomerId)
             {
 
-               $sql="SELECT * 
-                    FROM  `order` 
-                    WHERE  `CustomerId` =:CustomerId
-                    ";
+               $sql="SELECT  `order`.`OrderId` ,  `order`.`TotalAmount` ,  `order`.`DeliveryStatus` ,  `DRUGPACK`.`DrugPackName` 
+                FROM  `order` 
+                INNER JOIN  `DRUGPACK` ON  `order`.`PackId` =  `DRUGPACK`.`DrugPackId` 
+                WHERE  `order`.`CustomerId` =:CustomerId
+                ORDER BY  `order`.`OrderId` DESC";
 
                 $prepQuery = $this->db->conn_id->prepare($sql);
                 
@@ -198,11 +199,12 @@
                 
                 $prepQuery->execute();  
                 
-                $result= $prepQuery->fetch(PDO::FETCH_ASSOC);               
+                $result= $prepQuery->fetchAll(PDO::FETCH_ASSOC);               
                                 
                 return $result;
                 
             }
+           
             
             
 
