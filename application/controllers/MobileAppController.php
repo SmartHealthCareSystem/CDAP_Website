@@ -50,7 +50,7 @@ class MobileAppController extends CI_Controller {
         
         $this->load->model('MobileAppModel');
         $result=$this->MobileAppModel->register_customer($Ifname,$Ilname,$Iemail,$Ipwd,$Igenradio,$Iage,$ItelCustomer,$IaddCustomer,$Irfid);
-        echo json_encode($result);
+//        echo json_encode($result);
 //        echo var_dump($result);
     }
     public function update_profile(){
