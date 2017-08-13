@@ -43,7 +43,27 @@
                 $prepQuery->bindParam(':ItelCustomer',$ItelCustomer, PDO::PARAM_INT);
                 $prepQuery->bindParam(':Irfid',$Irfid, PDO::PARAM_STR);
                 
-                $prepQuery->execute();
+                if ($prepQuery->execute()){
+                    echo json_encode([
+                        "result" => TRUE,
+                        "message" => 'Registration successful',
+                    ]);
+                }else{
+                    $sql="SELECT * FROM `patient` WHERE `Email`=?";
+                    $prepQuery = $this->db->conn_id->prepare($sql);
+                    $prepQuery->bindParam(1,$Iemail);
+                    if($prepQuery->execute())
+                        echo json_encode([
+                            "result" => FALSE,
+                            "message" => 'User Already Exist',
+                        ]);
+                    else
+                        echo json_encode([
+                            "result" => FALSE,
+                            "message" => 'Something went wrong try again later',
+                        ]);
+                        
+                }
 
             }
             public function update_customer($Ufname,$Ulname,$Uemail,$Upwd,$Ugenradio,$Uage,$UtelCustomer,$UaddCustomer,$Urfid)
