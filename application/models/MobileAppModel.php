@@ -123,7 +123,6 @@
                 $prepQuery->bindParam(':TotalAmount',$TotalAmount, PDO::PARAM_INT);
                 $prepQuery->bindParam(':Quantity',$Quantity, PDO::PARAM_INT);
                 $prepQuery->bindParam(':PackId',$PackId, PDO::PARAM_INT);
-                $prepQuery->execute();
 
                 if ($prepQuery->execute()){
                     echo json_encode([
