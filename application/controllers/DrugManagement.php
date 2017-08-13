@@ -4,38 +4,39 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class DrugManagement extends CI_Controller {
 
  public function index(){
-                $this->load->model('DrugManagement_model');
+    //$this->load->model('CustomerManagement_model');
+      $this->load->model('DrugManagementModel');
 
-               $result=$this->DrugManagement_model->get_drug(); 
+       $result=$this->DrugManagementModel->get_drug(); 
 
-                if($result){
+        if($result){
 
-                      $data['result']=$result;
+               $data['result']=$result;
 
-                }else{
+          }else{
 
-                     $data['result']='No data to retrieve';
-                }
+               $data['result']='No data to retrieve';
+         }
 
-                $data['masterNav_view']="DrugManagementView";
+         $data['masterNav_view']="DrugManagementView";
 
 
-            $data['DrugManagementView'] = $this->load->view('DrugManagementView', $data, TRUE);
+//            $data['DrugManagementView'] = $this->load->view('DrugManagementView', $data, TRUE);
             $this->load->view('includes/masterNav',$data);
 
-
-              }
+ 
+}
 
  public function drugInsert(){
 
-            $this->form_validation->set_rules('IDrugId','Drug Id','trim|required|alpha');
+            $this->form_validation->set_rules('IDrugId','Drug Id','trim|required|integer');
             $this->form_validation->set_rules('IDrugName','Drug Name','trim|required|alpha');
-            $this->form_validation->set_rules('IDosage','Dosage','trim|required|valid_email');
-            $this->form_validation->set_rules('IPrice','Price','trim|required');
+            $this->form_validation->set_rules('IDosage','Dosage','trim|required|integer');
+            $this->form_validation->set_rules('IPrice','Price','trim|required|integer');
             $this->form_validation->set_rules('IFormulation','Formulation','trim|required');
             $this->form_validation->set_rules('IManufacturer','Manufacturer','trim|required|alpha');
             $this->form_validation->set_rules('IManufactureDate','Manufacture Date','trim|required');
-            $this->form_validation->set_rules('IExpiryDate','Expiry Date','trim');
+            $this->form_validation->set_rules('IExpiryDate','Expiry Date','trim|required');
           
 
             if($this->form_validation->run()==FALSE){
@@ -65,7 +66,7 @@ class DrugManagement extends CI_Controller {
                     
                     $this->load->model('DrugManagement_model');
 
-                    $result=$this->DrugManagement_model->insert_customer(IDrugId,IDrugName,IDosage,IPrice,IFormulation,IManufacturer,IManufactureDate,IExpiryDate);
+                    $result=$this->DrugManagement_model->insert_Drug(IDrugId,IDrugName,IDosage,IPrice,IFormulation,IManufacturer,IManufactureDate,IExpiryDate);
 
                     if($result){
 
@@ -88,14 +89,14 @@ class DrugManagement extends CI_Controller {
         }
 
  public function drugUpdate(){
-            $this->form_validation->set_rules('UDrugId','First name','trim|required|alpha');
-            $this->form_validation->set_rules('UDrugName','Last name','trim|required|alpha');
-            $this->form_validation->set_rules('UDosage','Email','trim|required|valid_email');
-            $this->form_validation->set_rules('UPrice','Password','trim|required');
-            $this->form_validation->set_rules('UFormulation','Gender','trim|required');
-            $this->form_validation->set_rules('UManufacturer','Age','trim|required|numeric');
-            $this->form_validation->set_rules('UManufactureDate','Tele-phone no.','trim|required|numeric');
-            $this->form_validation->set_rules('UExpiryDate','Address','trim|required');
+            $this->form_validation->set_rules('UDrugId','Drug Id','trim|required|integer');
+            $this->form_validation->set_rules('UDrugName','Drug Name','trim|required|alpha');
+            $this->form_validation->set_rules('UDosage','Dosage','trim|required|integer');
+            $this->form_validation->set_rules('UPrice','Price','trim|required|integer');
+            $this->form_validation->set_rules('UFormulation','Formulation','trim|required');
+            $this->form_validation->set_rules('UManufacturer','Manufacturer','trim|required|alpha');
+            $this->form_validation->set_rules('UManufactureDate','Manufacture Date','trim|required');
+            $this->form_validation->set_rules('UExpiryDate','Expiry Date','trim|required');
             
 
             if($this->form_validation->run()==FALSE){
@@ -162,7 +163,7 @@ class DrugManagement extends CI_Controller {
 
  public function drugDelete(){
 
-            $this->form_validation->set_rules('deleteDrug','Row to be deleted','trim|required|alpha');
+            $this->form_validation->set_rules('deleteDrug','Row to be deleted','trim|required|numeric');
 
 
              if($this->form_validation->run()==FALSE){
@@ -174,16 +175,16 @@ class DrugManagement extends CI_Controller {
                     );
                     $this->session->set_flashdata($data);
 
-                    redirect('CustomerManagement');
+                    redirect('DrugManagement');
 
                 }else{
 
 
                     $id=$this->input->post('deleteDrug');
 
-                    $this->load->model('DrugManagement_model');
+                    $this->load->model('DrugManagementModel');
 
-                    $result=$this->DrugManagement_model->delete_drug($id);
+                    $result=$this->DrugManagementModel->delete_drug($id);
 
                     if($result){
 

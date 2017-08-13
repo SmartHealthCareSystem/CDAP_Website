@@ -1,11 +1,28 @@
-<!--`DrugId`, `DrugName`, `Dosage`, `Price`, `Formulation`, `Manufacturer`, `ManufactureDate`, `ExpiryDate`-->
 <?php
 
-    class DrugManagement_model extends CI_Model
-    {
+class DrugManagementModel extends CI_Model
+{
+    public function get_drug(){
+
+            $this->db->where('Status',1);
+
+            $Query=$this->db->get('drug');
 
 
-        public function insert_drug($IDrugId,$IDrugName,$IDosage,$IPrice,$IFormulation,$IManufacturer,$IManufactureDate,$IExpiryDate)
+            if($Query->num_rows()>=1){
+
+                return $Query->result();
+
+            }else{
+
+                return FALSE;
+
+            }
+
+        }
+    
+    
+    public function insert_drug($IDrugId,$IDrugName,$IDosage,$IPrice,$IFormulation,$IManufacturer,$IManufactureDate,$IExpiryDate)
         {
             $data = array(
 
@@ -36,8 +53,7 @@
 
         }
 
-
-        public function     update_drug($UDrugId,$UDrugName,$UDosage,$UPrice,$UFormulation,$UManufacturer,$UManufactureDate,$UExpiryDate){
+     public function     update_drug($UDrugId,$UDrugName,$UDosage,$UPrice,$UFormulation,$UManufacturer,$UManufactureDate,$UExpiryDate){
                 $data = array(
 
                 'DrugId'=>$UDrugId, 
@@ -54,29 +70,9 @@
 
 
         }
-
-
-        public function get_drug(){
-
-            $this->db->where('Status',1);
-
-            $Query=$this->db->get('drug');
-
-
-            if($Query->num_rows()>=1){
-
-                return $Query->result();
-
-            }else{
-
-                return FALSE;
-
-            }
-
-        }
-
-
-        public function delete_drig($id){
+    
+    
+     public function delete_drug($id){
 
             $sql="UPDATE `drug` SET `Status`=0 WHERE `DrugId`='".$id."';";
 
@@ -95,10 +91,7 @@
         }
 
 
-    }
+    
+}
 
-    ?>
-
-
-
-
+?>

@@ -10,7 +10,7 @@
 <div class="well well-style">
 <form action="DrugManagement/drugDelete" method="post">
 <div class="btn-group col-lg-9 col-md-9">
-  <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#InsertModal">Insert</button>
+  <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#InsertDrugModal">Insert</button>
   <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#UpdatetModal">Update</button>
   <button type="submit" class="btn btn-danger">Delete</button>
 </div>
@@ -22,11 +22,11 @@
 <?php endif; ?>
      
      
-<input type="text" id="deleteDrug" name="deleteDrug" style="display:none">
+<input type="text" id="deleteDrug" name="deleteDrug" >
  </form>
     
 <div class="input-group col-lg-3 col-md-3">
-    <input type="text" class="form-control" id="myInput" onkeyup="myFunction()" placeholder="Search By  First name...">
+    <input type="text" class="form-control" id="myInput" onkeyup="myFunction()" placeholder="Search By  Drug name...">
     <div class="input-group-btn">
       <button class="btn btn-default" type="submit">
         <i class="glyphicon glyphicon-search"></i>
@@ -37,15 +37,14 @@
   <table class="table table-hover" id="myTable">
     <thead class="thead-default">
       <tr>
-        <th>Firstname</th>
-        <th>Lastname</th>
-        <th>Email</th>
-        <th>Password</th>
-        <th>Sex</th>
-        <th>Age</th>
-        <th>Address</th>
-        <th>Contact No.</th>
-        <th>Rfid Code</th>
+        <th>DrugId</th>
+        <th>Drugname</th>
+        <th>Dosage</th>
+        <th>Price</th>
+        <th>Formulation</th>
+        <th>Manufacturer</th>
+        <th>ManufactureDate</th>
+        <th>ExpiryDate</th>
       </tr>
     </thead>
     <tbody>
@@ -62,7 +61,7 @@
   </div>
  </div>
 </div>
-<!--Insert customer Model start-->
+<!--Insert Drug Model start-->
 <div id="InsertDrugModal" class="modal fade" role="dialog">
   <div class="modal-dialog">
 
@@ -75,7 +74,7 @@
       <div class="modal-body">
         <?php
           
-            $this->load->view('forms/CustomerInsert');
+            $this->load->view('forms/Drug_Insert');
           
           ?>
       </div>
@@ -87,8 +86,8 @@
   </div>
 </div>
 
-<!--Insert customer Model end-->
-<!--Update customer Model start-->
+<!--Insert Drug Model end-->
+<!--Update Drug Model start-->
 <div id="UpdatetModal" class="modal fade" role="dialog">
   <div class="modal-dialog">
 
@@ -114,7 +113,7 @@
   </div>
 </div>
 
-<!--Update customer Model end-->
+<!--Update Drug Model end-->
 
 <!--Script for search start-->
 <script>
@@ -139,22 +138,19 @@ function myFunction() {
   }
 }
 $("#myTable tr").click(function(){
-   $(this).addClass('selected_row').siblings().removeClass('selected_row');    
-   $("#Ufname").val($(this).find('td:eq(0)').html());
-   $("#Ulname").val($(this).find('td:eq(1)').html());
-    $("#Uemail").val($(this).find('td:eq(2)').html());
-    $("#Upwd").val($(this).find('td:eq(3)').html());
+   $(this).addClass('selected_row').siblings().removeClass('selected_row');   
+    $("#deleteDrug").val($(this).find('td:eq(0)').html());
+   $("#UDrugId").val($(this).find('td:eq(0)').html());
+   $("#UDrugname").val($(this).find('td:eq(1)').html());
+   
+    $("#UDosage").val($(this).find('td:eq(2)').html());
+    $("#UPrice").val($(this).find('td:eq(3)').html());
+      
     
-    if($(this).find('td:eq(4)').html()=="Female")
-        $("#UgenradioF").attr('checked',true);
-        //alert(this).find('td:eq(4)').html()=="Male");
-    else
-        $("#UgenradioM").attr('checked',true);  
-    
-    $("#Uage").val($(this).find('td:eq(5)').html());
-    $("#UaddCustomer").text($(this).find('td:eq(6)').html());
-    $("#UtelCustomer").val($(this).find('td:eq(7)').html());
-    $("#Urfid").val($(this).find('td:eq(8)').html());
+    $("#UFormulation").val($(this).find('td:eq(4)').html());
+ $("#UManufacturer").val($(this).find('td:eq(5)').html());
+    $("#UManufactureDate").text($(this).find('td:eq(6)').html());
+    $("#UExpiryDate").val($(this).find('td:eq(7)').html());
    //alert(value);    
 });
 
