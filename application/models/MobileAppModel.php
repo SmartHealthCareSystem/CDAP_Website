@@ -84,10 +84,18 @@
                 $prepQuery->bindParam(':UaddCustomer',$UaddCustomer, PDO::PARAM_STR);
                 $prepQuery->bindParam(':UtelCustomer',$UtelCustomer, PDO::PARAM_INT);
                 $prepQuery->bindParam(':Urfid',$Urfid, PDO::PARAM_STR);
-                
-                            
-                $r=$prepQuery->execute();
 
+                if ($prepQuery->execute()){
+                    echo json_encode([
+                        "result" => TRUE,
+                        "message" => 'Your account is successfully updated!',
+                    ]);
+                }else{
+                    echo json_encode([
+                        "result" => FALSE,
+                        "message" => 'Something went wrong try again later',
+                    ]);
+                }
             }
 
             public function purchase_history($customerId)
