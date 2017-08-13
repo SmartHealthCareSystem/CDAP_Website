@@ -30,41 +30,44 @@
             public function register_customer($Ifname,$Ilname,$Iemail,$Ipwd,$Igenradio,$Iage,$ItelCustomer,$IaddCustomer,$Irfid)
             {
 
-                $sql="INSERT INTO `patient`(`FirstName`, `LastName`, `Email`, `Password`, `Sex`, `Age`, `Address`, `ContactNo`, `RfidCode`, `Status`) VALUES (:Ifname,:Ilname,:Iemail,:Ipwd,:Igenradio,:Iage,:IaddCustomer,:ItelCustomer,:Irfid,1)";
+                $sql1="SELECT * FROM `patient` WHERE `Email`=?";
+                $prepQuery1 = $this->db->conn_id->prepare($sql1);
+                $prepQuery1->bindParam(1,$Iemail);
+                $prepQuery1->execute();
+                $customer = $prepQuery1->fetch(PDO::FETCH_ASSOC);
 
-                $prepQuery = $this->db->conn_id->prepare($sql);
-                $prepQuery->bindParam(':Ifname',$Ifname, PDO::PARAM_STR);
-                $prepQuery->bindParam(':Ilname',$Ilname, PDO::PARAM_STR);
-                $prepQuery->bindParam(':Iemail',$Iemail, PDO::PARAM_STR);
-                $prepQuery->bindParam(':Ipwd',$Ipwd, PDO::PARAM_STR);
-                $prepQuery->bindParam(':Igenradio',$Igenradio, PDO::PARAM_STR);
-                $prepQuery->bindParam(':Iage',$Iage, PDO::PARAM_INT);
-                $prepQuery->bindParam(':IaddCustomer',$IaddCustomer, PDO::PARAM_STR);
-                $prepQuery->bindParam(':ItelCustomer',$ItelCustomer, PDO::PARAM_INT);
-                $prepQuery->bindParam(':Irfid',$Irfid, PDO::PARAM_STR);
-                
-                if ($prepQuery->execute()){
-                    echo json_encode([
-                        "result" => TRUE,
-                        "message" => 'Registration successful',
-                    ]);
-                }else{
-                    $sql="SELECT * FROM `patient` WHERE `Email`=?";
+                if (!$customer>0){
+
+                    $sql="INSERT INTO `patient`(`FirstName`, `LastName`, `Email`, `Password`, `Sex`, `Age`, `Address`, `ContactNo`, `RfidCode`, `Status`) VALUES (:Ifname,:Ilname,:Iemail,:Ipwd,:Igenradio,:Iage,:IaddCustomer,:ItelCustomer,:Irfid,1)";
+
                     $prepQuery = $this->db->conn_id->prepare($sql);
-                    $prepQuery->bindParam(1,$Iemail);
-                    if($prepQuery->execute())
+                    $prepQuery->bindParam(':Ifname',$Ifname, PDO::PARAM_STR);
+                    $prepQuery->bindParam(':Ilname',$Ilname, PDO::PARAM_STR);
+                    $prepQuery->bindParam(':Iemail',$Iemail, PDO::PARAM_STR);
+                    $prepQuery->bindParam(':Ipwd',$Ipwd, PDO::PARAM_STR);
+                    $prepQuery->bindParam(':Igenradio',$Igenradio, PDO::PARAM_STR);
+                    $prepQuery->bindParam(':Iage',$Iage, PDO::PARAM_INT);
+                    $prepQuery->bindParam(':IaddCustomer',$IaddCustomer, PDO::PARAM_STR);
+                    $prepQuery->bindParam(':ItelCustomer',$ItelCustomer, PDO::PARAM_INT);
+                    $prepQuery->bindParam(':Irfid',$Irfid, PDO::PARAM_STR);
+
+                    if ($prepQuery->execute()){
                         echo json_encode([
-                            "result" => FALSE,
-                            "message" => 'User Already Exist',
+                            "result" => TRUE,
+                            "message" => 'Your account is successfully registered.. Login to continue!',
                         ]);
-                    else
+                    }else{
                         echo json_encode([
                             "result" => FALSE,
                             "message" => 'Something went wrong try again later',
                         ]);
-                        
+                    }
+                }else{
+                    echo json_encode([
+                        "result" => FALSE,
+                        "message" => 'User account already exist',
+                    ]);
                 }
-
             }
             public function update_customer($Ufname,$Ulname,$Uemail,$Upwd,$Ugenradio,$Uage,$UtelCustomer,$UaddCustomer,$Urfid)
             {
@@ -84,7 +87,6 @@
                 
                             
                 $r=$prepQuery->execute();
-                var_dump($r);
 
             }
 
