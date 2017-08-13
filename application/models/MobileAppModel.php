@@ -154,14 +154,11 @@
             public function getDrugPackDetailsByID($DrugId)
             {
 
-               $sql="SELECT * FROM `drugpack` WHERE `DrugPackId`=:DrugId";
+                $sql="SELECT * FROM `drugpack` WHERE `DrugPackId`=:DrugId";
 
                 $prepQuery = $this->db->conn_id->prepare($sql);
-                
                 $prepQuery->bindParam(':DrugId',$DrugId, PDO::PARAM_INT);
-                
-                $prepQuery->execute();  
-                
+                $prepQuery->execute();
                 $result= $prepQuery->fetch(PDO::FETCH_ASSOC);               
                                 
                 return $result;
@@ -171,40 +168,53 @@
             public function kioskSearchByDrugAvail($PackId)
             {
 
-               $sql="SELECT `kioskstock`.`KioskId`, `kioskstock`.`AvailQuantity`,`kiosk`.`Location`,`kiosk`.`Address` FROM `kioskstock`
+                $sql="SELECT `kioskstock`.`KioskId`, `kioskstock`.`AvailQuantity`,`kiosk`.`Location`,`kiosk`.`Address` FROM `kioskstock`
                 INNER JOIN `kiosk`ON `kioskstock`.`KioskId`=`kiosk`.`KioskId`
-               WHERE `kioskstock`.`DrugPackId`=:PackId;";
+                WHERE `kioskstock`.`DrugPackId`=:PackId;";
 
                 $prepQuery = $this->db->conn_id->prepare($sql);
-                 $prepQuery->bindParam(':PackId',$PackId, PDO::PARAM_INT);
+                $prepQuery->bindParam(':PackId',$PackId, PDO::PARAM_INT);
                 $prepQuery->execute();                
                 $result= $prepQuery->fetchAll(PDO::FETCH_ASSOC);
                                 
                 return $result;
-
             }
+
             public function getOrderDetails($CustomerId)
             {
 
-               $sql="SELECT  `order`.`OrderId` ,  `order`.`TotalAmount` ,  `order`.`DeliveryStatus` ,  `DRUGPACK`.`DrugPackName` 
+                $OrderDetails = [];
+
+                $sql="SELECT  `order`.`OrderId` ,`order`.`CustomerId` ,`order`.`PackId` , `order`.`TotalAmount` ,  `order`.`DeliveryStatus` ,  `DRUGPACK`.`DrugPackName` , `order`.AddedDate, DRUGPACK.Image
                 FROM  `order` 
-                INNER JOIN  `DRUGPACK` ON  `order`.`PackId` =  `DRUGPACK`.`DrugPackId` 
-                WHERE  `order`.`CustomerId` =:CustomerId
+                INNER JOIN  `DRUGPACK` ON  `order`.`PackId` =  `DRUGPACK`.`DrugPackId`
+                WHERE  `order`.`CustomerId` =?
                 ORDER BY  `order`.`OrderId` DESC";
 
                 $prepQuery = $this->db->conn_id->prepare($sql);
-                
-                $prepQuery->bindParam(':CustomerId',$CustomerId, PDO::PARAM_INT);
-                
-                $prepQuery->execute();  
-                
-                $result= $prepQuery->fetchAll(PDO::FETCH_ASSOC);               
-                                
-                return $result;
-                
+                $prepQuery->bindParam(1,$CustomerId);
+                $prepQuery->execute();
+                $result= $prepQuery->fetchAll(PDO::FETCH_ASSOC);
+
+                $OrderDetails = $result;
+
+                foreach ($OrderDetails as $key => $orders){
+                    $val = $orders["DeliveryStatus"];
+                    unset($OrderDetails[$key]["DeliveryStatus"]);
+
+                    if ($val==-1){
+                        $orders["DeliveryStatus"] = "Canceled";
+                        $OrderDetails[$key]["DeliveryStatus"] = $orders["DeliveryStatus"];
+                    }else if($val==0){
+                        $orders["DeliveryStatus"] = "Ordered";
+                        $OrderDetails[$key]["DeliveryStatus"] = $orders["DeliveryStatus"];
+                    }else if($val==1){
+                        $orders["DeliveryStatus"] = "Purchased";
+                        $OrderDetails[$key]["DeliveryStatus"] = $orders["DeliveryStatus"];
+                    }
+                }
+
+                return $OrderDetails;
             }
-           
-            
-            
 
         }
