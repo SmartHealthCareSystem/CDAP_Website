@@ -103,7 +103,7 @@
             public function get_balance($patientId)
             {
 
-               $sql="SELECT ab.* FROM `patient` as p INNER JOIN account_balance as ab on p.Id= ab.PatientId WHERE p.Id = ?";
+               $sql="SELECT ab.* FROM `patient` as p INNER JOIN account_balance as ab on p.Id= ab.PatientId WHERE p.Id = ? AND ab.Is_Active =1";
 
                 $prepQuery = $this->db->conn_id->prepare($sql);
                 $prepQuery->bindParam(1,$patientId);
