@@ -1,6 +1,6 @@
 
 <div class="col-lg-9 col-md-9">
-    <h2><i class="fa fa-address-book"></i> Cutomers</h2>
+    <h2><i class="fa fa-address-book"></i> Drugs</h2>
     <hr>
     <ul class="breadcrumb">
       <li><a href="#">Dashboard</a></li>
@@ -26,7 +26,7 @@
  </form>
     
 <div class="input-group col-lg-3 col-md-3">
-    <input type="text" class="form-control" id="myInput" onkeyup="myFunction()" placeholder="Search By  Drug name...">
+    <input type="text" class="form-control" id="myInput" onkeyup="myFunction()" placeholder="Search ...">
     <div class="input-group-btn">
       <button class="btn btn-default" type="submit">
         <i class="glyphicon glyphicon-search"></i>
