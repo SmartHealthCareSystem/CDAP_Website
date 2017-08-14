@@ -57,6 +57,7 @@ class DrugManagement extends CI_Controller {
 
                     $IDrugId=$this->input->post('IDrugId');
                     $IDrugName=$this->input->post('IDrugName');
+                
                     $IDosage=$this->input->post('IDosage');
                     $IPrice=$this->input->post('IPrice');
                     $IFormulation=$this->input->post('IFormulation');
@@ -66,7 +67,7 @@ class DrugManagement extends CI_Controller {
                     
                     $this->load->model('DrugManagementModel');
 
-                    $result=$this->DrugManagementModel->insert_Drug(IDrugId,IDrugName,IDosage,IPrice,IFormulation,IManufacturer,IManufactureDate,IExpiryDate);
+                    $result=$this->DrugManagementModel->insert_Drug($IDrugId,$IDrugName,$IDosage,$IPrice,$IFormulation,$IManufacturer,$IManufactureDate,$IExpiryDate);
 
                     if($result){
 
