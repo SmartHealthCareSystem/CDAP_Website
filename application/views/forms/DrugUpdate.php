@@ -27,7 +27,7 @@
             <div class="form-group">
             <label class="control-label col-sm-3" for="UDrugname">Drug Name:</label>
             <div class="col-sm-9">
-              <input type="text" class="form-control" id="UDrugname" name="UDrugname" placeholder="Enter Drug Name">
+              <input type="text" class="form-control" id="UDrugName" name="UDrugName" placeholder="Enter Drug Name">
             </div>
           </div>
             <div class="form-group">
@@ -64,7 +64,7 @@
             <div class="form-group">
             <label class="control-label col-sm-3" for="UExpiryDate">Expiry Date:</label>
             <div class="col-sm-9"> 
-                 <input type="date" class="form-control" id="IExpiryDate" name="IExpiryDate" placeholder="Enter Expiry Date" min="5">
+                 <input type="date" class="form-control" id="UExpiryDate" name="UExpiryDate" placeholder="Enter Expiry Date" min="5">
                
             </div>
           </div>

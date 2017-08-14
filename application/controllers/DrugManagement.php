@@ -4,7 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class DrugManagement extends CI_Controller {
 
  public function index(){
-    //$this->load->model('CustomerManagement_model');
+
       $this->load->model('DrugManagementModel');
 
        $result=$this->DrugManagementModel->get_drug(); 
@@ -57,6 +57,7 @@ class DrugManagement extends CI_Controller {
 
                     $IDrugId=$this->input->post('IDrugId');
                     $IDrugName=$this->input->post('IDrugName');
+                
                     $IDosage=$this->input->post('IDosage');
                     $IPrice=$this->input->post('IPrice');
                     $IFormulation=$this->input->post('IFormulation');
@@ -64,9 +65,9 @@ class DrugManagement extends CI_Controller {
                     $IManufactureDate=$this->input->post('IManufactureDate');
                     $IExpiryDate=$this->input->post('IExpiryDate');
                     
-                    $this->load->model('DrugManagement_model');
+                    $this->load->model('DrugManagementModel');
 
-                    $result=$this->DrugManagement_model->insert_Drug(IDrugId,IDrugName,IDosage,IPrice,IFormulation,IManufacturer,IManufactureDate,IExpiryDate);
+                    $result=$this->DrugManagementModel->insert_Drug($IDrugId,$IDrugName,$IDosage,$IPrice,$IFormulation,$IManufacturer,$IManufactureDate,$IExpiryDate);
 
                     if($result){
 
@@ -125,9 +126,9 @@ class DrugManagement extends CI_Controller {
                     $UExpiryDate=$this->input->post('UExpiryDate');
                     
 
-                    $this->load->model('DrugManagement_model');
+                    $this->load->model('DrugManagementModel');
 
-                    $result=$this->DrugManagement_model->update_drug($UDrugId,$UDrugName,$UDosage,$UPrice,$UFormulation,$UManufacturer,$UManufactureDate,$UExpiryDate);
+                    $result=$this->DrugManagementModel->update_drug($UDrugId,$UDrugName,$UDosage,$UPrice,$UFormulation,$UManufacturer,$UManufactureDate,$UExpiryDate);
 
                     if($result){
 
@@ -150,9 +151,9 @@ class DrugManagement extends CI_Controller {
  public function getDrug(){
 
 
-            $this->load->model('DrugManagement_model');
+            $this->load->model('DrugManagementModel');
 
-            $result=$this->DrugManagement_model->get_drug();
+            $result=$this->DrugManagementModel->get_drug();
 
 
 

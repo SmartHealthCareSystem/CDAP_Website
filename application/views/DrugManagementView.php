@@ -141,7 +141,7 @@ $("#myTable tr").click(function(){
    $(this).addClass('selected_row').siblings().removeClass('selected_row');   
     $("#deleteDrug").val($(this).find('td:eq(0)').html());
    $("#UDrugId").val($(this).find('td:eq(0)').html());
-   $("#UDrugname").val($(this).find('td:eq(1)').html());
+   $("#UDrugName").val($(this).find('td:eq(1)').html());
    
     $("#UDosage").val($(this).find('td:eq(2)').html());
     $("#UPrice").val($(this).find('td:eq(3)').html());
@@ -149,7 +149,7 @@ $("#myTable tr").click(function(){
     
     $("#UFormulation").val($(this).find('td:eq(4)').html());
  $("#UManufacturer").val($(this).find('td:eq(5)').html());
-    $("#UManufactureDate").text($(this).find('td:eq(6)').html());
+    $("#UManufactureDate").val($(this).find('td:eq(6)').html());
     $("#UExpiryDate").val($(this).find('td:eq(7)').html());
    //alert(value);    
 });

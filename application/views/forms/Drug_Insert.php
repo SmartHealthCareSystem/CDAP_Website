@@ -56,7 +56,7 @@
              <div class="form-group">
             <label class="control-label col-sm-3" for="IManufactureDate">ManufactureDate:</label>
             <div class="col-sm-9"> 
-              <input type="date" class="form-control" id="IManufactureDate" name="ItelCustomer" placeholder="Enter Manufacture Date." min="5">
+              <input type="date" class="form-control" id="IManufactureDate" name="IManufactureDate" placeholder="Enter Manufacture Date." min="5">
             </div>
           </div>
             <div class="form-group">
