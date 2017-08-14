@@ -101,7 +101,7 @@ class MobileAppModel extends CI_Model
     public function purchase_history($customerId)
     {
 
-        $sql="SELECT d.DrugPackId, d.DrugPackName, o.TotalAmount, i.InvoiceNo, i.Date, i.kioskId 
+        $sql="SELECT d.DrugPackId, d.DrugPackName , d.Image, o.TotalAmount, i.InvoiceNo, i.Date, i.kioskId
                     FROM `order` as o INNER JOIN invoice as i on o.OrderId= i.OrderNo 
                     JOIN drugpack d on d.DrugPackId=o.PackId WHERE o.CustomerId = ?";
         $prepQuery = $this->db->conn_id->prepare($sql);
