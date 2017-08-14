@@ -51,7 +51,7 @@
                   </a>
                 </li>
                 <li>
-                  <a href="#">
+                  <a href="<?php echo base_url();?>Kiosk_Location">
                   <i class="fa fa-map fa-lg"></i> Kiosk Location
                   </a>
                   </li>
@@ -61,10 +61,10 @@
                 </li>
                 <ul class="sub-menu collapse" id="products">
                     <li class="active"><a href="#">First-Aid Info</a></li>
-                    <li><a href="#">Drug</a></li>
-                    <li><a href="#">Customers</a></li>
-                    <li><a href="#">Supplier</a></li>
-                    <li><a href="#">Users</a></li>
+                    <li><a href="<?php echo base_url();?>DrugManagement">Drug</a></li>
+                    <li><a href="<?php echo base_url();?>CustomerManagement">Customers</a></li>
+                    
+                   
                 </ul>
 
 
@@ -87,7 +87,7 @@
 
 
                  <li>
-                  <a href="#">
+                  <a href="<?php echo base_url();?>AboutApp">
                   <i class="fa fa-user fa-lg"></i> About App
                   </a>
                   </li>
