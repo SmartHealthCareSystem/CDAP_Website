@@ -118,7 +118,7 @@
             public function kiosk_Location()
             {
 
-               $sql="SELECT `KioskId`, `Location` FROM `kiosk`";
+               $sql="SELECT `KioskId`, `Location` FROM `kiosk` WHERE `Status` =1";
 
                 $prepQuery = $this->db->conn_id->prepare($sql);
                 
