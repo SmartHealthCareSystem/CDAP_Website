@@ -219,7 +219,21 @@ class MobileAppModel extends CI_Model
 
         $OrderDetails = $result;
 
+        foreach ($OrderDetails as $key => $orders){
+            $val = $orders["DeliveryStatus"];
+            unset($OrderDetails[$key]["DeliveryStatus"]);
 
+            if ($val==-1){
+                $orders["DeliveryStatus"] = "Canceled";
+                $OrderDetails[$key]["DeliveryStatus"] = $orders["DeliveryStatus"];
+            }else if($val==0){
+                $orders["DeliveryStatus"] = "Ordered";
+                $OrderDetails[$key]["DeliveryStatus"] = $orders["DeliveryStatus"];
+            }else if($val==1){
+                $orders["DeliveryStatus"] = "Purchased";
+                $OrderDetails[$key]["DeliveryStatus"] = $orders["DeliveryStatus"];
+            }
+        }
 
         return $OrderDetails;
     }
