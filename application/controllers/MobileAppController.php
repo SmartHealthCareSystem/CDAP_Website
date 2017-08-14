@@ -1,4 +1,3 @@
-
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
@@ -193,3 +192,4 @@ class MobileAppController extends CI_Controller {
     
     
 }
+?>
