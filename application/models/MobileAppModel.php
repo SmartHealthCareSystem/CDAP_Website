@@ -118,7 +118,7 @@ class MobileAppModel extends CI_Model
     public function kiosk_Location()
     {
 
-        $sql="SELECT `KioskId`, `Location` FROM `kiosk` WHERE `Status` =1";
+        $sql="SELECT * FROM `kiosk` WHERE `Status` =1";
 
         $prepQuery = $this->db->conn_id->prepare($sql);
 
