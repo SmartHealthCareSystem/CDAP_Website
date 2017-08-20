@@ -210,7 +210,7 @@ class MobileAppModel extends CI_Model
 
     public function getOrderDetails($CustomerId)
     {
-        $sql="SELECT o.OrderId, o.CustomerId, o.PackId, o.TotalAmount, o.DeliveryStatus, d.DrugPackName, o.AddedDate, d.Image FROM `order` AS o INNER JOIN drugpack as d ON o.PackId = d.DrugPackId WHERE o.CustomerId = ? ORDER BY o.AddedDate DESC";
+        $sql="SELECT o.OrderId, o.CustomerId, o.PackId, o.TotalAmount, o.DeliveryStatus, d.DrugPackName, o.AddedDate, d.Image FROM `order` AS o INNER JOIN drugpack as d ON o.PackId = d.DrugPackId WHERE o.CustomerId = ?  AND o.DeliveryStatus = 0 ORDER BY o.AddedDate DESC";
 
         $prepQuery = $this->db->conn_id->prepare($sql);
         $prepQuery->bindParam(1,$CustomerId);
@@ -237,26 +237,55 @@ class MobileAppModel extends CI_Model
 
         return $OrderDetails;
     }
-    public function getKioskLocationByDrugName($PackName){
+    public function getKioskLocationByDrug($name){
 
-        $_PackName="%$PackName%";
+        $kiosk_array = [];
 
-        $sql="SELECT  `kioskstock`.`KioskId` ,  `kioskstock`.`AvailQuantity` ,  `kiosk`.`Location` ,  `kiosk`.`Address` ,  `drugpack`.`DrugPackName` 
-                FROM  `kioskstock` 
-                INNER JOIN  `kiosk` ON  `kioskstock`.`KioskId` =  `kiosk`.`KioskId` 
-                INNER JOIN  `drugpack` ON  `kioskstock`.`DrugPackId` =  `drugpack`.`DrugPackId` 
-                WHERE  `drugpack`.`DrugPackName` LIKE  :_PackName";
+        $like = "%".$name."%";
+        $sql = "select * from kiosk";
 
         $prepQuery = $this->db->conn_id->prepare($sql);
-        $prepQuery->bindParam(':_PackName',$_PackName, PDO::PARAM_STR);
         $prepQuery->execute();
         $result= $prepQuery->fetchAll(PDO::FETCH_ASSOC);
 
-        return $result;
+        $kiosk_array = $result;
 
+        foreach ($kiosk_array as $key => $kiosk){
+            $sql1 = "SELECT d.DrugPackId,d.DrugPackName, s.KioskId FROM drugpack as d 
+                    INNER JOIN kioskstock as s ON s.DrugPackId = d.DrugPackId 
+                    WHERE s.KioskId = ? AND d.DrugPackName LIKE ?";
+            $prepQuery1 = $this->db->conn_id->prepare($sql1);
+            $prepQuery1->bindParam(1,$kiosk_array[$key]["KioskId"], PDO::PARAM_INT);
+            $prepQuery1->bindParam(2,$like, PDO::PARAM_STR);
+            $prepQuery1->execute();
+            $result1= $prepQuery1->fetchAll(PDO::FETCH_ASSOC);
+
+            $kiosk_array[$key]["FirstAidKitModel"] = $result1;
+        }
+
+        return $kiosk_array;
     }
 
 
+    public function delete_order($order_id)
+    {
+
+        $sql="UPDATE `order` SET DeliveryStatus = -1 WHERE `OrderId`=?";
+
+        $prepQuery = $this->db->conn_id->prepare($sql);
+        $prepQuery->bindParam(1,$order_id);
+        if ($prepQuery->execute()){
+            echo json_encode([
+                "result" => TRUE,
+                "message" => 'Order successfully deleted!'
+            ]);
+        }else{
+            echo json_encode([
+                "result" => FALSE,
+                "message" => 'Something went wrong try again later'
+            ]);
+        }
+    }
 }
 
 ?>

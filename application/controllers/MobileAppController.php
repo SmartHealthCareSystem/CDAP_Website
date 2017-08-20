@@ -165,14 +165,14 @@ class MobileAppController extends CI_Controller {
         echo json_encode($result);
         
     }
-    public function getKioskLocationByDrugName(){
+    public function getKioskLocationByDrug(){
          
          $this->form_validation->set_rules('PackName','Pack Name','trim|required|numeric');
         
         $PackName=$this->input->post('PackName');
       
         $this->load->model('MobileAppModel');
-        $result=$this->MobileAppModel->getKioskLocationByDrugName($PackName);
+        $result=$this->MobileAppModel->getKioskLocationByDrug($PackName);
         
         echo json_encode($result);
         
@@ -189,7 +189,18 @@ class MobileAppController extends CI_Controller {
         echo json_encode($result);
         
     }
-    
-    
+
+    public function deleteOrderDetails(){
+
+        $this->form_validation->set_rules('OrderId','Order Id','trim|required|numeric');
+
+        $OrderId=$this->input->post('OrderId');
+
+        $this->load->model('MobileAppModel');
+        $result=$this->MobileAppModel->delete_order($OrderId);
+
+        echo json_encode($result);
+
+    }
 }
 ?>
