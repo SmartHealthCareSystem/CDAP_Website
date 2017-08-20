@@ -13,3 +13,4 @@ class FirstAidInfoManagement extends CI_Controller {
 
   }
 }
+?>

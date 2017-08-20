@@ -13,6 +13,6 @@ class UserManagement extends CI_Controller {
 
   }
 }
-
+?>
 
 

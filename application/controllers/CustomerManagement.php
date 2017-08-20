@@ -213,6 +213,4 @@ public function customerDelete(){
 
    
 }
- 
-
-
+?>
