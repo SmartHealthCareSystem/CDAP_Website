@@ -73,7 +73,7 @@
                 </li>  
                 <ul class="sub-menu collapse" id="service">
                     <li><a href="#">Ware House</a></li>
-                    <li><a href="#">Kiosk Stock</a></li>
+                    <li><a href="<?php echo base_url();?>KioskStock">Kiosk Stock</a></li>
                 </ul>
 
 
