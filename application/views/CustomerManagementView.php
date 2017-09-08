@@ -48,6 +48,9 @@
         <th>Address</th>
         <th>Contact No.</th>
         <th>Rfid Code</th>
+          <th>RegisterAt</th>
+          <th>UpdateAt</th>
+          <th>FcmToken</th>
       </tr>
     </thead>
     <tbody>
@@ -165,6 +168,9 @@ $("#myTable tr").click(function(){
     $("#UaddCustomer").text($(this).find('td:eq(6)').html());
     $("#UtelCustomer").val($(this).find('td:eq(7)').html());
     $("#Urfid").val($(this).find('td:eq(8)').html());
+      $("#UregisterAt").val($(this).find('td:eq(8)').html());
+      $("#UupdateAt").val($(this).find('td:eq(8)').html());
+      $("#UfcmToken").val($(this).find('td:eq(8)').html());
    //alert(value);    
 });
 

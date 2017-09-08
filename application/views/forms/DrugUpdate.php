@@ -55,19 +55,7 @@
               <input type="text" class="form-control" id="UManufacturer" name="UManufacturer" placeholder="Enter Manufacturer" >
             </div>
           </div>
-             <div class="form-group">
-            <label class="control-label col-sm-3" for="UManufactureDate">ManufactureDate:</label>
-            <div class="col-sm-9"> 
-              <input type="date" class="form-control" id="UManufactureDate" name="UManufactureDate" placeholder="Enter Manufacture Date." min="5">
-            </div>
-          </div>
-            <div class="form-group">
-            <label class="control-label col-sm-3" for="UExpiryDate">Expiry Date:</label>
-            <div class="col-sm-9"> 
-                 <input type="date" class="form-control" id="UExpiryDate" name="UExpiryDate" placeholder="Enter Expiry Date" min="5">
-               
-            </div>
-          </div>
+             
              
           
           <div class="form-group text-center"> 

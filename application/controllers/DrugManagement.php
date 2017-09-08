@@ -35,8 +35,7 @@ class DrugManagement extends CI_Controller {
             $this->form_validation->set_rules('IPrice','Price','trim|required|integer');
             $this->form_validation->set_rules('IFormulation','Formulation','trim|required');
             $this->form_validation->set_rules('IManufacturer','Manufacturer','trim|required|alpha');
-            $this->form_validation->set_rules('IManufactureDate','Manufacture Date','trim|required');
-            $this->form_validation->set_rules('IExpiryDate','Expiry Date','trim|required');
+            
           
 
             if($this->form_validation->run()==FALSE){
@@ -62,12 +61,11 @@ class DrugManagement extends CI_Controller {
                     $IPrice=$this->input->post('IPrice');
                     $IFormulation=$this->input->post('IFormulation');
                     $IManufacturer=$this->input->post('IManufacturer');
-                    $IManufactureDate=$this->input->post('IManufactureDate');
-                    $IExpiryDate=$this->input->post('IExpiryDate');
+                   
                     
                     $this->load->model('DrugManagementModel');
 
-                    $result=$this->DrugManagementModel->insert_Drug($IDrugId,$IDrugName,$IDosage,$IPrice,$IFormulation,$IManufacturer,$IManufactureDate,$IExpiryDate);
+                    $result=$this->DrugManagementModel->insert_Drug($IDrugId,$IDrugName,$IDosage,$IPrice,$IFormulation,$IManufacturer);
 
                     if($result){
 
@@ -96,8 +94,7 @@ class DrugManagement extends CI_Controller {
             $this->form_validation->set_rules('UPrice','Price','trim|required|integer');
             $this->form_validation->set_rules('UFormulation','Formulation','trim|required');
             $this->form_validation->set_rules('UManufacturer','Manufacturer','trim|required|alpha');
-            $this->form_validation->set_rules('UManufactureDate','Manufacture Date','trim|required');
-            $this->form_validation->set_rules('UExpiryDate','Expiry Date','trim|required');
+           
             
 
             if($this->form_validation->run()==FALSE){
@@ -122,13 +119,12 @@ class DrugManagement extends CI_Controller {
                     $UPrice=$this->input->post('UPrice');
                     $UFormulation=$this->input->post('UFormulation');
                     $UManufacturer=$this->input->post('UManufacturer');
-                    $UManufactureDate=$this->input->post('UManufactureDate');
-                    $UExpiryDate=$this->input->post('UExpiryDate');
+                    
                     
 
                     $this->load->model('DrugManagementModel');
 
-                    $result=$this->DrugManagementModel->update_drug($UDrugId,$UDrugName,$UDosage,$UPrice,$UFormulation,$UManufacturer,$UManufactureDate,$UExpiryDate);
+                    $result=$this->DrugManagementModel->update_drug($UDrugId,$UDrugName,$UDosage,$UPrice,$UFormulation,$UManufacturer);
 
                     if($result){
 

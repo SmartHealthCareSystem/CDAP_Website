@@ -11,8 +11,7 @@
 <td><?php echo $r->Price ?></td>
 <td><?php echo $r->Formulation ?></td>
 <td><?php echo $r->Manufacturer ?></td>
-<td><?php echo $r->ManufactureDate ?></td>
-<td><?php echo $r->ExpiryDate ?></td>
+
 </tr>
 <?php endforeach; ?>
 <?php else: ?>

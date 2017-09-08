@@ -1,9 +1,9 @@
-<?php $attributes = array('id' =>'kiosk_update_form' , 'class' =>'form-horizontal'); ?>
+<?php $attributes = array('id' =>'kioskStock_update_form' , 'class' =>'form-horizontal'); ?>
 
 
 
-<?php if($this->session->flashdata('errorsUpdatekiosk')): ?>
-<script> $('#UpdatedkioskModal').modal('show');</script>
+<?php if($this->session->flashdata('errorsUpdatekioskStock')): ?>
+<script> $('#UpdatedkioskStockModal').modal('show');</script>
 <?php echo ($this->session->flashdata('errorsUpdatekiosk')); ?>
 <?php endif; ?>
 
@@ -13,7 +13,7 @@
 <?php endif; ?>
 
 
-<?php echo form_open('Kiosk/update_Kiosk',$attributes);?>
+<?php echo form_open('KioskStock/KioskUpdate',$attributes);?>
    
 
 
@@ -25,15 +25,15 @@
             </div>
           </div>
             <div class="form-group">
-            <label class="control-label col-sm-3" for="ULocation">Location:</label>
+            <label class="control-label col-sm-3" for="UDrugPackId">Drug Pack Id:</label>
             <div class="col-sm-9">
-              <input type="number" class="form-control" id="ULocation" name="ULocation" placeholder="Enter Location">
+              <input type="number" class="form-control" id="UDrugPackId" name="UDrugPackId" placeholder="Enter Drug Pack Id">
             </div>
           </div>
             <div class="form-group">
-            <label class="control-label col-sm-3" for="UAddress">Address:</label>
+            <label class="control-label col-sm-3" for="UAvailQuantity">Available Quantity:</label>
             <div class="col-sm-9">
-              <input type="number" class="form-control" id="UAddress" name="UAddress" placeholder="Enter Address">
+              <input type="number" class="form-control" id="UAvailQuantity" name="UAvailQuantity" placeholder="Enter Drug Pack Id">
             </div>
           </div>
 

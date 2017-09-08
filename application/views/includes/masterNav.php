@@ -60,9 +60,10 @@
                   <a href="#"><i class="fa fa-gift fa-lg"></i> Information management </a><i class="fa fa-chevron-down drop_icon" aria-hidden="true"></i>
                 </li>
                 <ul class="sub-menu collapse" id="products">
-                    <li class="active"><a href="#">First-Aid Info</a></li>
-                    <li><a href="<?php echo base_url();?>DrugManagement">Drug</a></li>
-                    <li><a href="<?php echo base_url();?>CustomerManagement">Customers</a></li>
+                    <li class="active"><a href="<?php echo base_url();?>DrugManagement">Drugs</a></li>
+                    <li><a href="">Drug Packs</a></li>
+                    <li><a href="#">Kiosk</a></li>
+                    <li><a href="#">Patients</a></li>
                     
                    
                 </ul>

@@ -22,7 +22,7 @@ class DrugManagementModel extends CI_Model
         }
     
     
-    public function insert_drug($IDrugId,$IDrugName,$IDosage,$IPrice,$IFormulation,$IManufacturer,$IManufactureDate,$IExpiryDate)
+    public function insert_drug($IDrugId,$IDrugName,$IDosage,$IPrice,$IFormulation,$IManufacturer)
         {
             $data = array(
 
@@ -31,9 +31,7 @@ class DrugManagementModel extends CI_Model
             'Dosage'=>$IDosage,
             'Price'=>$IPrice,
             'Formulation'=>$IFormulation,
-            'Manufacturer'=>$IManufacturer,
-            'ManufactureDate'=>$IManufactureDate, 
-            'ExpiryDate'=>$IExpiryDate
+            'Manufacturer'=>$IManufacturer
                     
         );
 
@@ -53,7 +51,7 @@ class DrugManagementModel extends CI_Model
 
         }
 
-     public function     update_drug($UDrugId,$UDrugName,$UDosage,$UPrice,$UFormulation,$UManufacturer,$UManufactureDate,$UExpiryDate){
+     public function     update_drug($UDrugId,$UDrugName,$UDosage,$UPrice,$UFormulation,$UManufacturer){
                 $data = array(
 
                 'DrugId'=>$UDrugId, 
@@ -61,9 +59,7 @@ class DrugManagementModel extends CI_Model
                 'Dosage'=>$UDosage,
                 'Price'=>$UPrice,
                 'Formulation'=>$UFormulation,
-                'Manufacturer'=>$UManufacturer,
-                'ManufactureDate'=>$UManufactureDate, 
-                'ExpiryDate'=>$UExpiryDate        
+                'Manufacturer'=>$UManufacturer       
                 );
 
             $this->db->replace('drug', $data);   

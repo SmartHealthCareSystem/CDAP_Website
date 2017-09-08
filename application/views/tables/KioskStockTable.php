@@ -2,8 +2,8 @@
 <?php foreach($tabledata  as $r): ?>
  <tr> 
 <td><?php echo $r->KioskId ?></td>
-<td><?php echo $r->Location ?></td>
-<td><?php echo $r->Address ?></td>
+<td><?php echo $r->DrugPackId ?></td>
+<td><?php echo $r->AvailQuantity ?></td>
 
 </tr>
 <?php endforeach; ?>

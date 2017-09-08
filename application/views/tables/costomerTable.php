@@ -10,6 +10,9 @@
 <td><?php echo $r->Address ?></td>
 <td><?php echo $r->ContactNo ?></td>
 <td><?php echo $r->RfidCode ?></td>
+<td><?php echo $r->RegisterAt ?></td>
+<td><?php echo $r->UpdateAt ?></td>
+<td><?php echo $r->FcmToken ?></td>
 </tr>
 <?php endforeach; ?>
 <?php else: ?>

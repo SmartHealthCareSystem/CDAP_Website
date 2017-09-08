@@ -71,6 +71,31 @@
               <input type="number" class="form-control" id="Irfid" name="Irfid" placeholder="Enter RFID code">
             </div>
           </div>
+
+<div class="form-group">
+            <label class="control-label col-sm-3" for="IregisterAt">Register at:</label>
+            <div class="col-sm-9"> 
+              <input type="date" class="form-control" id="IregisterAt" name="IregisterAt" placeholder="Enter Register Date">
+            </div>
+          </div>
+
+
+<div class="form-group">
+            <label class="control-label col-sm-3" for="IupdateAt">Update at:</label>
+            <div class="col-sm-9"> 
+              <input type="date" class="form-control" id="IupdateAt" name="IupdateAt" placeholder="Enter Update date">
+            </div>
+          </div>
+
+<div class="form-group">
+            <label class="control-label col-sm-3" for="IfcmToken">Fcm Token:</label>
+            <div class="col-sm-9"> 
+              <input type="number" class="form-control" id="IfcmToken" name="IfcmToken" placeholder="Enter Fcm Token">
+            </div>
+          </div>
+
+
+
           
           <div class="form-group text-center"> 
               

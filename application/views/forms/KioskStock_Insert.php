@@ -1,4 +1,4 @@
-<?php $attributes = array('id' =>'Kiosk_insert_form' , 'class' =>'form-horizontal'); ?>
+<?php $attributes = array('id' =>'kioskStock_insert_form' , 'class' =>'form-horizontal'); ?>
 
 
 
@@ -13,7 +13,7 @@
 <?php endif; ?>
 
 
-<?php echo form_open('Kiosk/insert_Kiosk',$attributes);?>
+<?php echo form_open('KioskStock/KioskInsert',$attributes);?>
 
 
 	<div class="form-group">
@@ -23,15 +23,15 @@
             </div>
           </div>
             <div class="form-group">
-            <label class="control-label col-sm-3" for="ILocation">Location:</label>
+            <label class="control-label col-sm-3" for="IDrugPackId">Drug pack Id:</label>
             <div class="col-sm-9">
-              <input type="number" class="form-control" id="ILocation" name="ILocation" placeholder="Enter Location">
+              <input type="number" class="form-control" id="IDrugPackId" name="IDrugPackId" placeholder="Enter Drug Pack Id">
             </div>
           </div>
             <div class="form-group">
-            <label class="control-label col-sm-3" for="IAddress">Address:</label>
+            <label class="control-label col-sm-3" for="IAvailQuantity">Available Quantity:</label>
             <div class="col-sm-9">
-              <input type="Text" class="form-control" id="IAddress" name="IAddress" placeholder="Enter Address">
+              <input type="number" class="form-control" id="IAvailQuantity" name="IAvailQuantity" placeholder="Enter Avail Quantity">
             </div>
           </div>
             

@@ -4,7 +4,7 @@
     {
 
 
-        public function insert_customer($Ifname,$Ilname,$Iemail,$Ipwd,$Igenradio,$Iage,$ItelCustomer,$IaddCustomer,$Irfid)
+        public function insert_customer($Ifname,$Ilname,$Iemail,$Ipwd,$Igenradio,$Iage,$ItelCustomer,$IaddCustomer,$Irfid,$IregisterAt,$IupdateAt,$IfcmToken)
         {
             $data = array(
 
@@ -16,7 +16,11 @@
             'Age'=>$Iage,
             'Address'=>$IaddCustomer, 
             'ContactNo'=>$ItelCustomer,
-            'RfidCode'=> $Irfid         
+            'RfidCode'=> $Irfid,
+            'RegisterAt'=>$IregisterAt,
+            'UpdateAt'=>$IupdateAt,
+            'FcmToken'=>$IfcmToken
+                
         );
 
             $results=$this->db->insert('patient', $data);
@@ -36,7 +40,7 @@
         }
 
 
-        public function     update_customer($Ufname,$Ulname,$Uemail,$Upwd,$Ugenradio,$Uage,$UtelCustomer,$UaddCustomer,$Urfid){
+        public function     update_customer($Ufname,$Ulname,$Uemail,$Upwd,$Ugenradio,$Uage,$UtelCustomer,$UaddCustomer,$Urfid,$UregisterAt,$UupdateAt,$UfcmToken){
                 $data = array(
 
                 'FirstName'=>$Ufname, 
@@ -47,7 +51,10 @@
                 'Age'=>$Uage,
                 'Address'=>$UaddCustomer, 
                 'ContactNo'=>$UtelCustomer,
-                'RfidCode'=> $Urfid         
+                'RfidCode'=> $Urfid,
+                'RegisterAt'=>$UregisterAt,
+                'UpdateAt'=>$UupdateAt,
+                'FcmToken'=>$UfcmToken    
                 );
 
             $this->db->replace('patient', $data);   

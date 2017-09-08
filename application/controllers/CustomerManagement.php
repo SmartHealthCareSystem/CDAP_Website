@@ -37,6 +37,9 @@ public function customerInsert(){
     $this->form_validation->set_rules('ItelCustomer','Tele-phone no.','trim|required|numeric');
     $this->form_validation->set_rules('IaddCustomer','Address','trim|required');
     $this->form_validation->set_rules('Irfid','RFID code','trim|required');
+    $this->form_validation->set_rules('IregisterAt','RegisterAt','trim|required');
+     $this->form_validation->set_rules('IupdateAt','UpdateAt','trim|required');
+    $this->form_validation->set_rules('IfcmToken','FcmToken','trim|required');
     
     
     if($this->form_validation->run()==FALSE){
@@ -64,11 +67,13 @@ public function customerInsert(){
             $ItelCustomer=$this->input->post('ItelCustomer');
 			$IaddCustomer=$this->input->post('IaddCustomer');
             $Irfid=$this->input->post('Irfid');
-			
+			$IregisterAt=$this->input->post('IregisterAt');
+            $IupdateAt=$this->input->post('IupdateAt');
+             $IfcmToken=$this->input->post('IfcmToken');
 
 			$this->load->model('CustomerManagement_model');
 
-			$result=$this->CustomerManagement_model->insert_customer($Ifname,$Ilname,$Iemail,$Ipwd,$Igenradio,$Iage,$ItelCustomer,$IaddCustomer,$Irfid);
+			$result=$this->CustomerManagement_model->insert_customer($Ifname,$Ilname,$Iemail,$Ipwd,$Igenradio,$Iage,$ItelCustomer,$IaddCustomer,$Irfid,$IregisterAt,$IupdateAt,$IfcmToken);
 
 			if($result){
 
@@ -101,6 +106,14 @@ public function customerUpdate(){
     $this->form_validation->set_rules('UaddCustomer','Address','trim|required');
     $this->form_validation->set_rules('Urfid','RFID code','trim|required');
     
+     $this->form_validation->set_rules('UregisterAt','RegisterAt','trim|required');
+    
+     $this->form_validation->set_rules('UupdateAt','UpdateAt','trim|required');
+     $this->form_validation->set_rules('UfcmToken','FcmToken','trim|required');
+    
+    
+    
+   
     
     if($this->form_validation->run()==FALSE){
 
@@ -127,11 +140,14 @@ public function customerUpdate(){
             $UtelCustomer=$this->input->post('UtelCustomer');
 			$UaddCustomer=$this->input->post('UaddCustomer');
             $Urfid=$this->input->post('Urfid');
+            $UregisterAt=$this->input->post('UregisterAt');
+    $UupdateAt=$this->input->post('UupdateAt');
+     $UfcmToken=$this->input->post('UfcmToken');
 			
 
 			$this->load->model('CustomerManagement_model');
 
-			$result=$this->CustomerManagement_model->update_customer($Ufname,$Ulname,$Uemail,$Upwd,$Ugenradio,$Uage,$UtelCustomer,$UaddCustomer,$Urfid);
+			$result=$this->CustomerManagement_model->update_customer($Ufname,$Ulname,$Uemail,$Upwd,$Ugenradio,$Uage,$UtelCustomer,$UaddCustomer,$Urfid,$UregisterAt,$UupdateAt,$UfcmToken);
 
 			if($result){
 
@@ -211,6 +227,5 @@ public function customerDelete(){
     
 }    
 
-   
 }
 ?>
