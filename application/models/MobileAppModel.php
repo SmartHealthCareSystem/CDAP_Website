@@ -286,6 +286,69 @@ class MobileAppModel extends CI_Model
             ]);
         }
     }
+    public function requestExpiryDateNotification($barcode,$patient){
+        $sqlDrugBatchId="SELECT `id` FROM `drug_batch` WHERE `barcode`=?";
+        $prepQueryDrugBatchId = $this->db->conn_id->prepare($sqlDrugBatchId);
+        $prepQueryDrugBatchId->bindParam(1,$barcode, PDO::PARAM_INT);
+        $prepQueryDrugBatchId->execute();
+        $DrugBatchId=$prepQueryDrugBatchId->fetch(PDO::FETCH_ASSOC);
+
+        $sql="INSERT INTO `expiry_notification` (`id`, `drug_batch_id`, `patient_id`, `is_notified`, `added_date`, `updated_date`) VALUES (NULL, ?, ?, '0', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);";
+
+        $prepQuery = $this->db->conn_id->prepare($sql);
+        $prepQuery->bindParam(2,$patient, PDO::PARAM_INT);
+        $prepQuery->bindParam(1,$DrugBatchId["id"], PDO::PARAM_INT);
+
+        if ($prepQuery->execute()){
+            echo json_encode([
+                "result" => TRUE,
+                "message" => 'Your request is successfull!',
+            ]);
+        }else{
+            echo json_encode([
+                "result" => FALSE,
+                "message" => 'Something went wrong try again later',
+            ]);
+        }
+
+    }
+    public function updateToken($email,$token)
+    {
+
+        $sql1="SELECT `FcmToken` FROM `patient` WHERE `Email`=? AND `FcmToken`IS NULL";
+        $prepQuery1 = $this->db->conn_id->prepare($sql1);
+        $prepQuery1->bindParam(1,$email);
+        $prepQuery1->execute();
+        $customer = $prepQuery1->fetch(PDO::FETCH_ASSOC);
+
+//                var_dump($customer);die;
+
+        if ($customer>0){
+
+            $sql="UPDATE `patient` SET `FcmToken`=? WHERE `Email`=?";
+            $prepQuery = $this->db->conn_id->prepare($sql);
+            $prepQuery->bindParam(2,$email, PDO::PARAM_STR);
+            $prepQuery->bindParam(1,$token, PDO::PARAM_STR);
+
+
+            if ($prepQuery->execute()){
+                echo json_encode([
+                    "result" => TRUE,
+                    "message" => 'Your token is successfully updated',
+                ]);
+            }else{
+                echo json_encode([
+                    "result" => FALSE,
+                    "message" => 'Something went wrong try again later',
+                ]);
+            }
+        }else{
+            echo json_encode([
+                "result" => FALSE,
+                "message" => 'User token already exist',
+            ]);
+        }
+    }
 }
 
 ?>

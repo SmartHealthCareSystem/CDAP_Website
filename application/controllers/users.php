@@ -75,7 +75,14 @@ class users extends CI_Controller
 
 
 	}
+	public function sendNotification(){
+		$CustomerId=$this->input->post('CustomerId');
 
+		$this->load->model('login_model');
+		$result=$this->login_model->send_notification();
+
+		echo json_encode($result);
+	}
 
 
 

@@ -202,5 +202,33 @@ class MobileAppController extends CI_Controller {
         echo json_encode($result);
 
     }
+    public function requestExpiryDateNotification(){
+
+        $this->form_validation->set_rules('barcode','Barcode','trim|required|numeric');
+        $this->form_validation->set_rules('patientID','Patient ID','trim|required|numeric');
+
+        $barcode=$this->input->post('barcode');
+        $patient=$this->input->post('patientID');
+
+
+        $this->load->model('MobileAppModel');
+        $result=$this->MobileAppModel->requestExpiryDateNotification($barcode,$patient);
+        echo json_encode($result);
+//        echo var_dump($result);
+    }
+    public function updateToken(){
+
+        $this->form_validation->set_rules('email','Email','trim|required|numeric');
+        $this->form_validation->set_rules('token','Token','trim|required|numeric');
+
+        $email=$this->input->post('email');
+        $token=$this->input->post('token');
+
+
+        $this->load->model('MobileAppModel');
+        $result=$this->MobileAppModel->updateToken($email,$token);
+        echo json_encode($result);
+//        echo var_dump($result);
+    }
 }
 ?>
