@@ -61,9 +61,9 @@
                 </li>
                 <ul class="sub-menu collapse" id="products">
                     <li class="active"><a href="<?php echo base_url();?>DrugManagement">Drugs</a></li>
-                    <li><a href="">Drug Packs</a></li>
-                    <li><a href="#">Kiosk</a></li>
-                    <li><a href="#">Patients</a></li>
+                    <li><a href="<?php echo base_url();?>drugPack">Drug Packs</a></li>
+                    <li><a href="<?php echo base_url();?>Kiosk">Kiosk</a></li>
+                    <li><a href="<?php echo base_url();?>CustomerManagement">Patients</a></li>
                     
                    
                 </ul>

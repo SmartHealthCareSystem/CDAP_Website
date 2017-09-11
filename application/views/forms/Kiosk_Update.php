@@ -13,7 +13,7 @@
 <?php endif; ?>
 
 
-<?php echo form_open('Kiosk/update_Kiosk',$attributes);?>
+<?php echo form_open('Kiosk/Kiosk_Update',$attributes);?>
    
 
 
@@ -27,13 +27,13 @@
             <div class="form-group">
             <label class="control-label col-sm-3" for="ULocation">Location:</label>
             <div class="col-sm-9">
-              <input type="number" class="form-control" id="ULocation" name="ULocation" placeholder="Enter Location">
+              <input type="text" class="form-control" id="ULocation" name="ULocation" placeholder="Enter Location">
             </div>
           </div>
             <div class="form-group">
             <label class="control-label col-sm-3" for="UAddress">Address:</label>
             <div class="col-sm-9">
-              <input type="number" class="form-control" id="UAddress" name="UAddress" placeholder="Enter Address">
+              <input type="text" class="form-control" id="UAddress" name="UAddress" placeholder="Enter Address">
             </div>
           </div>
 

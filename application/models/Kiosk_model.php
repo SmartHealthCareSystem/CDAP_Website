@@ -4,7 +4,7 @@
     {
 
 
-        public function insert_Kiosk($IKioskId,$ILocation,$IAddress)
+        public function Kiosk_Insert($IKioskId,$ILocation,$IAddress)
         {
             $data = array(
 
@@ -12,6 +12,7 @@
             'Location'=>$ILocation,
             'Address'=>$IAddress        
         );
+            
 
             $results=$this->db->insert('kiosk', $data);
 
@@ -30,7 +31,7 @@
         }
 
 
-        public function     update_Kiosk($UKioskId,$ULocation,$UAddress){
+        public function     Kiosk_Update($UKioskId,$ULocation,$UAddress){
                 $data = array(
 
                
@@ -65,7 +66,7 @@
         }
 
 
-        public function delete_KioskStock($id){
+        public function delete_Kiosk($id){
 
             $sql="UPDATE `kiosk` SET `Status`=0 WHERE `KioskId`='".$id."';";
 

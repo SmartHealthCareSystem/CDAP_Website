@@ -1,11 +1,11 @@
 
 <div class="col-lg-9 col-md-9">
-    <h2><i class="fa fa-address-book"></i> Customers</h2>
+    <h2><i class="fa fa-address-book"></i> Patients</h2>
     <hr>
     <ul class="breadcrumb">
       <li><a href="#">Dashboard</a></li>
       <li><a href="#">Information Management</a></li>
-      <li class="active">Customers</li> 
+      <li class="active">Patients</li> 
     </ul>
 <div class="well well-style">
  <form action="CustomerManagement/customerDelete" method="post">    
@@ -48,9 +48,9 @@
         <th>Address</th>
         <th>Contact No.</th>
         <th>Rfid Code</th>
-          <th>RegisterAt</th>
-          <th>UpdateAt</th>
-          <th>FcmToken</th>
+        <th>Balance</th>
+        <th>Valid Till</th>
+         
       </tr>
     </thead>
     <tbody>
@@ -168,9 +168,7 @@ $("#myTable tr").click(function(){
     $("#UaddCustomer").text($(this).find('td:eq(6)').html());
     $("#UtelCustomer").val($(this).find('td:eq(7)').html());
     $("#Urfid").val($(this).find('td:eq(8)').html());
-      $("#UregisterAt").val($(this).find('td:eq(8)').html());
-      $("#UupdateAt").val($(this).find('td:eq(8)').html());
-      $("#UfcmToken").val($(this).find('td:eq(8)').html());
+     
    //alert(value);    
 });
 

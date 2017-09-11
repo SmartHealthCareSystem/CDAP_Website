@@ -30,7 +30,7 @@ class DrugManagement extends CI_Controller {
  public function drugInsert(){
 
             $this->form_validation->set_rules('IDrugId','Drug Id','trim|required|integer');
-            $this->form_validation->set_rules('IDrugName','Drug Name','trim|required|alpha');
+            $this->form_validation->set_rules('IDrugName','Drug Name','trim|required');
             $this->form_validation->set_rules('IDosage','Dosage','trim|required|integer');
             $this->form_validation->set_rules('IPrice','Price','trim|required|integer');
             $this->form_validation->set_rules('IFormulation','Formulation','trim|required');
@@ -89,7 +89,7 @@ class DrugManagement extends CI_Controller {
 
  public function drugUpdate(){
             $this->form_validation->set_rules('UDrugId','Drug Id','trim|required|integer');
-            $this->form_validation->set_rules('UDrugName','Drug Name','trim|required|alpha');
+            $this->form_validation->set_rules('UDrugName','Drug Name','trim|required');
             $this->form_validation->set_rules('UDosage','Dosage','trim|required|integer');
             $this->form_validation->set_rules('UPrice','Price','trim|required|integer');
             $this->form_validation->set_rules('UFormulation','Formulation','trim|required');
