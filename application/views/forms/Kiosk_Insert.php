@@ -13,7 +13,7 @@
 <?php endif; ?>
 
 
-<?php echo form_open('Kiosk/insert_Kiosk',$attributes);?>
+<?php echo form_open('Kiosk/Kiosk_Insert',$attributes);?>
 
 
 	<div class="form-group">
@@ -25,7 +25,7 @@
             <div class="form-group">
             <label class="control-label col-sm-3" for="ILocation">Location:</label>
             <div class="col-sm-9">
-              <input type="number" class="form-control" id="ILocation" name="ILocation" placeholder="Enter Location">
+              <input type="text" class="form-control" id="ILocation" name="ILocation" placeholder="Enter Location">
             </div>
           </div>
             <div class="form-group">

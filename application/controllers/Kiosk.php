@@ -27,11 +27,11 @@ class Kiosk extends CI_Controller {
  
 }
 
- public function insert_Kiosk(){
+ public function Kiosk_Insert(){
 
             $this->form_validation->set_rules('IKioskId','Kiosk Id','trim|required|integer');
-            $this->form_validation->set_rules('ILocation','Location','trim');
-            $this->form_validation->set_rules('IAddress','Address','trim');
+            $this->form_validation->set_rules('ILocation','Location','trim|required');
+            $this->form_validation->set_rules('IAddress','Address','trim|required');
            
           
 
@@ -54,11 +54,11 @@ class Kiosk extends CI_Controller {
                     $IKioskId=$this->input->post('IKioskId');
                     $ILocation=$this->input->post('ILocation');
                 
-                    $IAddress=$this->input->post('IAddress ');
+                    $IAddress=$this->input->post('IAddress');
                    
                     $this->load->model('Kiosk_model');
-
-                    $result=$this->Kiosk_model->insert_Kiosk($IKioskId,$ILocation,$IAddress);
+                    
+                    $result=$this->Kiosk_model->Kiosk_Insert($IKioskId,$ILocation,$IAddress);
 
                     if($result){
 
@@ -80,7 +80,7 @@ class Kiosk extends CI_Controller {
 
         }
 
- public function update_Kiosk(){
+ public function Kiosk_Update(){
             $this->form_validation->set_rules('UKioskId','Kiosk Id','trim|required|integer');
             $this->form_validation->set_rules('ULocation','Location','trim|required');
             $this->form_validation->set_rules('UAddress','Address','trim|required');
@@ -110,7 +110,7 @@ class Kiosk extends CI_Controller {
 
                     $this->load->model('Kiosk_model');
 
-                    $result=$this->Kiosk_model->update_Kiosk($UKioskId,$ULocation,$UAddress);
+                    $result=$this->Kiosk_model->Kiosk_Update($UKioskId,$ULocation,$UAddress);
 
                     if($result){
 
@@ -146,7 +146,7 @@ class Kiosk extends CI_Controller {
 
  public function delete_Kiosk(){
 
-            $this->form_validation->set_rules('delete_Kiosk','Row to be deleted','trim|required|numeric');
+            $this->form_validation->set_rules('deleteKiosk','Row to be deleted','trim|required|numeric');
 
 
              if($this->form_validation->run()==FALSE){
@@ -163,7 +163,7 @@ class Kiosk extends CI_Controller {
                 }else{
 
 
-                    $id=$this->input->post('delete_Kiosk');
+                    $id=$this->input->post('deleteKiosk');
 
                     $this->load->model('Kiosk_model');
 

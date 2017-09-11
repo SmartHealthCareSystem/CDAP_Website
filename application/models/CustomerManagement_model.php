@@ -4,7 +4,7 @@
     {
 
 
-        public function insert_customer($Ifname,$Ilname,$Iemail,$Ipwd,$Igenradio,$Iage,$ItelCustomer,$IaddCustomer,$Irfid,$IregisterAt,$IupdateAt,$IfcmToken)
+        public function insert_customer($Ifname,$Ilname,$Iemail,$Ipwd,$Igenradio,$Iage,$ItelCustomer,$IaddCustomer,$Irfid)
         {
             $data = array(
 
@@ -16,10 +16,7 @@
             'Age'=>$Iage,
             'Address'=>$IaddCustomer, 
             'ContactNo'=>$ItelCustomer,
-            'RfidCode'=> $Irfid,
-            'RegisterAt'=>$IregisterAt,
-            'UpdateAt'=>$IupdateAt,
-            'FcmToken'=>$IfcmToken
+            'RfidCode'=> $Irfid
                 
         );
 
@@ -40,7 +37,7 @@
         }
 
 
-        public function     update_customer($Ufname,$Ulname,$Uemail,$Upwd,$Ugenradio,$Uage,$UtelCustomer,$UaddCustomer,$Urfid,$UregisterAt,$UupdateAt,$UfcmToken){
+        public function     update_customer($Ufname,$Ulname,$Uemail,$Upwd,$Ugenradio,$Uage,$UtelCustomer,$UaddCustomer,$Urfid){
                 $data = array(
 
                 'FirstName'=>$Ufname, 
@@ -51,10 +48,7 @@
                 'Age'=>$Uage,
                 'Address'=>$UaddCustomer, 
                 'ContactNo'=>$UtelCustomer,
-                'RfidCode'=> $Urfid,
-                'RegisterAt'=>$UregisterAt,
-                'UpdateAt'=>$UupdateAt,
-                'FcmToken'=>$UfcmToken    
+                'RfidCode'=> $Urfid   
                 );
 
             $this->db->replace('patient', $data);   
@@ -65,9 +59,12 @@
 
         public function get_customer(){
 
-            $this->db->where('Status',1);
+//            $this->db->where('Status',1);
 
-            $Query=$this->db->get('patient');
+            $Query=$this->db->query("SELECT p. * , a.Balance, a.ValidTill
+FROM  `patient` AS p,  `account_balance` AS a
+WHERE  `Status` =1
+AND p.Id = a.PatientId");
 
 
             if($Query->num_rows()>=1){
