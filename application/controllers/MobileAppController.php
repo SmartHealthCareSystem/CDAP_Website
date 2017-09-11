@@ -207,7 +207,7 @@ class MobileAppController extends CI_Controller {
         $this->form_validation->set_rules('barcode','Barcode','trim|required|numeric');
         $this->form_validation->set_rules('patientID','Patient ID','trim|required|numeric');
 
-        $barcode=$this->input->post('barcode');
+        $barcode=$this->input->post('barCode');
         $patient=$this->input->post('patientID');
 
 
