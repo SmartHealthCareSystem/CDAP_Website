@@ -230,5 +230,17 @@ class MobileAppController extends CI_Controller {
         echo json_encode($result);
 //        echo var_dump($result);
     }
+    public function getExpiryDetails(){
+         
+         $this->form_validation->set_rules('patientId','patientId','trim|required|numeric');
+        
+        $patientId=$this->input->post('patientId');
+      
+        $this->load->model('MobileAppModel');
+        $result=$this->MobileAppModel->getExpiryDetails($patientId);
+        
+        echo json_encode($result);
+        
+    }
 }
 ?>
