@@ -351,9 +351,10 @@ class MobileAppModel extends CI_Model
     }
     public function getExpiryDetails($patientId){
 
-        $sql = "SELECT d.DrugName,db.`expiry_date`,DATEDIFF(db.`expiry_date`,CURRENT_DATE) as DaysRemaining,db.`barcode` FROM `drug_batch` as db,drug as d,expiry_notification as en WHERE db.`drug_id`=d.DrugId AND db.id=en.drug_batch_id AND db.`expiry_date`>CURRENT_DATE AND en.patient_id=5 ";
+        $sql = "SELECT d.DrugName as drug_name ,db.`expiry_date`,DATEDIFF(db.`expiry_date`,CURRENT_DATE) as days_remaining ,db.`barcode` FROM `drug_batch` as db,drug as d,expiry_notification as en WHERE db.`drug_id`=d.DrugId AND db.id=en.drug_batch_id AND db.`expiry_date`>CURRENT_DATE AND en.patient_id=? ";
 
         $prepQuery = $this->db->conn_id->prepare($sql);
+        $prepQuery->bindParam(1,$patientId);
         $prepQuery->execute();
         $result= $prepQuery->fetchAll(PDO::FETCH_ASSOC);
 
