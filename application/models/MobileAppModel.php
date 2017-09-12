@@ -253,7 +253,7 @@ class MobileAppModel extends CI_Model
         foreach ($kiosk_array as $key => $kiosk){
             $sql1 = "SELECT d.DrugPackId,d.DrugPackName, s.KioskId FROM drugpack as d 
                     INNER JOIN kioskstock as s ON s.DrugPackId = d.DrugPackId 
-                    WHERE s.KioskId = ? AND d.DrugPackName LIKE ?";
+                    WHERE s.KioskId = ? AND d.DrugPackName LIKE ? AND d.delete = 0";
             $prepQuery1 = $this->db->conn_id->prepare($sql1);
             $prepQuery1->bindParam(1,$kiosk_array[$key]["KioskId"], PDO::PARAM_INT);
             $prepQuery1->bindParam(2,$like, PDO::PARAM_STR);
