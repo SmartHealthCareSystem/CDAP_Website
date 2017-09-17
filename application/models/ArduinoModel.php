@@ -65,10 +65,13 @@ class ArduinoModel extends CI_Model
             $prepQueryInvoice->bindParam(2,$TotalAmount);
             $prepQueryInvoice->bindParam(3,$kioskId);
             if ($prepQueryInvoice->execute()) {
-                echo json_encode([
-                    "result" => TRUE,
-                    "message" => 'Your purchase is successfully done',
-                ]);
+                $urlInvoice= "localhost:8080/CDAP_Website/Notification_Email/KioskOrderMail?CustomerId=".$CustomerId."?kioskId=".$kioskId;
+                $ch = curl_init();
+                curl_setopt($ch, CURLOPT_URL,$urlInvoice);
+                curl_setopt($ch, CURLOPT_HEADER, 0);
+                curl_exec($ch);
+                curl_close($ch);
+
             } else {
                 echo json_encode([
                     "result" => FALSE,
@@ -89,17 +92,33 @@ class ArduinoModel extends CI_Model
         $prepQueryInvoice->bindParam(1, $OrderId);
         $prepQueryInvoice->bindParam(2, $OrderId);
         $prepQueryInvoice->bindParam(3, $kioskId);
+
+        var_dump($prepQueryInvoice);die();
+
         if ($prepQueryInvoice->execute()) {
-            echo json_encode([
-                "result" => TRUE,
-                "message" => 'Your purchase is successfully done',
-            ]);
+//            echo json_encode([
+//                "result" => TRUE,
+//                "message" => 'Your purchase is successfully done',
+//            ]);
+            $urlInvoice= "localhost:8080/CDAP_Website/Notification_Email?orderId=".$OrderId;
+            $ch = curl_init();
+
+            // set URL and other appropriate options
+            curl_setopt($ch, CURLOPT_URL,$urlInvoice);
+            curl_setopt($ch, CURLOPT_HEADER, 0);
+
+            // grab URL and pass it to the browser
+            curl_exec($ch);
+
+            // close cURL resource, and free up system resources
+            curl_close($ch);
         } else {
             echo json_encode([
                 "result" => FALSE,
                 "message" => 'Something went wrong try again later Invoice',
             ]);
         }
+
     }
 
 }
