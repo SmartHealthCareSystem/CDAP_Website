@@ -315,15 +315,15 @@ class MobileAppModel extends CI_Model
     public function updateToken($email,$token)
     {
 
-        $sql1="SELECT `FcmToken` FROM `patient` WHERE `Email`=? AND `FcmToken`IS NULL";
-        $prepQuery1 = $this->db->conn_id->prepare($sql1);
-        $prepQuery1->bindParam(1,$email);
-        $prepQuery1->execute();
-        $customer = $prepQuery1->fetch(PDO::FETCH_ASSOC);
-
-//                var_dump($customer);die;
-
-        if ($customer>0){
+//        $sql1="SELECT `FcmToken` FROM `patient` WHERE `Email`=?";
+//        $prepQuery1 = $this->db->conn_id->prepare($sql1);
+//        $prepQuery1->bindParam(1,$email);
+//        $prepQuery1->execute();
+//        $customer = $prepQuery1->fetch(PDO::FETCH_ASSOC);
+//
+////                var_dump($customer);die;
+//
+//        if ($customer>0){
 
             $sql="UPDATE `patient` SET `FcmToken`=? WHERE `Email`=?";
             $prepQuery = $this->db->conn_id->prepare($sql);
@@ -342,12 +342,12 @@ class MobileAppModel extends CI_Model
                     "message" => 'Something went wrong try again later',
                 ]);
             }
-        }else{
-            echo json_encode([
-                "result" => FALSE,
-                "message" => 'User token already exist',
-            ]);
-        }
+//        }else{
+//            echo json_encode([
+//                "result" => FALSE,
+//                "message" => 'User token already exist',
+//            ]);
+//        }
     }
     public function getExpiryDetails($patientId){
 

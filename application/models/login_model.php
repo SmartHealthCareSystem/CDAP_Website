@@ -38,14 +38,14 @@ class login_model extends CI_Model
 		$message="Your medicine has reached its Expiry date";
 		$title="Expiry date notification";
 		$path_to_fcm="https://fcm.googleapis.com/fcm/send";
-		$server_key="AIzaSyDr2hZzFys2dovXYExlUGNuOy7dKNG5HOA";
-		$sql1="SELECT p.FcmToken FROM `expiry_notification` as en INNER JOIN drug_batch as db ON en.`drug_batch_id`=db.id INNER JOIN patient as p on p.Id=en.id WHERE en.`is_notified`=0 AND DATEDIFF(db.expiry_date,CURRENT_DATE)=30";
+		$server_key="AIzaSyD_JmovY8dQb9m6usYpBAJufJE2iyftSn8";
+		$sql1="SELECT p.FcmToken,db.barcode,d.DrugName FROM `expiry_notification` as en INNER JOIN drug_batch as db ON en.`drug_batch_id`=db.id INNER JOIN patient as p on p.Id=en.id INNER JOIN drug as d on d.DrugId=db.drug_id WHERE en.`is_notified`=0 AND DATEDIFF(db.expiry_date,CURRENT_DATE)=30";
 		$prepQuery1 = $this->db->conn_id->prepare($sql1);
 		$prepQuery1->execute();
 		$result = $prepQuery1->fetchAll(PDO::FETCH_ASSOC);
 
 		foreach ($result as $token){
-
+			$message="We kindly inform you that "+$token["DrugName"]+" you purchased with barcode id "+$token["barcode"]+" will get expired within 30 days from today";
 			$key=$token["FcmToken"];
 			$fields = array(
 				'to' => $key,
