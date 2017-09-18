@@ -242,26 +242,27 @@ class MobileAppModel extends CI_Model
         $kiosk_array = [];
 
         $like = "%".$name."%";
-        $sql = "select * from kiosk";
+        $sql = "SELECT k.* from kiosk k INNER join kioskstock ks on k.KioskId=ks.KioskId INNER JOIN drugpack dp on ks.DrugPackId=dp.DrugPackId where ks.AvailQuantity>1 and dp.DrugPackName LIKE ?";
 
         $prepQuery = $this->db->conn_id->prepare($sql);
+        $prepQuery->bindParam(1,$like, PDO::PARAM_STR);
         $prepQuery->execute();
         $result= $prepQuery->fetchAll(PDO::FETCH_ASSOC);
 
         $kiosk_array = $result;
 
-        foreach ($kiosk_array as $key => $kiosk){
-            $sql1 = "SELECT d.DrugPackId,d.DrugPackName, s.KioskId FROM drugpack as d 
-                    INNER JOIN kioskstock as s ON s.DrugPackId = d.DrugPackId 
-                    WHERE s.KioskId = ? AND d.DrugPackName LIKE ? AND d.delete = 0";
-            $prepQuery1 = $this->db->conn_id->prepare($sql1);
-            $prepQuery1->bindParam(1,$kiosk_array[$key]["KioskId"], PDO::PARAM_INT);
-            $prepQuery1->bindParam(2,$like, PDO::PARAM_STR);
-            $prepQuery1->execute();
-            $result1= $prepQuery1->fetchAll(PDO::FETCH_ASSOC);
-
-            $kiosk_array[$key]["FirstAidKitModel"] = $result1;
-        }
+//        foreach ($kiosk_array as $key => $kiosk){
+//            $sql1 = "SELECT d.DrugPackId,d.DrugPackName, s.KioskId FROM drugpack as d
+//                    INNER JOIN kioskstock as s ON s.DrugPackId = d.DrugPackId
+//                    WHERE s.KioskId = ? AND d.DrugPackName LIKE ? AND d.delete = 0";
+//            $prepQuery1 = $this->db->conn_id->prepare($sql1);
+//            $prepQuery1->bindParam(1,$kiosk_array[$key]["KioskId"], PDO::PARAM_INT);
+//            $prepQuery1->bindParam(2,$like, PDO::PARAM_STR);
+//            $prepQuery1->execute();
+//            $result1= $prepQuery1->fetchAll(PDO::FETCH_ASSOC);
+//
+//            $kiosk_array[$key]["FirstAidKitModel"] = $result1;
+//        }
 
         return $kiosk_array;
     }
