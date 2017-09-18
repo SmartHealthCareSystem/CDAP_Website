@@ -242,7 +242,7 @@ class MobileAppModel extends CI_Model
         $kiosk_array = [];
 
         $like = "%".$name."%";
-        $sql = "SELECT DISTINCT k.* from kiosk k INNER join kioskstock ks on k.KioskId=ks.KioskId INNER JOIN drugpack dp on ks.DrugPackId=dp.DrugPackId where ks.AvailQuantity>=1 and dp.DrugPackName LIKE ?";
+        $sql = "SELECT DISTINCT k.* from kiosk k INNER join kioskstock ks on k.KioskId=ks.KioskId INNER JOIN drugpack dp on ks.DrugPackId=dp.DrugPackId where ks.AvailQuantity>=1 AND dp.delete and dp.DrugPackName LIKE ?";
 
         $prepQuery = $this->db->conn_id->prepare($sql);
         $prepQuery->bindParam(1,$like, PDO::PARAM_STR);
