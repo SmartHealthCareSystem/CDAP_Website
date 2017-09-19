@@ -20,9 +20,8 @@
             <div class="form-group">
             <label class="control-label col-sm-3" for="Idrugs">drugs:</label>
             <div class="col-sm-9"> 
-                <label><input type="checkbox" id="Idrugs" name="Idrugs" value="">drug 1</label>
-                 <label><input type="checkbox" id="Idrugs" name="Idrugs" value="">drug 2</label>
-                 <label><input type="checkbox" id="Idrugs" name="Idrugs" value="">drug 3</label>
+                <label><input type="checkbox" id="Idrugs" name="Idrugs" value="">drug </label>
+                
             </div>
           </div>
             

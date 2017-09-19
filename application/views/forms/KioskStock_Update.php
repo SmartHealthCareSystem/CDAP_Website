@@ -13,7 +13,7 @@
 <?php endif; ?>
 
 
-<?php echo form_open('KioskStock/KioskUpdate',$attributes);?>
+<?php echo form_open('KioskStock/KioskStockUpdate',$attributes);?>
    
 
 
@@ -33,7 +33,7 @@
             <div class="form-group">
             <label class="control-label col-sm-3" for="UAvailQuantity">Available Quantity:</label>
             <div class="col-sm-9">
-              <input type="number" class="form-control" id="UAvailQuantity" name="UAvailQuantity" placeholder="Enter Drug Pack Id">
+              <input type="number" class="form-control" id="UAvailQuantity" name="UAvailQuantity" placeholder="Enter new Availability">
             </div>
           </div>
 

@@ -64,18 +64,13 @@
                     <li><a href="<?php echo base_url();?>drugPack">Drug Packs</a></li>
                     <li><a href="<?php echo base_url();?>Kiosk">Kiosk</a></li>
                     <li><a href="<?php echo base_url();?>CustomerManagement">Patients</a></li>
+                     <li><a href="<?php echo base_url();?>KioskStock">Kiosk Stock</a></li>
                     
                    
                 </ul>
 
 
-                <li data-toggle="collapse" data-target="#service" class="collapsed">
-                  <a href="#"><i class="fa fa-globe fa-lg"></i> Stock </a><i style="text-align:right" class="fa fa-chevron-down drop_icon" aria-hidden="true"></i>
-                </li>  
-                <ul class="sub-menu collapse" id="service">
-                    <li><a href="#">Ware House</a></li>
-                    <li><a href="<?php echo base_url();?>KioskStock">Kiosk Stock</a></li>
-                </ul>
+              
 
 
                 <li data-toggle="collapse" data-target="#new" class="collapsed">

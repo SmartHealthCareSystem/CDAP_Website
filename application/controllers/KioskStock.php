@@ -31,7 +31,7 @@ class KioskStock extends CI_Controller {
 
             $this->form_validation->set_rules('IKioskId','Kiosk Id','trim|required|integer');
             $this->form_validation->set_rules('IDrugPackId','Drug pack Id','trim|required|integer');
-            $this->form_validation->set_rules('IAvailQuantity','AvailQuantity','trim|required|integer');
+            $this->form_validation->set_rules('IAvailQuantity','IAvailQuantity','trim|required|integer');
            
           
 
@@ -54,7 +54,7 @@ class KioskStock extends CI_Controller {
                     $IKioskId=$this->input->post('IKioskId');
                     $IDrugPackId=$this->input->post('IDrugPackId');
                 
-                    $IAvailQuantity=$this->input->post('IAvailQuantity ');
+                    $IAvailQuantity=$this->input->post('IAvailQuantity');
                    
                     $this->load->model('KioskStock_model');
 
@@ -146,14 +146,15 @@ class KioskStock extends CI_Controller {
 
  public function kioskStockDelete(){
 
-            $this->form_validation->set_rules('deleteKiosk','Row to be deleted','trim|required|numeric');
+            $this->form_validation->set_rules('deleteKioskId','Row to be deleted','trim|required|numeric');
+            $this->form_validation->set_rules('deleteDrugPackId','Row to be deleted','trim|required|numeric');
 
 
              if($this->form_validation->run()==FALSE){
 
                     $data=array(
 
-                        'errorsDeleteKiosk' => validation_errors() 
+                        'errorsDeleteKioskStock' => validation_errors() 
 
                     );
                     $this->session->set_flashdata($data);
@@ -163,11 +164,12 @@ class KioskStock extends CI_Controller {
                 }else{
 
 
-                    $id=$this->input->post('deleteKiosk');
+                $kioskId=$this->input->post('deleteKioskId');
+                 $drugPackId=$this->input->post('deleteDrugPackId');
 
                     $this->load->model('KioskStock_model');
 
-                    $result=$this->KioskStock_model->delete_KioskStock($id);
+                    $result=$this->KioskStock_model->delete_KioskStock($kioskId,$drugPackId);
 
                     if($result){
 
