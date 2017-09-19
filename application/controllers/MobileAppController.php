@@ -207,7 +207,7 @@ class MobileAppController extends CI_Controller {
         $this->form_validation->set_rules('barcode','Barcode','trim|required|numeric');
         $this->form_validation->set_rules('patientID','Patient ID','trim|required|numeric');
 
-        $barcode=$this->input->post('barcode');
+        $barcode=$this->input->post('barCode');
         $patient=$this->input->post('patientID');
 
 
@@ -229,6 +229,18 @@ class MobileAppController extends CI_Controller {
         $result=$this->MobileAppModel->updateToken($email,$token);
         echo json_encode($result);
 //        echo var_dump($result);
+    }
+    public function getExpiryDetails(){
+         
+         $this->form_validation->set_rules('patientId','patientId','trim|required|numeric');
+        
+        $patientId=$this->input->post('patientId');
+      
+        $this->load->model('MobileAppModel');
+        $result=$this->MobileAppModel->getExpiryDetails($patientId);
+        
+        echo json_encode($result);
+        
     }
 }
 ?>

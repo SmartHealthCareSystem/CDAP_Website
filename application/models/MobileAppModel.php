@@ -242,26 +242,27 @@ class MobileAppModel extends CI_Model
         $kiosk_array = [];
 
         $like = "%".$name."%";
-        $sql = "select * from kiosk";
+        $sql = "SELECT DISTINCT k.* from kiosk k INNER join kioskstock ks on k.KioskId=ks.KioskId INNER JOIN drugpack dp on ks.DrugPackId=dp.DrugPackId where ks.AvailQuantity>=1 AND dp.delete = 0 and dp.DrugPackName LIKE ?";
 
         $prepQuery = $this->db->conn_id->prepare($sql);
+        $prepQuery->bindParam(1,$like, PDO::PARAM_STR);
         $prepQuery->execute();
         $result= $prepQuery->fetchAll(PDO::FETCH_ASSOC);
 
         $kiosk_array = $result;
 
-        foreach ($kiosk_array as $key => $kiosk){
-            $sql1 = "SELECT d.DrugPackId,d.DrugPackName, s.KioskId FROM drugpack as d 
-                    INNER JOIN kioskstock as s ON s.DrugPackId = d.DrugPackId 
-                    WHERE s.KioskId = ? AND d.DrugPackName LIKE ?";
-            $prepQuery1 = $this->db->conn_id->prepare($sql1);
-            $prepQuery1->bindParam(1,$kiosk_array[$key]["KioskId"], PDO::PARAM_INT);
-            $prepQuery1->bindParam(2,$like, PDO::PARAM_STR);
-            $prepQuery1->execute();
-            $result1= $prepQuery1->fetchAll(PDO::FETCH_ASSOC);
-
-            $kiosk_array[$key]["FirstAidKitModel"] = $result1;
-        }
+//        foreach ($kiosk_array as $key => $kiosk){
+//            $sql1 = "SELECT d.DrugPackId,d.DrugPackName, s.KioskId FROM drugpack as d
+//                    INNER JOIN kioskstock as s ON s.DrugPackId = d.DrugPackId
+//                    WHERE s.KioskId = ? AND d.DrugPackName LIKE ? AND d.delete = 0";
+//            $prepQuery1 = $this->db->conn_id->prepare($sql1);
+//            $prepQuery1->bindParam(1,$kiosk_array[$key]["KioskId"], PDO::PARAM_INT);
+//            $prepQuery1->bindParam(2,$like, PDO::PARAM_STR);
+//            $prepQuery1->execute();
+//            $result1= $prepQuery1->fetchAll(PDO::FETCH_ASSOC);
+//
+//            $kiosk_array[$key]["FirstAidKitModel"] = $result1;
+//        }
 
         return $kiosk_array;
     }
@@ -315,15 +316,15 @@ class MobileAppModel extends CI_Model
     public function updateToken($email,$token)
     {
 
-        $sql1="SELECT `FcmToken` FROM `patient` WHERE `Email`=? AND `FcmToken`IS NULL";
-        $prepQuery1 = $this->db->conn_id->prepare($sql1);
-        $prepQuery1->bindParam(1,$email);
-        $prepQuery1->execute();
-        $customer = $prepQuery1->fetch(PDO::FETCH_ASSOC);
-
-//                var_dump($customer);die;
-
-        if ($customer>0){
+//        $sql1="SELECT `FcmToken` FROM `patient` WHERE `Email`=?";
+//        $prepQuery1 = $this->db->conn_id->prepare($sql1);
+//        $prepQuery1->bindParam(1,$email);
+//        $prepQuery1->execute();
+//        $customer = $prepQuery1->fetch(PDO::FETCH_ASSOC);
+//
+////                var_dump($customer);die;
+//
+//        if ($customer>0){
 
             $sql="UPDATE `patient` SET `FcmToken`=? WHERE `Email`=?";
             $prepQuery = $this->db->conn_id->prepare($sql);
@@ -342,12 +343,24 @@ class MobileAppModel extends CI_Model
                     "message" => 'Something went wrong try again later',
                 ]);
             }
-        }else{
-            echo json_encode([
-                "result" => FALSE,
-                "message" => 'User token already exist',
-            ]);
-        }
+//        }else{
+//            echo json_encode([
+//                "result" => FALSE,
+//                "message" => 'User token already exist',
+//            ]);
+//        }
+    }
+    public function getExpiryDetails($patientId){
+
+        $sql = "SELECT d.DrugName as drug_name ,db.`expiry_date`,DATEDIFF(db.`expiry_date`,CURRENT_DATE) as days_remaining ,db.`barcode` FROM `drug_batch` as db,drug as d,expiry_notification as en WHERE db.`drug_id`=d.DrugId AND db.id=en.drug_batch_id AND db.`expiry_date`>CURRENT_DATE AND en.patient_id=? ";
+
+        $prepQuery = $this->db->conn_id->prepare($sql);
+        $prepQuery->bindParam(1,$patientId);
+        $prepQuery->execute();
+        $result= $prepQuery->fetchAll(PDO::FETCH_ASSOC);
+
+
+        return $result;
     }
 }
 
