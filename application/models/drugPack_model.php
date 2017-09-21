@@ -49,7 +49,29 @@
         }
 
 
-        public function get_drugPack(){
+        public function get_Drugdrugname(){
+
+         //   $this->db->where('delete',1);
+
+            $Query=$this->db->query("SELECT d.DrugName
+            FROM `drug` AS d 
+            WHERE `Status` 1");
+
+
+            if($Query->num_rows()>=1){
+
+                return $Query->result();
+
+            }else{
+
+                return FALSE;
+
+            }
+
+        }
+        
+        
+            public function get_drugPack(){
 
             $this->db->where('delete',1);
 

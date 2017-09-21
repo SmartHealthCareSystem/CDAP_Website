@@ -159,6 +159,22 @@ class drugPack extends CI_Controller {
 
             //echo var_dump($result) ;
         }
+    
+     public function get_Drugdrugname(){
+
+
+            $this->load->model('drugPack_model');
+
+            $result=$this->drugPack_model->get_Drugdrugname();
+
+
+
+
+
+            //echo var_dump($result) ;
+        }
+    
+    
 
  public function delete_drugPack(){
 

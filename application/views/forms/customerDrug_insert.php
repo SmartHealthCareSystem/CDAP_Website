@@ -13,7 +13,7 @@
 <?php endif; ?>
 
 
-<?php echo form_open('drugPack/drugPack_Insert',$attributes);?>
+<?php echo form_open('drugPack/get_Drugdrugname',$attributes);?>
 
 
 	
