@@ -89,6 +89,14 @@
             }
 
         }
+        
+        public function get_Drugdrugname(){
+            
+        $this->db->select('DrugId','DrugName');
+            $this->db->where('Status', '1');
+            $q = $this->db->get('drug');
+          
+        }
 
 
         public function delete_drugPack($id){
