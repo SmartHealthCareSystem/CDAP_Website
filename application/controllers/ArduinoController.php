@@ -5,7 +5,7 @@ class ArduinoController extends CI_Controller {
     
     public function index(){
     
-        $this->load->model('MobileAppModel');
+//        $this->load->model('MobileAppModel');
         //To Load The model respective to this Controller
         
     }
