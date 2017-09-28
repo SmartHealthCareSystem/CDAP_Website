@@ -22,11 +22,11 @@
 <?php endif; ?>
      
      
-<input type="text" id="deletedrugPack" name="deletedrugPack" >
+<input type="text" id="deletedrugPack" name="deletedrugPack" style="display:none" >
  </form>
     
 <div class="input-group col-lg-3 col-md-3">
-    <input type="text" class="form-control" id="myInput" name="myInput" onkeyup="myFunction()" placeholder="Search ...">
+    <input type="text" class="form-control" id="myInput" name="myInput" onkeyup="myFunction()" placeholder="Search ..." >
     <div class="input-group-btn">
       <button class="btn btn-default" type="submit">
         <i class="glyphicon glyphicon-search"></i>
