@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 19, 2017 at 06:08 AM
+-- Generation Time: Sep 30, 2017 at 07:22 AM
 -- Server version: 5.7.14
 -- PHP Version: 5.6.25
 
@@ -40,7 +40,7 @@ CREATE TABLE `account_balance` (
 
 INSERT INTO `account_balance` (`PatientId`, `Balance`, `Is_Active`, `AddedDate`, `ValidTill`) VALUES
 (3, 100, 1, '2017-09-19 06:04:06', '2017-10-19 06:04:06'),
-(5, 400, 1, '2017-09-12 10:52:07', '2017-10-12 10:52:07'),
+(5, 300, 1, '2017-09-28 08:57:35', '2017-10-28 08:57:35'),
 (6, 100, 1, '2017-09-19 05:59:38', '2017-10-19 05:59:38');
 
 --
@@ -81,6 +81,34 @@ INSERT INTO `drug` (`DrugId`, `DrugName`, `Dosage`, `Price`, `Formulation`, `Man
 -- --------------------------------------------------------
 
 --
+-- Stand-in structure for view `drugavailandneeded`
+-- (See below for the actual view)
+--
+CREATE TABLE `drugavailandneeded` (
+`DrugPackId` varchar(500)
+,`DrugPackName` varchar(200)
+,`AvailQuantity` int(11)
+,`NeedAmount` bigint(13)
+,`Color` varchar(6)
+);
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `drugneedandavail`
+-- (See below for the actual view)
+--
+CREATE TABLE `drugneedandavail` (
+`DrugPackId` varchar(500)
+,`DrugPackName` varchar(200)
+,`AvailQuantity` int(11)
+,`NeedAmount` bigint(13)
+,`Color` varchar(6)
+);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `drugpack`
 --
 
@@ -99,7 +127,8 @@ CREATE TABLE `drugpack` (
 
 INSERT INTO `drugpack` (`DrugPackId`, `DrugPackName`, `UnitPrice`, `delete`, `Instruction`, `Image`) VALUES
 (1, 'Small Burn First-Aid Pack', 100, 0, 'Place the burned area under running cool water for at least 5 minutes to reduce swelling. Apply an antiseptic spray, antibiotic ointment, or aloe vera cream to soothe the area. Loosely wrap a gauze bandage around the burn. To relieve pain, take acetaminophen', ''),
-(2, 'Small Burn First-Aid Pack 2', 50, 0, 'Place the burned area under running cool water for at least 5 minutes to reduce swelling. Apply an antiseptic spray, antibiotic ointment, or aloe vera cream to soothe the area. Loosely wrap a gauze bandage around the burn. To relieve pain, take acetaminophen', '');
+(2, 'Small Burn First-Aid Pack 2', 50, 0, 'Place the burned area under running cool water for at least 5 minutes to reduce swelling. Apply an antiseptic spray, antibiotic ointment, or aloe vera cream to soothe the area. Loosely wrap a gauze bandage around the burn. To relieve pain, take acetaminophen', ''),
+(3, 'Small Burn First-Aid Pack 3', 50, 0, 'Place the burned area under running cool water for at least 5 minutes to reduce swelling. Apply an antiseptic spray, antibiotic ointment, or aloe vera cream to soothe the area. Loosely wrap a gauze bandage around the burn. To relieve pain, take acetaminophen', '');
 
 -- --------------------------------------------------------
 
@@ -111,6 +140,13 @@ CREATE TABLE `drugpackitem` (
   `DrugPackId` int(11) NOT NULL,
   `Drug` varchar(200) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `drugpackitem`
+--
+
+INSERT INTO `drugpackitem` (`DrugPackId`, `Drug`) VALUES
+(1, '1');
 
 -- --------------------------------------------------------
 
@@ -221,8 +257,10 @@ CREATE TABLE `invoice` (
 --
 
 INSERT INTO `invoice` (`InvoiceNo`, `OrderNo`, `TotalAmount`, `Date`, `kioskId`, `e-billStatus`) VALUES
-(1, 10, 100, '2017-08-13 12:59:13', 123456789, 0),
-(3, 22, 100, '2017-09-12 11:07:33', 1, 0);
+(1, 10, 100, '2017-09-28 10:07:33', 1, 0),
+(3, 22, 100, '2017-09-28 10:07:33', 1, 0),
+(4, 17, 100, '2017-09-28 10:07:33', 1, 0),
+(5, 2, 100, '2017-09-28 10:07:33', 1, 0);
 
 --
 -- Triggers `invoice`
@@ -259,7 +297,7 @@ CREATE TABLE `kiosk` (
 --
 
 INSERT INTO `kiosk` (`KioskId`, `Status`, `Location`, `Address`) VALUES
-('1', '1', '6.9488, 79.8605', ''),
+('1', '1', '6.9488, 79.8605', 'Kollupitiya'),
 ('2', '1', '6.9488, 79.8690', 'Colombo');
 
 -- --------------------------------------------------------
@@ -279,8 +317,9 @@ CREATE TABLE `kioskstock` (
 --
 
 INSERT INTO `kioskstock` (`KioskId`, `DrugPackId`, `AvailQuantity`) VALUES
-(1, '1', 99),
-(1, '2', 50),
+(1, '1', 0),
+(1, '2', 49),
+(1, '3', 8),
 (2, '1', 99),
 (2, '2', 50);
 
@@ -307,7 +346,7 @@ CREATE TABLE `order` (
 
 INSERT INTO `order` (`OrderId`, `CustomerId`, `TotalAmount`, `DeliveryStatus`, `Quantity`, `PackId`, `AddedDate`, `UpdatedDate`) VALUES
 (1, 1, 100, 0, 1, 1, '2017-08-12 18:01:32', '2017-08-13 07:04:52'),
-(2, 25, 100, 0, 1, 1001, '2017-08-12 18:01:32', '2017-08-13 07:04:52'),
+(2, 25, 100, 1, 1, 2, '2017-08-12 18:01:32', '2017-09-28 09:24:26'),
 (3, 5, 100, -1, 1, 1, '2017-08-12 18:01:32', '2017-08-20 14:22:37'),
 (4, 5, 100, -1, 1, 1, '2017-08-12 18:01:32', '2017-08-20 14:22:23'),
 (5, 5, 100, -1, 1, 1, '2017-08-12 18:01:32', '2017-08-20 14:22:34'),
@@ -315,12 +354,12 @@ INSERT INTO `order` (`OrderId`, `CustomerId`, `TotalAmount`, `DeliveryStatus`, `
 (7, 5, 100, -1, 1, 1, '2017-08-12 18:01:32', '2017-08-20 14:22:39'),
 (8, 5, 400, -1, 4, 1, '2017-08-12 18:01:32', '2017-08-20 14:22:35'),
 (9, 5, 400, -1, 4, 1, '2017-08-12 18:01:32', '2017-08-20 14:22:27'),
-(10, 5, 100, -1, 1, 1, '2017-08-12 18:01:32', '2017-08-20 14:22:41'),
+(10, 5, 100, -1, 8, 1, '2017-08-12 18:01:32', '2017-09-28 08:22:57'),
 (11, 5, 500, -1, 5, 1, '2017-08-13 13:17:31', '2017-08-20 14:21:46'),
 (12, 5, 300, 0, 3, 1, '2017-08-20 14:23:33', '2017-08-20 14:23:33'),
 (13, 5, 1200, 0, 2, 1, '2017-09-12 09:29:01', '2017-09-12 09:29:01'),
 (14, 5, 100, 1, 1, 1, '2017-09-12 10:01:47', '2017-09-12 10:01:47'),
-(17, 5, 100, 0, 1, 3, '2017-09-12 10:29:28', '2017-09-12 10:29:28'),
+(17, 5, 100, 1, 9, 3, '2017-09-12 10:29:28', '2017-09-28 09:17:00'),
 (22, 5, 100, 1, 1, 1, '2017-09-12 10:52:07', '2017-09-12 10:52:07');
 
 -- --------------------------------------------------------
@@ -390,6 +429,24 @@ CREATE TABLE `stock` (
   `DrugPackId` varchar(500) NOT NULL,
   `AvailStock` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `drugavailandneeded`
+--
+DROP TABLE IF EXISTS `drugavailandneeded`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `drugavailandneeded`  AS  select `ks`.`DrugPackId` AS `DrugPackId`,`dp`.`DrugPackName` AS `DrugPackName`,`ks`.`AvailQuantity` AS `AvailQuantity`,(select ceiling(avg(`o`.`Quantity`)) AS `avgQuantity` from (`invoice` `i` join `order` `o` on((`o`.`OrderId` = `i`.`OrderNo`))) where ((weekday(`i`.`Date`) = weekday(now())) and (cast(`i`.`Date` as time) >= cast(now() as time)) and (cast(`i`.`Date` as time) < addtime(cast(now() as time),'2:00:00')) and (`i`.`kioskId` = `k`.`KioskId`) and (`o`.`PackId` = `ks`.`DrugPackId`))) AS `NeedAmount`,if((`ks`.`AvailQuantity` = 0),'Red',if((`ks`.`AvailQuantity` < 5),'Orange',if((`ks`.`AvailQuantity` < (select ceiling(avg(`o`.`Quantity`)) AS `avgQuantity` from (`invoice` `i` join `order` `o` on((`o`.`OrderId` = `i`.`OrderNo`))) where ((weekday(`i`.`Date`) = weekday(now())) and (cast(`i`.`Date` as time) >= cast(now() as time)) and (cast(`i`.`Date` as time) < addtime(cast(now() as time),'2:00:00')) and (`i`.`kioskId` = `k`.`KioskId`) and (`o`.`PackId` = `ks`.`DrugPackId`)))),'Orange','Green'))) AS `Color` from ((`kiosk` `k` join `kioskstock` `ks` on((`k`.`KioskId` = `ks`.`KioskId`))) join `drugpack` `dp` on((`dp`.`DrugPackId` = `ks`.`DrugPackId`))) ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `drugneedandavail`
+--
+DROP TABLE IF EXISTS `drugneedandavail`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `drugneedandavail`  AS  select `ks`.`DrugPackId` AS `DrugPackId`,`dp`.`DrugPackName` AS `DrugPackName`,`ks`.`AvailQuantity` AS `AvailQuantity`,if(((select ceiling(avg(`o`.`Quantity`)) AS `avgQuantity` from (`invoice` `i` join `order` `o` on((`o`.`OrderId` = `i`.`OrderNo`))) where ((weekday(`i`.`Date`) = weekday(now())) and (cast(`i`.`Date` as time) >= cast(now() as time)) and (cast(`i`.`Date` as time) < addtime(cast(now() as time),'2:00:00')) and (`i`.`kioskId` = `k`.`KioskId`) and (`o`.`PackId` = `ks`.`DrugPackId`))) > 0),(select ceiling(avg(`o`.`Quantity`)) AS `avgQuantity` from (`invoice` `i` join `order` `o` on((`o`.`OrderId` = `i`.`OrderNo`))) where ((weekday(`i`.`Date`) = weekday(now())) and (cast(`i`.`Date` as time) >= cast(now() as time)) and (cast(`i`.`Date` as time) < addtime(cast(now() as time),'2:00:00')) and (`i`.`kioskId` = `k`.`KioskId`) and (`o`.`PackId` = `ks`.`DrugPackId`))),5) AS `NeedAmount`,if((`ks`.`AvailQuantity` = 0),'Red',if((`ks`.`AvailQuantity` < 5),'Orange',if((`ks`.`AvailQuantity` < (select ceiling(avg(`o`.`Quantity`)) AS `avgQuantity` from (`invoice` `i` join `order` `o` on((`o`.`OrderId` = `i`.`OrderNo`))) where ((weekday(`i`.`Date`) = weekday(now())) and (cast(`i`.`Date` as time) >= cast(now() as time)) and (cast(`i`.`Date` as time) < addtime(cast(now() as time),'2:00:00')) and (`i`.`kioskId` = `k`.`KioskId`) and (`o`.`PackId` = `ks`.`DrugPackId`)))),'Orange','Green'))) AS `Color` from ((`kiosk` `k` join `kioskstock` `ks` on((`k`.`KioskId` = `ks`.`KioskId`))) join `drugpack` `dp` on((`dp`.`DrugPackId` = `ks`.`DrugPackId`))) ;
 
 --
 -- Indexes for dumped tables
@@ -503,7 +560,7 @@ ALTER TABLE `drug`
 -- AUTO_INCREMENT for table `drugpack`
 --
 ALTER TABLE `drugpack`
-  MODIFY `DrugPackId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `DrugPackId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `drug_batch`
 --
@@ -523,7 +580,7 @@ ALTER TABLE `injury`
 -- AUTO_INCREMENT for table `invoice`
 --
 ALTER TABLE `invoice`
-  MODIFY `InvoiceNo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `InvoiceNo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `order`
 --
