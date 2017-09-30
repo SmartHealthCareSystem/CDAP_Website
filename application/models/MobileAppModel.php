@@ -303,7 +303,6 @@ class MobileAppModel extends CI_Model
 
         if ($prepQuery->execute()){
 
-            var_dump("Came ");die;
             echo json_encode([
                 "result" => TRUE,
                 "message" => 'Your request is successfull!',
