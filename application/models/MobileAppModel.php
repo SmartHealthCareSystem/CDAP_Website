@@ -301,8 +301,6 @@ class MobileAppModel extends CI_Model
         $prepQuery->bindParam(2,$patient, PDO::PARAM_INT);
         $prepQuery->bindParam(1,$DrugBatchId, PDO::PARAM_INT);
 
-        var_dump($prepQuery->execute());die;
-
         if ($prepQuery->execute()){
 
             var_dump("Came ");die;
