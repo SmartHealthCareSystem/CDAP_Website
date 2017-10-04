@@ -45,7 +45,7 @@ class Login_model extends CI_Model
 		$result = $prepQuery1->fetchAll(PDO::FETCH_ASSOC);
 
 		foreach ($result as $token){
-			$message="We kindly inform you that "+$token["DrugName"]+" you purchased with barcode id "+$token["barcode"]+" will get expired within 30 days from today";
+			$message="We kindly inform you that "+$token["DrugName"]." you purchased with barcode id "+$token["barcode"]+" will get expired within 30 days from today";
 			$key=$token["FcmToken"];
 			$fields = array(
 				'to' => $key,

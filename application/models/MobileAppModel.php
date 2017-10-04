@@ -292,15 +292,17 @@ class MobileAppModel extends CI_Model
         $prepQueryDrugBatchId = $this->db->conn_id->prepare($sqlDrugBatchId);
         $prepQueryDrugBatchId->bindParam(1,$barcode, PDO::PARAM_INT);
         $prepQueryDrugBatchId->execute();
-        $DrugBatchId=$prepQueryDrugBatchId->fetch(PDO::FETCH_ASSOC);
+        $DrugBatchId=(int)$prepQueryDrugBatchId->fetch(PDO::FETCH_COLUMN);
 
-        $sql="INSERT INTO `expiry_notification` (`id`, `drug_batch_id`, `patient_id`, `is_notified`, `added_date`, `updated_date`) VALUES (NULL, ?, ?, '0', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);";
+
+        $sql="INSERT INTO expiry_notification (drug_batch_id, patient_id) VALUES (?,?)";
 
         $prepQuery = $this->db->conn_id->prepare($sql);
         $prepQuery->bindParam(2,$patient, PDO::PARAM_INT);
-        $prepQuery->bindParam(1,$DrugBatchId["id"], PDO::PARAM_INT);
+        $prepQuery->bindParam(1,$DrugBatchId, PDO::PARAM_INT);
 
         if ($prepQuery->execute()){
+
             echo json_encode([
                 "result" => TRUE,
                 "message" => 'Your request is successfull!',
