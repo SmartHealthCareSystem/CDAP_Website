@@ -2,7 +2,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 
-class users extends CI_Controller
+class Users extends CI_Controller
 {
 	
 	
@@ -23,7 +23,7 @@ class users extends CI_Controller
 				 );
 			$this->session->set_flashdata($data);
 
-			redirect('login');
+			redirect('Login');
 
 		}else{
 
@@ -32,9 +32,9 @@ class users extends CI_Controller
 			$username=$this->input->post('username');
 			$password=$this->input->post('password');
 
-			$this->load->model('login_model');
+			$this->load->model('Login_model');
 
-			$email=$this->login_model->login_user($username,$password);
+			$email=$this->Login_model->login_user($username,$password);
 
 			if($email){
 
@@ -54,7 +54,7 @@ class users extends CI_Controller
 
 				$this->session->set_flashdata('login_unsuccess','Invalid login details');
 				//echo "<script>alert('Invalid username and Password');</script>";
-				redirect('login');
+				redirect('Login');
 			}
 
 		}
@@ -70,7 +70,7 @@ class users extends CI_Controller
 
 
 		$this->session->sess_destroy();
-		redirect('login');
+		redirect('Login');
 
 
 
@@ -78,8 +78,8 @@ class users extends CI_Controller
 	public function sendNotification(){
 //		$CustomerId=$this->input->post('CustomerId');
 
-		$this->load->model('login_model');
-		$result=$this->login_model->send_notification();
+		$this->load->model('Login_model');
+		$result=$this->Login_model->send_notification();
 
 		echo json_encode($result);
 	}

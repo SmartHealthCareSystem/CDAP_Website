@@ -22,7 +22,7 @@ public function index(){
     
     
 $data['CustomerManagementView'] = $this->load->view('CustomerManagementView', $data, TRUE);
-$this->load->view('includes/masterNav',$data);
+$this->load->view('includes/MasterNav',$data);
     
 }
     

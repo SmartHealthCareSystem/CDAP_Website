@@ -8,7 +8,7 @@ class FirstAidInfoManagement extends CI_Controller {
     $data['masterNav_view']="FirstAidInfoManagementView";
 
 
-   $this->load->view('includes/masterNav',$data);
+   $this->load->view('includes/MasterNav',$data);
 
 
   }

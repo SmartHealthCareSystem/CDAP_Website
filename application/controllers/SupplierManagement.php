@@ -8,7 +8,7 @@ class SupplierManagement extends CI_Controller {
     $data['masterNav_view']="SupplierManagementView";
 
 
-   $this->load->view('includes/masterNav',$data);
+   $this->load->view('includes/MasterNav',$data);
 
 
   }

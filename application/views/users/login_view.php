@@ -14,7 +14,7 @@
 <?php endif; ?>
 
 
-<?php echo form_open('users/login',$attributes);?>
+<?php echo form_open('Users/login',$attributes);?>
 
 
 	<fieldset>

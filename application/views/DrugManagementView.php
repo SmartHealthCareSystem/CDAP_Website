@@ -52,7 +52,7 @@
            
             $data['tabledata']=$result;
           
-            $this->load->view('tables/drugTable',$data);
+            $this->load->view('tables/DrugTable',$data);
           
         ?>
     </tbody>

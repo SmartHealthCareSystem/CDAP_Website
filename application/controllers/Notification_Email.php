@@ -86,8 +86,8 @@ class Notification_Email extends CI_Controller {
             'protocol' => 'smtp',
             'smtp_host' => 'ssl://smtp.googlemail.com',
             'smtp_port' => 465,
-            'smtp_user' => 'vijayashangavi6@gmail.com',
-            'smtp_pass' => '958590229v',
+            'smtp_user' => 'cdapgroup@gmail.com',
+            'smtp_pass' => 'cdapgroup2017',
             'smtp_timeout' => '4',
             'mailtype' => 'html',
             'charset' => 'iso-8859-1'
