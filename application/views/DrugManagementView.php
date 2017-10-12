@@ -22,7 +22,7 @@
 <?php endif; ?>
      
      
-<input type="text" id="deleteDrug" name="deleteDrug" >
+<input type="text" id="deleteDrug" name="deleteDrug" style="display:none"  >
  </form>
     
 <div class="input-group col-lg-3 col-md-3">
@@ -52,7 +52,7 @@
            
             $data['tabledata']=$result;
           
-            $this->load->view('tables/drugTable',$data);
+            $this->load->view('tables/DrugTable',$data);
           
         ?>
     </tbody>

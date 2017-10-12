@@ -8,21 +8,22 @@
       <li class="active">Kiosk Stock</li> 
     </ul>
 <div class="well well-style">
-<form action="KioskStock/KioskStockDelete" method="post">
+<form action="KioskStock/kioskStockDelete" method="post">
 <div class="btn-group col-lg-9 col-md-9">
   <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#InsertKioskModal">Insert</button>
   <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#UpdatetModal">Update</button>
   <button type="submit" class="btn btn-danger">Delete</button>
 </div>
     
-<?php if($this->session->flashdata('errorsDeleteDrug')): ?>
+<?php if($this->session->flashdata('errorsDeleteKioskStock')): ?>
 <h5 style="color:red;">    
-<?php echo ($this->session->flashdata('errorsDeleteDrug')); ?>
+<?php echo ($this->session->flashdata('errorsDeleteKioskStock')); ?>
 </h5> 
 <?php endif; ?>
      
      
-<input type="text" id="deleteKiosk" name="deleteKiosk" >
+<input type="text" id="deleteKioskId" name="deleteKioskId" style="display:none" >
+<input type="text" id="deleteDrugPackId" name="deleteDrugPackId" style="display:none"  >
  </form>
     
 <div class="input-group col-lg-3 col-md-3">
@@ -49,7 +50,7 @@
            
             $data['tabledata']=$result;
           
-            $this->load->view('tables/KioskTable',$data);
+            $this->load->view('tables/KioskStockTable',$data);
           
         ?>
     </tbody>
@@ -70,7 +71,7 @@
       <div class="modal-body">
         <?php
           
-            $this->load->view('forms/Kiosk_Insert');
+            $this->load->view('forms/KioskStock_Insert');
           
           ?>
       </div>
@@ -96,7 +97,7 @@
       <div class="modal-body">
         <?php
           
-            $this->load->view('forms/Kiosk_Update');
+            $this->load->view('forms/KioskStock_Update');
           
           ?>
           
@@ -117,15 +118,15 @@ function myFunction() {
   // Declare variables 
   var input, filter, table, tr, td, i;
   input = document.getElementById("myInput");
- 
+ filter = input.value;
   table = document.getElementById("myTable");
-  tr = table.getElementById("tr");
+  tr = table.getElementsByTagName("tr");
 
   // Loop through all table rows, and hide those who don't match the search query
   for (i = 0; i < tr.length; i++) {
-    td = tr[i].getElementById("td")[1];
+    td = tr[i].getElementsByTagName("td")[0];
     if (td) {
-      if (td.innerHTML> -1) {
+      if (td.innerHTML.indexOf(filter)> -1) {
         tr[i].style.display = "";
       } else {
         tr[i].style.display = "none";
@@ -136,11 +137,12 @@ function myFunction() {
 $("#myTable tr").click(function(){
    $(this).addClass('selected_row').siblings().removeClass('selected_row');    
    $("#UKioskId").val($(this).find('td:eq(0)').html());
+    $("#deleteKioskId").val($(this).find('td:eq(0)').html());
    $("#UDrugPackId").val($(this).find('td:eq(1)').html());
-    $("#UAvailQuantity").val($(this).find('td:eq(2)').html());
+  $("#deleteDrugPackId").val($(this).find('td:eq(1)').html());  $("#UAvailQuantity").val($(this).find('td:eq(2)').html());
    
 });
 
 
-</script>>
+</script>
 <!--Script for search end-->

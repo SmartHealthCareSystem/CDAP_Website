@@ -8,7 +8,7 @@ class UserManagement extends CI_Controller {
     $data['masterNav_view']="UserManagementView";
 
 
-   $this->load->view('includes/masterNav',$data);
+   $this->load->view('includes/MasterNav',$data);
 
 
   }

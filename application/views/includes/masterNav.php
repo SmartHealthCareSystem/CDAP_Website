@@ -30,7 +30,7 @@
       <li class="active"><a href="#"><?php echo ($this->session->userdata('username')); ?></a></li>
       <li><a>|</a></li>
       
-      <li class="active"><a href="<?php echo base_url();?>users/logout">Logout</a></li>
+      <li class="active"><a href="<?php echo base_url();?>Users/logout">Logout</a></li>
       
       <?php endif; ?>
     </ul>
@@ -61,21 +61,16 @@
                 </li>
                 <ul class="sub-menu collapse" id="products">
                     <li class="active"><a href="<?php echo base_url();?>DrugManagement">Drugs</a></li>
-                    <li><a href="<?php echo base_url();?>drugPack">Drug Packs</a></li>
+                    <li><a href="<?php echo base_url();?>DrugPack">Drug Packs</a></li>
                     <li><a href="<?php echo base_url();?>Kiosk">Kiosk</a></li>
                     <li><a href="<?php echo base_url();?>CustomerManagement">Patients</a></li>
+                     <li><a href="<?php echo base_url();?>KioskStock">Kiosk Stock</a></li>
                     
                    
                 </ul>
 
 
-                <li data-toggle="collapse" data-target="#service" class="collapsed">
-                  <a href="#"><i class="fa fa-globe fa-lg"></i> Stock </a><i style="text-align:right" class="fa fa-chevron-down drop_icon" aria-hidden="true"></i>
-                </li>  
-                <ul class="sub-menu collapse" id="service">
-                    <li><a href="#">Ware House</a></li>
-                    <li><a href="<?php echo base_url();?>KioskStock">Kiosk Stock</a></li>
-                </ul>
+              
 
 
                 <li data-toggle="collapse" data-target="#new" class="collapsed">
@@ -111,7 +106,7 @@
 
 </div>
 <footer class="container-fluid text-center footer-bg">
-  <p>@Smart Health Care System by <a href="https://www.SmartHealthCareSystem.com">www.SmartHealthCareSystem.com</a></p> 
+  <p>@Smart Health Care System by <a href="http://smarthealthcaresystem.000webhostapp.com/">smarthealthcaresystem.000webhostapp.com</a></p>
 </footer>
 </body>
 </html>

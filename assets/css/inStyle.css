@@ -25,11 +25,13 @@ body{
 .navbar-nav>li>a{
     color: white;
     font-size: medium;
+    text-decoration: none;
     }
 .nav>li>a:focus, .nav>li>a:hover{
     background-color: #B40606;
     border: #E71010;
     color: white;
+    text-decoration: none;
 /*    font-size: medium;*/
 }
 .navbar-brand {
@@ -70,12 +72,24 @@ body{
     height: 100%;
 }
 .menu-content>li{
-    padding: 15px;
+    /*padding: 15px;*/
     border: 1px solid #B40606;
     text-decoration: none;
 }
 .menu-content>li>a{
+    padding: 15px;
+    padding-top: 15px;
+    padding-bottom: 15px;
     color: white;
+    text-decoration: none;
+    display: block;
+}
+.menu-content>li>i{
+    padding: 15px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    color: white;
+    display: block;
 }
 .menu-list>ul{
     list-style: none;
@@ -96,12 +110,16 @@ body{
 /*    margin-left: 10px;*/
 }
 .sub-menu>li{
-    padding: 15px;
+    /*padding: 15px;*/
     border: 1px solid #B40606;
     text-decoration: none;
 }
 .sub-menu>li>a{
+    padding: 15px;
+    padding-top: 15px;
+    padding-bottom: 15px;
     color: white;
+    display: block;
 }
 .menu-content>ul{
     list-style: none;

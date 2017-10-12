@@ -1,5 +1,5 @@
 <?php
-    include 'includes/masterNav.php';
+    include 'includes/MasterNav.php';
 ?>
 
 <div class="col-lg-9 col-md-9">
@@ -297,5 +297,5 @@ $("#myTable tr").click(function(){
 <!--Script for search end-->
 
 <?php
-    include 'includes/masterFoot.php';
+    include 'includes/MasterFoot.php';
 ?>

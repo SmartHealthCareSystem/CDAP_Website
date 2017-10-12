@@ -242,26 +242,27 @@ class MobileAppModel extends CI_Model
         $kiosk_array = [];
 
         $like = "%".$name."%";
-        $sql = "select * from kiosk";
+        $sql = "SELECT DISTINCT k.* from kiosk k INNER join kioskstock ks on k.KioskId=ks.KioskId INNER JOIN drugpack dp on ks.DrugPackId=dp.DrugPackId where ks.AvailQuantity>=1 AND dp.delete = 0 and dp.DrugPackName LIKE ?";
 
         $prepQuery = $this->db->conn_id->prepare($sql);
+        $prepQuery->bindParam(1,$like, PDO::PARAM_STR);
         $prepQuery->execute();
         $result= $prepQuery->fetchAll(PDO::FETCH_ASSOC);
 
         $kiosk_array = $result;
 
-        foreach ($kiosk_array as $key => $kiosk){
-            $sql1 = "SELECT d.DrugPackId,d.DrugPackName, s.KioskId FROM drugpack as d 
-                    INNER JOIN kioskstock as s ON s.DrugPackId = d.DrugPackId 
-                    WHERE s.KioskId = ? AND d.DrugPackName LIKE ? AND d.delete = 0";
-            $prepQuery1 = $this->db->conn_id->prepare($sql1);
-            $prepQuery1->bindParam(1,$kiosk_array[$key]["KioskId"], PDO::PARAM_INT);
-            $prepQuery1->bindParam(2,$like, PDO::PARAM_STR);
-            $prepQuery1->execute();
-            $result1= $prepQuery1->fetchAll(PDO::FETCH_ASSOC);
-
-            $kiosk_array[$key]["FirstAidKitModel"] = $result1;
-        }
+//        foreach ($kiosk_array as $key => $kiosk){
+//            $sql1 = "SELECT d.DrugPackId,d.DrugPackName, s.KioskId FROM drugpack as d
+//                    INNER JOIN kioskstock as s ON s.DrugPackId = d.DrugPackId
+//                    WHERE s.KioskId = ? AND d.DrugPackName LIKE ? AND d.delete = 0";
+//            $prepQuery1 = $this->db->conn_id->prepare($sql1);
+//            $prepQuery1->bindParam(1,$kiosk_array[$key]["KioskId"], PDO::PARAM_INT);
+//            $prepQuery1->bindParam(2,$like, PDO::PARAM_STR);
+//            $prepQuery1->execute();
+//            $result1= $prepQuery1->fetchAll(PDO::FETCH_ASSOC);
+//
+//            $kiosk_array[$key]["FirstAidKitModel"] = $result1;
+//        }
 
         return $kiosk_array;
     }
@@ -291,15 +292,17 @@ class MobileAppModel extends CI_Model
         $prepQueryDrugBatchId = $this->db->conn_id->prepare($sqlDrugBatchId);
         $prepQueryDrugBatchId->bindParam(1,$barcode, PDO::PARAM_INT);
         $prepQueryDrugBatchId->execute();
-        $DrugBatchId=$prepQueryDrugBatchId->fetch(PDO::FETCH_ASSOC);
+        $DrugBatchId=(int)$prepQueryDrugBatchId->fetch(PDO::FETCH_COLUMN);
 
-        $sql="INSERT INTO `expiry_notification` (`id`, `drug_batch_id`, `patient_id`, `is_notified`, `added_date`, `updated_date`) VALUES (NULL, ?, ?, '0', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);";
+
+        $sql="INSERT INTO expiry_notification (drug_batch_id, patient_id) VALUES (?,?)";
 
         $prepQuery = $this->db->conn_id->prepare($sql);
         $prepQuery->bindParam(2,$patient, PDO::PARAM_INT);
-        $prepQuery->bindParam(1,$DrugBatchId["id"], PDO::PARAM_INT);
+        $prepQuery->bindParam(1,$DrugBatchId, PDO::PARAM_INT);
 
         if ($prepQuery->execute()){
+
             echo json_encode([
                 "result" => TRUE,
                 "message" => 'Your request is successfull!',
@@ -315,15 +318,15 @@ class MobileAppModel extends CI_Model
     public function updateToken($email,$token)
     {
 
-        $sql1="SELECT `FcmToken` FROM `patient` WHERE `Email`=? AND `FcmToken`IS NULL";
-        $prepQuery1 = $this->db->conn_id->prepare($sql1);
-        $prepQuery1->bindParam(1,$email);
-        $prepQuery1->execute();
-        $customer = $prepQuery1->fetch(PDO::FETCH_ASSOC);
-
-//                var_dump($customer);die;
-
-        if ($customer>0){
+//        $sql1="SELECT `FcmToken` FROM `patient` WHERE `Email`=?";
+//        $prepQuery1 = $this->db->conn_id->prepare($sql1);
+//        $prepQuery1->bindParam(1,$email);
+//        $prepQuery1->execute();
+//        $customer = $prepQuery1->fetch(PDO::FETCH_ASSOC);
+//
+////                var_dump($customer);die;
+//
+//        if ($customer>0){
 
             $sql="UPDATE `patient` SET `FcmToken`=? WHERE `Email`=?";
             $prepQuery = $this->db->conn_id->prepare($sql);
@@ -342,12 +345,12 @@ class MobileAppModel extends CI_Model
                     "message" => 'Something went wrong try again later',
                 ]);
             }
-        }else{
-            echo json_encode([
-                "result" => FALSE,
-                "message" => 'User token already exist',
-            ]);
-        }
+//        }else{
+//            echo json_encode([
+//                "result" => FALSE,
+//                "message" => 'User token already exist',
+//            ]);
+//        }
     }
     public function getExpiryDetails($patientId){
 

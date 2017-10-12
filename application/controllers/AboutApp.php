@@ -7,7 +7,7 @@ public function index(){
     
    $data['masterNav_view']="About_App";
     
-     $this->load->view('includes/masterNav',$data);
+     $this->load->view('includes/MasterNav',$data);
     
     
 

@@ -21,7 +21,7 @@
       <div class="panel-body">
 
 
-        <?php $this->load->view('users/login_view');?>
+        <?php $this->load->view('users/Login_view');?>
 
          
       </div>

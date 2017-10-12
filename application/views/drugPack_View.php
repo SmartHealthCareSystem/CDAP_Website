@@ -8,7 +8,7 @@
       <li class="active">drugPack</li> 
     </ul>
 <div class="well well-style">
-<form action="drugPack/drugPackDelete" method="post">
+<form action="DrugPack/drugPackDelete" method="post">
 <div class="btn-group col-lg-9 col-md-9">
   <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#InsertdrugPackModal">Insert</button>
   <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#UpdateModal">Update</button>
@@ -22,11 +22,11 @@
 <?php endif; ?>
      
      
-<input type="text" id="deletedrugPack" name="deletedrugPack" >
+<input type="text" id="deletedrugPack" name="deletedrugPack" style="display:none" >
  </form>
     
 <div class="input-group col-lg-3 col-md-3">
-    <input type="text" class="form-control" id="myInput" name="myInput" onkeyup="myFunction()" placeholder="Search ...">
+    <input type="text" class="form-control" id="myInput" name="myInput" onkeyup="myFunction()" placeholder="Search ..." >
     <div class="input-group-btn">
       <button class="btn btn-default" type="submit">
         <i class="glyphicon glyphicon-search"></i>
@@ -51,7 +51,7 @@
            
             $data['tabledata']=$result;
           
-            $this->load->view('tables/drugPackTable',$data);
+            $this->load->view('tables/DrugPackTable',$data);
           
         ?>
     </tbody>
@@ -69,8 +69,8 @@
         
       <div class="modal-body">
         <?php
-          
-            $this->load->view('forms/drugPack_Insert');
+            $data['drugPackNames']=$drugPackNames;
+            $this->load->view('forms/DrugPack_Insert',$data);
           
           ?>
       </div>
@@ -96,8 +96,8 @@
       </div>
       <div class="modal-body">
         <?php
-          
-            $this->load->view('forms/drugPack_Update');
+            $data['drugPackNames']=$drugPackNames;
+            $this->load->view('forms/DrugPack_Update',$data);
           
           ?>
           

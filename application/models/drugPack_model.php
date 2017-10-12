@@ -1,6 +1,6 @@
     <?php
 
-    class drugPack_model extends CI_Model
+    class DrugPack_model extends CI_Model
     {
 
 
@@ -37,7 +37,7 @@
 
                
             'DrugPackId'=>$UDrugPackId, 
-            'DrugPackName'=>$UDrugPackNamen,
+            'DrugPackName'=>$UDrugPackName,
             'UnitPrice'=>$UUnitPrice,
             'Instruction'=>$UInstruction,
             'Image'=>$UImage
@@ -49,9 +49,56 @@
         }
 
 
-        public function get_drugPack(){
+        public function get_Drugdrugname(){
 
-            $this->db->where('delete',1);
+         //   $this->db->where('delete',1);
+
+            $Query=$this->db->query("SELECT d.DrugName,d.DrugId
+            FROM `drug` d 
+            WHERE d.`Status`=1");
+
+
+            if($Query->num_rows()>=1){
+
+                return $Query->result();
+
+            }else{
+
+                return FALSE;
+
+            }
+
+        }
+
+        public function insertDrugPackItem($drugPackId,$drugPackItem){
+            foreach ($drugPackItem as $drug){
+                $sql="INSERT INTO `drugpackitem` (`DrugPackId`, `Drug`) VALUES (?, ?);";
+
+                $prepQuery = $this->db->conn_id->prepare($sql);
+                $prepQuery->bindParam(1,$drugPackId, PDO::PARAM_INT);
+                $prepQuery->bindParam(2,$drug, PDO::PARAM_INT);
+
+                if ($prepQuery->execute()){
+                    echo json_encode([
+                        "result" => TRUE,
+                        "message" => 'Drug Items Are successfully Inserted!',
+                    ]);
+                }else{
+                    echo json_encode([
+                        "result" => FALSE,
+                        "message" => 'Something went wrong try again',
+                    ]);
+                }
+            }
+        }
+        public function deleteDrugPackItem(){
+
+    }
+        
+        
+            public function get_drugPack(){
+
+            $this->db->where('delete',0);
 
             $Query=$this->db->get('drugpack');
 
@@ -67,6 +114,14 @@
             }
 
         }
+        
+//        public function get_Drugdrugname(){
+//
+//        $this->db->select('DrugId','DrugName');
+//            $this->db->where('Status', '1');
+//            $q = $this->db->get('drug');
+//
+//        }
 
 
         public function delete_drugPack($id){
