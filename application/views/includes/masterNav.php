@@ -82,8 +82,9 @@
                   <a href="#"><i class="fa fa-car fa-lg"></i> Reports</a><i style="text-align:right" class="fa fa-chevron-down drop_icon" aria-hidden="true"></i>
                 </li>
                 <ul class="sub-menu collapse" id="new">
-                    <li><a href="#">Sales</a></li>
+                    <li><a href="Report_Sales">Sales</a></li>
                     <li><a href="#">Trasaction</a></li>
+                 
                 </ul>
 
 
