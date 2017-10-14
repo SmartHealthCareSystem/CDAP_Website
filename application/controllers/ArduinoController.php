@@ -9,9 +9,17 @@ class ArduinoController extends CI_Controller {
         //To Load The model respective to this Controller
         
     }
-    public function getDrugPackDetail(){
+    public function getDrugPackName(){
         $this->load->model('ArduinoModel');
-        $result=$this->ArduinoModel->getDrugPackDetails();
+        $result=$this->ArduinoModel->getDrugPackName();
+
+        echo json_encode($result);
+    }
+    public function getDrugPackDetail(){
+        $this->form_validation->set_rules('DrugPackId','DrugPackId','trim|required|numeric');
+        $DrugPackId=$this->input->get('DrugPackId');
+        $this->load->model('ArduinoModel');
+        $result=$this->ArduinoModel->getDrugPackDetails($DrugPackId);
 
         echo json_encode($result);
     }
@@ -39,7 +47,7 @@ class ArduinoController extends CI_Controller {
         $this->load->model('ArduinoModel');
         $result=$this->ArduinoModel->UpdateLocation($Location,$KioskId);
 
-        echo json_encode($result);
+//        echo json_encode($result);
     }
     public  function CheckBAlanceOfRFID(){
         $this->form_validation->set_rules('PatientId','PatientId','trim|required');
@@ -66,7 +74,7 @@ class ArduinoController extends CI_Controller {
         $this->load->model('ArduinoModel');
         $result=$this->ArduinoModel->KioskOrderProcessing($CustomerId,$TotalAmount,$Quantity,$PackId,$kioskId);
 
-        echo json_encode($result);
+//        echo json_encode($result);
     }
     public function MobileOrderProcessing(){
         $this->form_validation->set_rules('OrderId','OrderId','trim|required');
@@ -77,7 +85,7 @@ class ArduinoController extends CI_Controller {
         $this->load->model('ArduinoModel');
         $result=$this->ArduinoModel->MobileOrderProcessing($OrderId,$kioskId);
 
-        echo json_encode($result);
+//        echo json_encode($result);
     }
 
 }
