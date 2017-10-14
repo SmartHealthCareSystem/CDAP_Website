@@ -6,8 +6,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <link rel="stylesheet" href="<?php echo base_url();?>assets/css/inStyle.css">
+  <link rel="stylesheet" href="http://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="http://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+    
+<script>
+$(document).ready(function(){
+    $('#salestb').DataTable();
+});    
+</script> 
+ 
+    
     <script src="https://use.fontawesome.com/f79d16d09e.js"></script>
 </head>
 <body>
