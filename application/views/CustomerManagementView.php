@@ -59,7 +59,7 @@
            
             $data['tabledata']=$result;
           
-            $this->load->view('tables/costomerTable',$data);
+            $this->load->view('tables/CostomerTable',$data);
           
         ?>
     </tbody>

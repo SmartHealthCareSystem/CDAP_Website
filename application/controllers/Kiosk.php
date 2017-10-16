@@ -22,7 +22,7 @@ class Kiosk extends CI_Controller {
 
 
 //            $data['DrugManagementView'] = $this->load->view('DrugManagementView', $data, TRUE);
-            $this->load->view('includes/masterNav',$data);
+            $this->load->view('includes/MasterNav',$data);
 
  
 }

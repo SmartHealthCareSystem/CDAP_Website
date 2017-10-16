@@ -6,8 +6,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <link rel="stylesheet" href="<?php echo base_url();?>assets/css/inStyle.css">
+  <link rel="stylesheet" href="http://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="http://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+    
+<script>
+$(document).ready(function(){
+    $('#salestb').DataTable();
+});    
+</script> 
+ 
+    
     <script src="https://use.fontawesome.com/f79d16d09e.js"></script>
 </head>
 <body>
@@ -30,7 +40,7 @@
       <li class="active"><a href="#"><?php echo ($this->session->userdata('username')); ?></a></li>
       <li><a>|</a></li>
       
-      <li class="active"><a href="<?php echo base_url();?>users/logout">Logout</a></li>
+      <li class="active"><a href="<?php echo base_url();?>Users/logout">Logout</a></li>
       
       <?php endif; ?>
     </ul>
@@ -61,7 +71,7 @@
                 </li>
                 <ul class="sub-menu collapse" id="products">
                     <li class="active"><a href="<?php echo base_url();?>DrugManagement">Drugs</a></li>
-                    <li><a href="<?php echo base_url();?>drugPack">Drug Packs</a></li>
+                    <li><a href="<?php echo base_url();?>DrugPack">Drug Packs</a></li>
                     <li><a href="<?php echo base_url();?>Kiosk">Kiosk</a></li>
                     <li><a href="<?php echo base_url();?>CustomerManagement">Patients</a></li>
                      <li><a href="<?php echo base_url();?>KioskStock">Kiosk Stock</a></li>
@@ -77,8 +87,9 @@
                   <a href="#"><i class="fa fa-car fa-lg"></i> Reports</a><i style="text-align:right" class="fa fa-chevron-down drop_icon" aria-hidden="true"></i>
                 </li>
                 <ul class="sub-menu collapse" id="new">
-                    <li><a href="#">Sales</a></li>
+                    <li><a href="Report_Sales">Sales</a></li>
                     <li><a href="#">Trasaction</a></li>
+                 
                 </ul>
 
 
@@ -105,7 +116,7 @@
 
 </div>
 <footer class="container-fluid text-center footer-bg">
-  <p>@Smart Health Care System by <a href="https://www.SmartHealthCareSystem.com">www.SmartHealthCareSystem.com</a></p> 
+  <p>@Smart Health Care System by <a href="http://smarthealthcaresystem.000webhostapp.com/">smarthealthcaresystem.000webhostapp.com</a></p>
 </footer>
 </body>
 </html>

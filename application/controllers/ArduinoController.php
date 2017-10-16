@@ -9,9 +9,17 @@ class ArduinoController extends CI_Controller {
         //To Load The model respective to this Controller
         
     }
-    public function getDrugPackDetail(){
+    public function getDrugPackName(){
         $this->load->model('ArduinoModel');
-        $result=$this->ArduinoModel->getDrugPackDetails();
+        $result=$this->ArduinoModel->getDrugPackName();
+
+        echo json_encode($result);
+    }
+    public function getDrugPackDetail(){
+        $this->form_validation->set_rules('DrugPackId','DrugPackId','trim|required|numeric');
+        $DrugPackId=$this->input->get('DrugPackId');
+        $this->load->model('ArduinoModel');
+        $result=$this->ArduinoModel->getDrugPackDetails($DrugPackId);
 
         echo json_encode($result);
     }
@@ -20,8 +28,8 @@ class ArduinoController extends CI_Controller {
         $this->form_validation->set_rules('DrugPackId','DrugPackId','trim|required|numeric');
         $this->form_validation->set_rules('KioskId','KioskId','trim|required|numeric');
 
-        $DrugPackId=$this->input->post('DrugPackId');
-        $KioskId=$this->input->post('KioskId');
+        $DrugPackId=$this->input->get('DrugPackId');
+        $KioskId=$this->input->get('KioskId');
 
         $this->load->model('ArduinoModel');
         $result=$this->ArduinoModel->checkAvailability($DrugPackId,$KioskId);
@@ -33,17 +41,17 @@ class ArduinoController extends CI_Controller {
         $this->form_validation->set_rules('Location','Location','trim|required|numeric');
         $this->form_validation->set_rules('KioskId','KioskId','trim|required|numeric');
 
-        $Location=$this->input->post('Location');
-        $KioskId=$this->input->post('KioskId');
+        $Location=$this->input->get('Location');
+        $KioskId=$this->input->get('KioskId');
 
         $this->load->model('ArduinoModel');
         $result=$this->ArduinoModel->UpdateLocation($Location,$KioskId);
 
-        echo json_encode($result);
+//        echo json_encode($result);
     }
     public  function CheckBAlanceOfRFID(){
         $this->form_validation->set_rules('PatientId','PatientId','trim|required');
-        $PatientId=$this->input->post('PatientId');
+        $PatientId=$this->input->get('PatientId');
 
         $this->load->model('ArduinoModel');
         $result=$this->ArduinoModel->CheckBAlanceOfRFID($PatientId);
@@ -52,32 +60,32 @@ class ArduinoController extends CI_Controller {
     }
     public function KioskOrderProcessing(){
         $this->form_validation->set_rules('CustomerId','CustomerId','trim|required');
-        $CustomerId=$this->input->post('CustomerId');
+        $CustomerId=$this->input->get('CustomerId');
         $this->form_validation->set_rules('TotalAmount','TotalAmount','trim|required');
-        $TotalAmount=$this->input->post('TotalAmount');
+        $TotalAmount=$this->input->get('TotalAmount');
         $this->form_validation->set_rules('Quantity','Quantity','trim|required');
-        $Quantity=$this->input->post('Quantity');
+        $Quantity=$this->input->get('Quantity');
         $this->form_validation->set_rules('PackId','PackId','trim|required');
-        $PackId=$this->input->post('PackId');
+        $PackId=$this->input->get('PackId');
         $this->form_validation->set_rules('kioskId','kioskId','trim|required');
-        $kioskId=$this->input->post('kioskId');
+        $kioskId=$this->input->get('kioskId');
 
 
         $this->load->model('ArduinoModel');
         $result=$this->ArduinoModel->KioskOrderProcessing($CustomerId,$TotalAmount,$Quantity,$PackId,$kioskId);
 
-        echo json_encode($result);
+//        echo json_encode($result);
     }
     public function MobileOrderProcessing(){
         $this->form_validation->set_rules('OrderId','OrderId','trim|required');
-        $OrderId=$this->input->post('OrderId');
+        $OrderId=$this->input->get('OrderId');
         $this->form_validation->set_rules('kioskId','kioskId','trim|required');
-        $kioskId=$this->input->post('kioskId');
+        $kioskId=$this->input->get('kioskId');
 
         $this->load->model('ArduinoModel');
         $result=$this->ArduinoModel->MobileOrderProcessing($OrderId,$kioskId);
 
-        echo json_encode($result);
+//        echo json_encode($result);
     }
 
 }

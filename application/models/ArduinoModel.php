@@ -2,11 +2,18 @@
 
 class ArduinoModel extends CI_Model
 {
-    
-    public function getDrugPackDetails(){
-        
-        $sql="SELECT `DrugPackId`, `DrugPackName`, `UnitPrice`, `Instruction`, `Image` FROM `drugpack` WHERE `delete`=0 ";
+    public function getDrugPackName(){
+        $sql="SELECT `DrugPackId`, `DrugPackName` FROM `drugpack` WHERE `delete`=0";
         $prepQuery = $this->db->conn_id->prepare($sql);
+        $prepQuery->execute();
+        $result= $prepQuery->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
+    public function getDrugPackDetails($DrugPackId){
+        
+        $sql="SELECT `DrugPackId`, `DrugPackName`, `UnitPrice`, `Instruction`, `Image` FROM `drugpack` WHERE `delete`=0 and `DrugPackId`=? ";
+        $prepQuery = $this->db->conn_id->prepare($sql);
+        $prepQuery->bindParam(1,$DrugPackId);
         $prepQuery->execute();
         $result= $prepQuery->fetchAll(PDO::FETCH_ASSOC);
 
@@ -66,23 +73,27 @@ class ArduinoModel extends CI_Model
             $prepQueryInvoice->bindParam(3,$kioskId);
             if ($prepQueryInvoice->execute()) {
                 $urlInvoice= "localhost:8080/CDAP_Website/Notification_Email/KioskOrderMail?CustomerId=".$CustomerId."?kioskId=".$kioskId;
+//                $urlInvoice= "http://smarthealthcaresystem.000webhostapp.com/Notification_Email/KioskOrderMail?CustomerId=".$CustomerId."?kioskId=".$kioskId;
                 $ch = curl_init();
                 curl_setopt($ch, CURLOPT_URL,$urlInvoice);
                 curl_setopt($ch, CURLOPT_HEADER, 0);
                 curl_exec($ch);
                 curl_close($ch);
+                echo "Transaction is successfull collect you order";
 
             } else {
-                echo json_encode([
-                    "result" => FALSE,
-                    "message" => 'Something went wrong try again later Invoice',
-                ]);
+                echo "Something went wrong in transaction processing try again later";
+//                echo json_encode([
+//                    "result" => FALSE,
+//                    "message" => 'Something went wrong in transaction processing try again later',
+//                ]);
             }
         }else {
-            echo json_encode([
-                "result" => FALSE,
-                "message" => 'Something went wrong try again later Order',
-            ]);
+            echo "Something went wrong try again later";
+//            echo json_encode([
+//                "result" => FALSE,
+//                "message" => 'Something went wrong try again later Order',
+//            ]);
         }
     }
     public function MobileOrderProcessing($OrderId,$kioskId)
@@ -93,7 +104,7 @@ class ArduinoModel extends CI_Model
         $prepQueryInvoice->bindParam(2, $OrderId);
         $prepQueryInvoice->bindParam(3, $kioskId);
 
-        var_dump($prepQueryInvoice);die();
+//        var_dump($prepQueryInvoice);die();
 
         if ($prepQueryInvoice->execute()) {
 //            echo json_encode([
@@ -101,6 +112,7 @@ class ArduinoModel extends CI_Model
 //                "message" => 'Your purchase is successfully done',
 //            ]);
             $urlInvoice= "localhost:8080/CDAP_Website/Notification_Email?orderId=".$OrderId;
+//            $urlInvoice= "http://smarthealthcaresystem.000webhostapp.com/Notification_Email?orderId=".$OrderId;
             $ch = curl_init();
 
             // set URL and other appropriate options
@@ -112,11 +124,13 @@ class ArduinoModel extends CI_Model
 
             // close cURL resource, and free up system resources
             curl_close($ch);
+            echo "Transaction is successfull collect you order";
         } else {
-            echo json_encode([
-                "result" => FALSE,
-                "message" => 'Something went wrong try again later Invoice',
-            ]);
+            echo "Something went wrong try again later";
+//            echo json_encode([
+//                "result" => FALSE,
+//                "message" => 'Something went wrong try again later Invoice',
+//            ]);
         }
 
     }

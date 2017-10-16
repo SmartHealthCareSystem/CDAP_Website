@@ -13,7 +13,7 @@
 <?php endif; ?>
 
 
-<?php echo form_open('drugPack/drugPack_Insert',$attributes);?>
+<?php echo form_open('DrugPack/drugPack_Insert',$attributes);?>
 
 
 	<div class="form-group">
@@ -34,16 +34,16 @@
               <input type="number" class="form-control" id="IUnitPrice" name="IUnitPrice" placeholder="Enter UnitPrice">
             </div>
           </div>
-          <div class="form-group">
-            <label class="control-label col-sm-3" for="IInstruction">Instruction:</label>
-            <div class="col-sm-9"> 
-              <input type="text" class="form-control" id="IInstruction" name="IInstruction" placeholder="Enter Instruction">
-            </div>
-          </div>
+    <div class="form-group">
+        <label class="control-label col-sm-3" for="IDrugPackName">Instruction :</label>
+        <div class="col-sm-9">
+            <input type="text" class="form-control" id="IInstruction" name="IInstruction" placeholder="Enter Instruction">
+        </div>
+    </div>
             <div class="form-group">
             <label class="control-label col-sm-3" for="IImage">Image:</label>
             <div class="col-sm-9"> 
-                <label class="radio-inline"><input type="file" name="filename" accept="image/gif, image/jpeg, image/png" placeholder="Upload Image">
+                <label class="radio-inline"><input type="file" name="IImage" accept="image/gif, image/jpeg, image/png" placeholder="Upload Image">
                 </label>
                 </div>
           </div>
@@ -53,7 +53,7 @@
          <div class="form-group text-center"> 
               
             <div class="col-sm-offset-2 col-sm-10">
-              <button type="submit" class="btn btn-success">Submit</button>
+              <button type="submit" name="drugInsert" class="btn btn-success">Submit</button>
             </div>
           </div>
 
@@ -66,8 +66,8 @@
         
       <div class="modal-body">
         <?php
-          
-            $this->load->view('forms/customerDrug_insert');
+            $data['drugPackNames']=$drugPackNames;
+            $this->load->view('forms/CustomerDrug_insert',$data);
           
           ?>
       </div>
