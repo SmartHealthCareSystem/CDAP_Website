@@ -5,6 +5,19 @@ class Kiosk_Location extends CI_Controller {
 
 public function index(){
 
+    
+    $this->load->model('KioskLocationModel');
+    
+   $result=$this->KioskLocationModel->getKioskLocation(); 
+    
+     if($result){
+        
+          $data['result']=$result;
+        
+    }else{
+        
+         $data['result']='No data to retrieve';
+    }
 
     $data['masterNav_view']="KioskLocation_view";
     
