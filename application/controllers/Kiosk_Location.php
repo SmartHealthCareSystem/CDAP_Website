@@ -17,12 +17,23 @@ public function index(){
               $temp['id']=$r['KioskId'];
               $temp['Location']=$r['Location'];
               $temp['Address']=$r['Address'];
+              $temp['Color']=$this->KioskLocationModel->getKioskPinColor($r['KioskId']);
+              $resultDetails=$this->KioskLocationModel->kioskOnClickDetails($r['KioskId']);
+             $temp['Details']=array();
+              foreach($resultDetails as $rd){
+                  $temp2=array();
+                  $temp2['DrugPackId']=$rd['DrugPackId'];
+                  $temp2['DrugPackName']=$rd['DrugPackName'];
+                  $temp2['AvailQuantity']=$rd['AvailQuantity'];
+                  $temp2['NeedAmount']=$rd['NeedAmount'];
+                  $temp2['Color']=$rd['Color'];
+                  array_push($temp['Details'],$temp2);
+              }
               array_push($kioskArray,$temp);
          }
         
           $data['result']=$kioskArray;
-        
-    }else{
+          }else{
         
          $data['result']='No data to retrieve';
     }
