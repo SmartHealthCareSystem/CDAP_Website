@@ -10,18 +10,29 @@ class ArduinoController extends CI_Controller {
         
     }
     public function getDrugPackName(){
+        $this->form_validation->set_rules('keyIndex','keyIndex','trim|required|numeric');
+        $keyIndex=$this->input->get('keyIndex');
         $this->load->model('ArduinoModel');
-        $result=$this->ArduinoModel->getDrugPackName();
+        $result=$this->ArduinoModel->getDrugPackName($keyIndex-1);
 
-        echo json_encode($result);
+        // echo json_encode($result);
+        echo "[".$result."]";
     }
-    public function getDrugPackDetail(){
+    public function getDrugPackPrice(){
         $this->form_validation->set_rules('DrugPackId','DrugPackId','trim|required|numeric');
         $DrugPackId=$this->input->get('DrugPackId');
         $this->load->model('ArduinoModel');
-        $result=$this->ArduinoModel->getDrugPackDetails($DrugPackId);
+        $result=$this->ArduinoModel->getDrugPackPrice($DrugPackId);
 
-        echo json_encode($result);
+        echo "[".$result."]";
+    }
+    public function getDrugPackInstruction(){
+        $this->form_validation->set_rules('DrugPackId','DrugPackId','trim|required|numeric');
+        $DrugPackId=$this->input->get('DrugPackId');
+       $this->load->model('ArduinoModel');
+        $result=$this->ArduinoModel->getDrugPackInstruction($DrugPackId);
+
+        echo "[".$result."]";
     }
     public function checkAvailability(){
 
@@ -34,7 +45,7 @@ class ArduinoController extends CI_Controller {
         $this->load->model('ArduinoModel');
         $result=$this->ArduinoModel->checkAvailability($DrugPackId,$KioskId);
 
-        echo json_encode($result);
+        echo "[".$result."]";
     }
     public function UpdateLocation(){
 
@@ -56,7 +67,7 @@ class ArduinoController extends CI_Controller {
         $this->load->model('ArduinoModel');
         $result=$this->ArduinoModel->CheckBAlanceOfRFID($PatientId);
 
-        echo json_encode($result);
+        echo "[".$result."]";
     }
     public function KioskOrderProcessing(){
         $this->form_validation->set_rules('CustomerId','CustomerId','trim|required');
