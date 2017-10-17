@@ -21,7 +21,7 @@ public function index(){
 
     $data['masterNav_view']="KioskLocation_view";
     
-     $this->load->view('includes/masterNav',$data);
+     $this->load->view('includes/MasterNav',$data);
     
 }
     public function getKioskLocation(){
