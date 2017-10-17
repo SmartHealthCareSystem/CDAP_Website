@@ -5,9 +5,9 @@ class Report_Sales extends CI_Controller {
 
 public function index(){
     
-   $this->load->model('Report_Sales_model');
+   $this->load->model('Report_Sales_Model');
     
-   $result=$this->Report_Sales_model->show_reports(); 
+   $result=$this->Report_Sales_Model->show_reports();
   
     if($result){
         
@@ -22,7 +22,7 @@ public function index(){
     
     
 $data['Report_Sales_Model_View'] = $this->load->view('Report_Sales_Model_View', $data, TRUE);
-$this->load->view('includes/masterNav',$data);
+$this->load->view('includes/MasterNav',$data);
     
 }}
 ?>
