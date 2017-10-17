@@ -67,7 +67,7 @@ $(document).ready(function(){
                   </li>
 
                 <li  data-toggle="collapse" data-target="#products" class="collapsed active">
-                  <a href="#"><i class="fa fa-gift fa-lg"></i> Information management </a><i class="fa fa-chevron-down drop_icon" aria-hidden="true"></i>
+                  <a href="#"><i class="fa fa-gift fa-lg"></i> Information management </a><i style="text-align:right" class="fa fa-chevron-down drop_icon" aria-hidden="true"></i>
                 </li>
                 <ul class="sub-menu collapse" id="products">
                     <li class="active"><a href="<?php echo base_url();?>DrugManagement">Drugs</a></li>
@@ -88,7 +88,7 @@ $(document).ready(function(){
                 </li>
                 <ul class="sub-menu collapse" id="new">
                     <li><a href="Report_Sales">Sales</a></li>
-                    <li><a href="#">Trasaction</a></li>
+                    <li><a href="#">Transaction</a></li>
                  
                 </ul>
 

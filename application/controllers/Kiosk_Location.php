@@ -5,14 +5,22 @@ class Kiosk_Location extends CI_Controller {
 
 public function index(){
 
-    
+    $kioskArray=array();
     $this->load->model('KioskLocationModel');
     
-   $result=$this->KioskLocationModel->getKioskLocation(); 
+   $result=$this->KioskLocationModel->getKioskLocationDetails(); 
     
      if($result){
+         
+         foreach($result as $r){
+              $temp=array();
+              $temp['id']=$r['KioskId'];
+              $temp['Location']=$r['Location'];
+              $temp['Address']=$r['Address'];
+              array_push($kioskArray,$temp);
+         }
         
-          $data['result']=$result;
+          $data['result']=$kioskArray;
         
     }else{
         
