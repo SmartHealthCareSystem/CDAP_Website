@@ -7,7 +7,7 @@ public function index(){
     
    $this->load->model('Report_Sales_model');
     
-   $result=$this->Report_Sales_model->get_customer(); 
+   $result=$this->Report_Sales_model->show_reports(); 
   
     if($result){
         
