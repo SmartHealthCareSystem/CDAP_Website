@@ -18,16 +18,20 @@
               <td><?php echo $r['Color'] ?></td>
 
           </tr>
+          
       <?php endforeach; ?>
+        <tr>
+            <td>
+                <?php echo json_encode($result); ?>
+            </td>  
+        </tr>
       </tbody>
   </table>
   <script type="text/javascript">
     function initMap() {
-      var locations = [
-        ['Kiosk 1', 6.9124557, 79.8502741, 3],
-        ['Kiosk 2', 6.900996, 79.85488229999999, 2],
-        ['Kiosk 3', 6.830118499999999, 79.88008319999994, 1]
-      ];
+        
+          
+      
 
       var map = new google.maps.Map(document.getElementById('map'), {
         zoom: 10,
@@ -39,20 +43,25 @@
       var infowindow = new google.maps.InfoWindow();
 
       var marker, i;
-
-      for (i = 0; i < locations.length; i++) {
-        marker = new google.maps.Marker({
-          position: new google.maps.LatLng(locations[i][1], locations[i][2]),
-          map: map
+        <?php foreach ($result as $r): ?>
+           <?php $locations=explode(",",$r['Location']);?>
+            var lat=parseFloat(<?php echo $locations[0]?>);
+            var longi=parseFloat(<?php echo $locations[1]?>);
+           marker = new google.maps.Marker({
+          position: new google.maps.LatLng(lat,longi),
+          map: map,
+          title: 'Uluru (Ayers Rock)'
         });
 
-        google.maps.event.addListener(marker, 'click', (function (marker, i) {
+        google.maps.event.addListener(marker, 'click', (function (marker) {
           return function () {
-            infowindow.setContent(locations[i][0]);
+            var address=<?php echo $r['Address']?>;
+            infowindow.setContent(address);
             infowindow.open(map, marker);
           }
-        })(marker, i));
-      }
+        })(marker));
+         <?php endforeach; ?>
+
 
     }
   </script>
