@@ -8,10 +8,10 @@
       <li class="active">drugPack</li> 
     </ul>
 <div class="well well-style">
-<form action="DrugPack/drugPackDelete" method="post">
+<form action="DrugPack/delete_drugPack" method="post">
 <div class="btn-group col-lg-9 col-md-9">
   <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#InsertdrugPackModal">Insert</button>
-  <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#UpdateModal">Update</button>
+  <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#UpdatetDrugPackModal">Update</button>
   <button type="submit" class="btn btn-danger">Delete</button>
 </div>
     
@@ -85,7 +85,7 @@
 
 <!--Insert drugPack Model end-->
 <!--Update drugPack Model start-->
-<div id="UpdatetModal" class="modal fade" role="dialog">
+<div id="UpdatetDrugPackModal" class="modal fade" role="dialog">
   <div class="modal-dialog">
 
     <!-- Modal content-->
@@ -97,6 +97,7 @@
       <div class="modal-body">
         <?php
             $data['drugPackNames']=$drugPackNames;
+            $data['drugPackItems']=$drugPackItems;
             $this->load->view('forms/DrugPack_Update',$data);
           
           ?>

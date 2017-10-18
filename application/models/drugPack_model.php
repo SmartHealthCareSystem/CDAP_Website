@@ -11,6 +11,7 @@
             'DrugPackId'=>$IDrugPackId, 
             'DrugPackName'=>$IDrugPackName,
             'UnitPrice'=>$IUnitPrice,
+            'delete'=>0,
             'Instruction'=>$IInstruction,
             'Image'=>$IImage    
         );
@@ -79,22 +80,13 @@
                 $prepQuery->bindParam(2,$drug, PDO::PARAM_INT);
 
                 if ($prepQuery->execute()){
-                    echo json_encode([
-                        "result" => TRUE,
-                        "message" => 'Drug Items Are successfully Inserted!',
-                    ]);
+                    return true;
                 }else{
-                    echo json_encode([
-                        "result" => FALSE,
-                        "message" => 'Something went wrong try again',
-                    ]);
+                    return false;
                 }
             }
         }
-        public function deleteDrugPackItem(){
 
-    }
-        
         
             public function get_drugPack(){
 
@@ -114,6 +106,18 @@
             }
 
         }
+        public function getDrugPackItem(){
+            $Query=$this->db->get('drugpackitem');
+            if($Query->num_rows()>=1){
+
+                return $Query->result();
+
+            }else{
+
+                return FALSE;
+
+            }
+        }
         
 //        public function get_Drugdrugname(){
 //
@@ -126,7 +130,7 @@
 
         public function delete_drugPack($id){
 
-            $sql="UPDATE `drugpack` SET `delete`=0 WHERE `DrugPackId`='".$id."';";
+            $sql="UPDATE `drugpack` SET `delete`=1 WHERE `DrugPackId`='".$id."';";
 
             $this->db->query($sql);
 

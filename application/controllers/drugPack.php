@@ -8,14 +8,22 @@ class DrugPack extends CI_Controller {
       $this->load->model('DrugPack_model');
      $DrugPackName=$this->DrugPack_model->get_Drugdrugname();
      $result=$this->DrugPack_model->get_drugPack();
+     $drugPackItems=$this->DrugPack_model->getDrugPackItem();
 
         if($result){
 
                $data['result']=$result;
                 if($DrugPackName){
                     $data['drugPackNames']=$DrugPackName;
+                    if($drugPackItems){
+                        $data['drugPackItems']=$drugPackItems;
+                    }
+                    else{
+                        $data['drugPackItems']=array();
+                    }
                 }else{
                     $data['drugPackNames']='No Drugs';
+                    $data['drugPackItems']=array();
                 }
 
           }else{
@@ -23,8 +31,11 @@ class DrugPack extends CI_Controller {
                $data['result']='No data to retrieve';
             if($DrugPackName){
                 $data['drugPackNames']=$DrugPackName;
+                $data['drugPackItems']=array();
+
             }else{
                 $data['drugPackNames']='No Drugs';
+                $data['drugPackItems']=array();
                 }
          }
 
@@ -68,11 +79,11 @@ class DrugPack extends CI_Controller {
                 
                     $IDrugPackName=$this->input->post('IDrugPackName');
                 
-                    $IUnitPrice=$this->input->post('IUnitPrice ');
+                    $IUnitPrice=$this->input->post('IUnitPrice');
                     
-                     $IInstruction=$this->input->post('IInstruction ');
+                     $IInstruction=$this->input->post('IInstruction');
 
-                     $IImage=$this->input->post('IImage ');
+                     $IImage=$this->input->post('IImage');
                 
                     $this->load->model('DrugPack_model');
 //                    echo $IDrugPackId.",".$IDrugPackName.",".$IUnitPrice.",".$IInstruction.",".$IImage;die;
@@ -81,8 +92,8 @@ class DrugPack extends CI_Controller {
                     if($result){
 
                         $this->session->set_flashdata('drugPack_Insert_success','Stock Successfully inserted');
-                        $IDrugPackId=$this->input->post('drugnames');
-                        $result2=$this->DrugPack_model->insertDrugPackItem($IDrugPackId,$IDrugPackId);
+                        $IDrugId=$this->input->post('drugnames');
+                        $result2=$this->DrugPack_model->insertDrugPackItem($IDrugPackId,$IDrugId);
                         if($result2)
                         redirect('DrugPack');
                     }else{
@@ -127,11 +138,11 @@ class DrugPack extends CI_Controller {
                 
                     $UDrugPackName=$this->input->post('UDrugPackName');
                 
-                    $UUnitPrice=$this->input->post('UUnitPrice ');
+                    $UUnitPrice=$this->input->post('UUnitPrice');
                     
-                     $UInstruction=$this->input->post('UInstruction ');
+                     $UInstruction=$this->input->post('UInstruction');
                    
-                     $UImage=$this->input->post('UImage ');
+                     $UImage=$this->input->post('UImage');
                     
 
                     $this->load->model('DrugPack_model');
@@ -183,10 +194,8 @@ class DrugPack extends CI_Controller {
 
             //echo var_dump($result) ;
         }
-    
-    
 
- public function delete_drugPack(){
+    public function delete_drugPack(){
 
             $this->form_validation->set_rules('deletedrugPack','Row to be deleted','trim|required|numeric');
 
@@ -205,7 +214,7 @@ class DrugPack extends CI_Controller {
                 }else{
 
 
-                    $id=$this->input->post('drugPackDelete');
+                    $id=$this->input->post('deletedrugPack');
 
                     $this->load->model('DrugPack_model');
 

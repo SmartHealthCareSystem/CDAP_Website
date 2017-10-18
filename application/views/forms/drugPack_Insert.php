@@ -30,12 +30,12 @@
           </div>
             <div class="form-group">
             <label class="control-label col-sm-3" for="IUnitPrice">UnitPrice:</label>
-            <div class="col-sm-9">
-              <input type="number" class="form-control" id="IUnitPrice" name="IUnitPrice" placeholder="Enter UnitPrice">
-            </div>
+                <div class="col-sm-9">
+                    <input type="number" class="form-control" id="IUnitPrice" name="IUnitPrice" placeholder="Enter Unit Price">
+                </div>
           </div>
     <div class="form-group">
-        <label class="control-label col-sm-3" for="IDrugPackName">Instruction :</label>
+        <label class="control-label col-sm-3" for="IInstruction">Instruction :</label>
         <div class="col-sm-9">
             <input type="text" class="form-control" id="IInstruction" name="IInstruction" placeholder="Enter Instruction">
         </div>
@@ -43,13 +43,18 @@
             <div class="form-group">
             <label class="control-label col-sm-3" for="IImage">Image:</label>
             <div class="col-sm-9"> 
-                <label class="radio-inline"><input type="file" name="IImage" accept="image/gif, image/jpeg, image/png" placeholder="Upload Image">
-                </label>
+                <input class="form-control" type="file" name="IImage" id="IImage" accept="image/gif, image/jpeg, image/png" placeholder="Upload Image">
+
                 </div>
           </div>
- <div >
-  <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#InsertdrugModal">Drugs</button>
-</div>  
+    <div class="form-group">
+        <label class="control-label col-sm-3">Drug Items:</label>
+        <div class="col-sm-9">
+            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#InsertdrugModal">Drugs</button>
+
+        </div>
+    </div>
+
          <div class="form-group text-center"> 
               
             <div class="col-sm-offset-2 col-sm-10">

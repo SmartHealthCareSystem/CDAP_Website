@@ -43,9 +43,8 @@
             <div class="form-group">
             <label class="control-label col-sm-3" for="IFormulation">Formulation:</label>
             <div class="col-sm-9"> 
-                <label class="radio-inline"><input type="text" id="IFormulation" name="IFormulation" placeholder="Enter Formulation">
-                </label>
-                </div>
+                <input type="text" class="form-control" id="IFormulation" name="IFormulation" placeholder="Enter Formulation">
+            </div>
           </div>
             <div class="form-group">
             <label class="control-label col-sm-3" for="IManufacturer">Manufacturer:</label>
