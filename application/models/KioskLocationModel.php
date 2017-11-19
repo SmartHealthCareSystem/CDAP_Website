@@ -28,17 +28,17 @@
                 }
             }
             if ($red>0){
-                return "Red";
+                return "red";
             }elseif ($orange>0){
-                return "Orange";
+                return "orange";
             }else{
-                return "Green";
+                return "green";
             }
 
 //            return $result;
         }
         public function kioskOnClickDetails($kioskId){
-            $sql = "SELECT ks.DrugPackId,dp.DrugPackName,ks.AvailQuantity,IF((SELECT CEILING(AVG(o.Quantity)) as avgQuantity FROM `invoice`i INNER JOIN `order` o on o.OrderId=i.`OrderNo` WHERE WEEKDAY(i.Date)=WEEKDAY(CURRENT_TIMESTAMP) AND TIME(i.Date)>=TIME(CURRENT_TIMESTAMP) AND TIME(i.Date)<ADDTIME(TIME(CURRENT_TIMESTAMP),'2:00:00') AND i.kioskId=k.KioskId AND o.PackId=ks.DrugPackId)>0,(SELECT CEILING(AVG(o.Quantity)) as avgQuantity FROM `invoice`i INNER JOIN `order` o on o.OrderId=i.`OrderNo` WHERE WEEKDAY(i.Date)=WEEKDAY(CURRENT_TIMESTAMP) AND TIME(i.Date)>=TIME(CURRENT_TIMESTAMP) AND TIME(i.Date)<ADDTIME(TIME(CURRENT_TIMESTAMP),'2:00:00') AND i.kioskId=k.KioskId AND o.PackId=ks.DrugPackId),5) AS NeedAmount,IF(ks.AvailQuantity=0,\"Red\",IF(ks.AvailQuantity<5,\"Orange\",IF(ks.AvailQuantity<(SELECT CEILING(AVG(o.Quantity)) as avgQuantity FROM `invoice`i INNER JOIN `order` o on o.OrderId=i.`OrderNo` WHERE WEEKDAY(i.Date)=WEEKDAY(CURRENT_TIMESTAMP) AND TIME(i.Date)>=TIME(CURRENT_TIMESTAMP) AND TIME(i.Date)<ADDTIME(TIME(CURRENT_TIMESTAMP),'2:00:00') AND i.kioskId=k.KioskId AND o.PackId=ks.DrugPackId),\"Orange\",\"Green\"))) AS Color FROM `kiosk` k INNER JOIN kioskstock ks on k.`KioskId`=ks.KioskId INNER JOIN drugpack dp ON dp.DrugPackId=ks.DrugPackId WHERE k.`KioskId`=?";
+            $sql = "SELECT ks.DrugPackId,dp.DrugPackName,ks.AvailQuantity,IF((SELECT CEILING(AVG(o.Quantity)) as avgQuantity FROM `invoice`i INNER JOIN `order` o on o.OrderId=i.`OrderNo` WHERE WEEKDAY(i.Date)=WEEKDAY(CURRENT_TIMESTAMP) AND TIME(i.Date)>=TIME(CURRENT_TIMESTAMP) AND TIME(i.Date)<ADDTIME(TIME(CURRENT_TIMESTAMP),'2:00:00') AND i.kioskId=k.KioskId AND o.PackId=ks.DrugPackId)>0,(SELECT CEILING(AVG(o.Quantity)) as avgQuantity FROM `invoice`i INNER JOIN `order` o on o.OrderId=i.`OrderNo` WHERE WEEKDAY(i.Date)=WEEKDAY(CURRENT_TIMESTAMP) AND TIME(i.Date)>=TIME(CURRENT_TIMESTAMP) AND TIME(i.Date)<ADDTIME(TIME(CURRENT_TIMESTAMP),'2:00:00') AND i.kioskId=k.KioskId AND o.PackId=ks.DrugPackId),5) AS NeedAmount,IF(ks.AvailQuantity=0,\"red\",IF(ks.AvailQuantity<5,\"orange\",IF(ks.AvailQuantity<(SELECT CEILING(AVG(o.Quantity)) as avgQuantity FROM `invoice`i INNER JOIN `order` o on o.OrderId=i.`OrderNo` WHERE WEEKDAY(i.Date)=WEEKDAY(CURRENT_TIMESTAMP) AND TIME(i.Date)>=TIME(CURRENT_TIMESTAMP) AND TIME(i.Date)<ADDTIME(TIME(CURRENT_TIMESTAMP),'2:00:00') AND i.kioskId=k.KioskId AND o.PackId=ks.DrugPackId),\"orange\",\"green\"))) AS Color FROM `kiosk` k INNER JOIN kioskstock ks on k.`KioskId`=ks.KioskId INNER JOIN drugpack dp ON dp.DrugPackId=ks.DrugPackId WHERE k.`KioskId`=?";
             $prepQuery = $this->db->conn_id->prepare($sql);
             $prepQuery->bindParam(1,$kioskId);
             $prepQuery->execute();

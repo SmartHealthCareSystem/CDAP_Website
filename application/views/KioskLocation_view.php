@@ -1,32 +1,6 @@
 
   <div id="map" style="width: 800px; height: 500px;"></div>
-  <table class="table table-hover" id="myTable">
-      <thead class="thead-default">
-      <tr>
-          <th>id</th>
-          <th>Location</th>
-          <th>Address</th>
-          <th>Color</th>
-      </tr>
-      </thead>
-      <tbody>
-      <?php foreach ($result as $r): ?>
-          <tr>
-              <td><?php echo $r['id'] ?></td>
-              <td><?php echo $r['Location'] ?></td>
-              <td><?php echo $r['Address'] ?></td>
-              <td><?php echo $r['Color'] ?></td>
 
-          </tr>
-          
-      <?php endforeach; ?>
-        <tr>
-            <td>
-                <?php echo json_encode($result); ?>
-            </td>  
-        </tr>
-      </tbody>
-  </table>
   <script type="text/javascript">
     function initMap() {
         
@@ -50,7 +24,8 @@
            marker = new google.maps.Marker({
           position: new google.maps.LatLng(lat,longi),
           map: map,
-          title: 'Uluru (Ayers Rock)'
+          title: '<?php echo "hi"?>',
+          icon:  'http://maps.google.com/mapfiles/ms/icons/<?php echo $r['Color']?>-dot.png'     
         });
 
         google.maps.event.addListener(marker, 'click', (function (marker) {
